@@ -4,10 +4,6 @@ import styles from '../styles/Home.module.css'
 
 export default function Payment(){
     let products = loadProducts()
-    // if (loadProducts()) {
-    //     products = loadProducts();
-    // };
-
     console.log(products)
 
     // console.log(loadProducts());
