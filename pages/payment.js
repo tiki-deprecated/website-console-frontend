@@ -1,7 +1,19 @@
+import React from 'react';
+import { loadProducts } from './api/load-products.js';
+import styles from '../styles/Home.module.css'
 
+export default function Payment(){
+    let products = loadProducts()
+    // if (loadProducts()) {
+    //     products = loadProducts();
+    // };
 
-export default function Home() {
+    console.log(products)
 
-return <h1>Payments!!!</h1>
-
+    // console.log(loadProducts());
+    if (products) {
+        return 'yes'
+    } else {
+        return 'loading...'
+    }
 }

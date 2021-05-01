@@ -1,0 +1,10 @@
+[
+    {
+      "sku": "DEMO001",
+      "name": "Early API Access",
+      "description": "Look at this pretty plant. Photo by Galina N on Unsplash.",
+      "image": "https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=600&h=600&q=80",
+      "amount": 1,
+      "currency": "USD"
+    }
+  ]
