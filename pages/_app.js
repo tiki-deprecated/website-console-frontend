@@ -5,9 +5,9 @@ function MyApp({ Component, pageProps }) {
 
   return (
   <Auth0Provider
-    domain="dev-azwil67y.us.auth0.com"
-    clientId="GxRSF2rhyFgmYk29IOyrkgNj85vFQbHl"
-    redirectUri={"http://localhost:3000"}
+    domain={process.env.NEXT_PUBLIC_AUTH0_DOMAIN}
+    clientId={process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID}
+    redirectUri={process.env.NEXT_PUBLIC_AUTH0_CALLBACK_URI}
   >
     <Component {...pageProps} />
   </Auth0Provider>
