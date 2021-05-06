@@ -1,0 +1,12 @@
+@keyframes fade-in {
+    from {opacity: 0%;}
+    to {opacity: 100%;}
+}
+.container{
+    max-width: 1200px;
+    padding: 0 20px;
+    margin: 0 auto;
+    color: #00133f;
+    animation: fade-in 2s ease;
+    height: 100%;
+}

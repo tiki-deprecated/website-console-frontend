@@ -6,15 +6,15 @@
     text-align: center;
   }
   
-  .CheckoutForm-complete {
+  .CheckoutFormComplete {
     color: #7fdc45;
     font-weight: 700;
     text-align: center;
   }
   
-  .CheckoutForm-button {
+  .CheckoutFormButton {
     display: inline-block;
-    margin: 0 0 1rem 0;
+    margin: 20px 0 1rem 0;
     padding: 0.85em 1em;
     border: 0;
     outline: 0;
@@ -23,7 +23,7 @@
     font-weight: 600;
     line-height: 1;
     text-align: center;
-    background-color: #7fdc45;
+    background-color: #00133f;
     color: #fff;
     cursor: pointer;
     transition-property: background-color, color;
@@ -32,16 +32,16 @@
     -webkit-appearance: none;
   }
   
-  .CheckoutForm-button:hover,
-  .CheckoutForm-button:focus {
-    background-color: #68b637;
+  .CheckoutFormButton:hover,
+  .CheckoutFormButton:focus {
+    background-color: #00257c;
   }
   
-  .CheckoutForm-button:disabled {
+  .CheckoutFormButton:disabled {
     background-color: #ccc;
   }
   
-  .CheckoutForm-error {
+  .CheckoutFormError {
     color: #dc4545;
   }
   

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
 import { CardElement, injectStripe } from 'react-stripe-elements-universal';
-// import './CheckoutForm.module.css';
+import React, { useState } from 'react';
+
+import styles from './CheckoutForm.module.css';
 
 function CheckoutForm({ stripe, totalCost }) {
   const [status, setStatus] = useState('default');
@@ -32,24 +33,27 @@ function CheckoutForm({ stripe, totalCost }) {
   };
 
   if (status === 'complete') {
-    return <div className="CheckoutForm-complete">Payment successful!</div>;
+    return <div className={styles.CheckoutFormComplete}>Payment successful!</div>;
   }
 
   return (
-    <form className="CheckoutForm" onSubmit={submit}>
+    <div className={styles.StripeElement}>
       <h4>Payment Page</h4>
-      <CardElement />
-      <button
-        className="CheckoutForm-button"
-        type="submit"
-        disabled={status === 'submitting'}
-      >
-        {status === 'submitting' ? 'Submitting' : 'Pay $1'}
-      </button>
-      {status === 'error' && (
-        <div className="CheckoutForm-error">Something went wrong.</div>
-      )}
-    </form>
+      <form className={styles.CheckoutForm} onSubmit={submit}>
+        <CardElement />
+        <button
+          className={styles.CheckoutFormButton}
+          type="submit"
+          disabled={status === 'submitting'}
+        >
+          {status === 'submitting' ? 'Submitting' : 'Pay $1'}
+        </button>
+        {status === 'error' && (
+          <div className={styles.CheckoutFormError}>Something went wrong.</div>
+        )}
+      </form>
+    </div>
+
   );
 }
 

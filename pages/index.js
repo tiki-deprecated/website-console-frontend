@@ -1,7 +1,7 @@
+import Head from 'next/head';
 import React from 'react';
+import styles from '../styles/Index.module.css';
 import { useAuth0 } from '@auth0/auth0-react';
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
 
 export default function Home() {
   const {
@@ -22,14 +22,26 @@ export default function Home() {
 
   if (isAuthenticated) {
     return (
-      <div>
-        Hello {user.name}{' '}
-        <button onClick={() => logout({ returnTo: window.location.origin })}>
-          Log out
+      <div className={styles.container}>
+        <div className={styles.loginBlock}>
+          <h1>Welcome to the Tiki Developer Portal!</h1>
+          <h3>Hello {user.name}{' '}</h3>
+          <button className={styles.loginButton} onClick={() => logout({ returnTo: window.location.origin })}>
+            Log out
         </button>
+        </div>
       </div>
     );
   } else {
-    return <button onClick={loginWithRedirect}>Log in</button>;
+    return (
+      <div className={styles.container}>
+        <div className={styles.loginBlock}>
+          <h1>Welcome to the Tiki Developer Portal!</h1>
+          <h3>Please Log In to Continue</h3>
+          <button className={styles.loginButton} onClick={loginWithRedirect}>Log in</button>
+        </div>
+      </div>
+    )
+
   }
 }

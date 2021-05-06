@@ -1,0 +1,67 @@
+@keyframes fade-in {
+    from {opacity: 0%;}
+    to {opacity: 100%;}
+}
+.container{
+    max-width: 1200px;
+    padding: 0 20px;
+    margin: 0 auto;
+    color: #00133f;
+    animation: fade-in 2s ease;
+}
+.applicationBlock{
+    display: flex;
+    flex-direction: column;
+    background-color: #00133f;
+    border-radius: 10px;
+    width: 75%;
+    padding: 30px 50px 50px;
+    margin: 0px auto;
+    color: #eee;
+    text-align: center;
+}
+.applicationForm{
+    width: 100%;
+}
+.applicationForm form{
+    width: 100%;
+}
+.applicationForm input, .applicationForm textarea{
+    border-radius: 5px;
+    border: solid 1px #ccc;
+    padding: 15px 20px;
+    width: 75%;
+    max-width: 400px;
+    box-shadow: none;
+    font-size: 18px;
+    margin-top: 15px;
+}
+.applicationForm textarea{
+    min-height: 150px;
+}
+.applicationForm span{
+    display: none;
+    margin: 5px 0px;
+    color: #eee;
+    font-weight: 600;
+    margin-top: 15px;
+}
+.applicationForm label{
+    color: white;
+    display: block;
+}
+.applicationForm ul{
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+.applicationForm input[type=submit]{
+    margin-top: 15px;
+    padding: 10px 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color .2s;
+}
+.applicationForm input[type=submit]:hover{
+    background-color: #ccc;
+}
