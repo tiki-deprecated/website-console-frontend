@@ -10,3 +10,27 @@
     animation: fade-in 2s ease;
     height: 100%;
 }
+.complete{
+    color: #00b272;
+}
+.incomplete{
+    color: #c73000;
+}
+.link{
+    text-decoration: underline;
+    color:cornflowerblue;
+}
+.dashboardButton{
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #00133f;
+    color: #fff;
+    border-radius: 5px;
+    border: 1px solid #00133f;
+    transition: all .2s;
+}
+.dashboardButton:hover{
+    background-color: #fff;
+    color: #00133f;
+}

@@ -1,4 +1,4 @@
-
+import styles from '../styles/Dashboard.module.css'
 
 export default function ReadmeLogin() {
 
@@ -23,6 +23,7 @@ export default function ReadmeLogin() {
   return (
       <button
         onClick={accessAPI}
+        className={styles.dashboardButton}
       >
         {'Access API'}
       </button>
