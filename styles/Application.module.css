@@ -65,3 +65,10 @@
 .applicationForm input[type=submit]:hover{
     background-color: #ccc;
 }
+
+/* DEMO STYLES */
+.demoButton{
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+}

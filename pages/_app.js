@@ -11,6 +11,8 @@ function MyApp({ Component, pageProps }) {
     clientId={process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID}
     redirectUri={process.env.NEXT_PUBLIC_AUTH0_CALLBACK_URI}
   >
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"></link>
+    
     <Navigation/>
     <div className="pageWrapper">
       <Component {...pageProps} />

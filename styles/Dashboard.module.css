@@ -34,3 +34,17 @@
     background-color: #fff;
     color: #00133f;
 }
+.dashboardContainer{
+    margin-top: 20px;
+}
+.pageTitle{
+    border-bottom: #00133f solid 1px;
+}
+.sectionTitle{
+    margin-top: 25px;
+    text-decoration: underline;
+}
+/* Override Bootstrap Styles */
+.accordionToggle{
+    cursor: pointer;
+}

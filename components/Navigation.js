@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
@@ -10,7 +11,8 @@ function Navigation() {
                 <ul>
                     <li>
                         <Link className="logo" href="/">
-                            <a>Logo</a>
+                            <a><Image src='/TIKI_logo_black.png' width={100} height={33}/>
+                            </a>
                         </Link>
                     </li>
                     <li>
