@@ -1,2 +1,2 @@
 ## Buyer App
-Buyer gain access to the API and view the documentation
+Buyer can gain access to the API and view documentation
