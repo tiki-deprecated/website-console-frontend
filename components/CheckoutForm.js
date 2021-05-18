@@ -37,11 +37,13 @@ const useOptions = () => {
   return options;
 };
 
-const CheckoutForm = () => {
+const CheckoutForm = (props) => {
   const stripe = useStripe();
   const elements = useElements();
   const options = useOptions();
   const [status, setStatus] = useState('default');
+
+  const {totalCost} = props;
 
   const handleSubmit = async event => {
     event.preventDefault();
