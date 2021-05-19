@@ -1,0 +1,37 @@
+import { useState, useEffect } from 'react';
+import  useSWR,  { mutate } from 'swr';
+import Head from 'next/head'
+import Image from 'next/image'
+import styles from '../styles/Home.module.css'
+import axios from 'axios';
+
+export default function Home() {
+  const [posts, setPosts] = useState();
+  const [hello, setHello] = useState();
+
+  const { data, error } = useSWR('/api/db');
+  console.log(data);
+
+  // update the local data immediately, but disable the revalidation
+  // mutate('/api/db', { query }, false);
+
+
+  useEffect(() => {
+    async function fetchRandomText() {
+      const response = await axios.get('https://jsonplaceholder.typicode.com/todos/1');
+      console.log(response.data);
+      setPosts(response.data);
+    }
+    // fetchRandomText();
+  },[])
+
+  if (hello) {
+    return (
+
+      <div>test...</div>
+    )
+  } else return (
+    <div>loading...</div>
+  )
+
+}
