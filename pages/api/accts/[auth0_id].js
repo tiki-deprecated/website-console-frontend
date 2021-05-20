@@ -56,16 +56,15 @@ export default (req, res) => {
                  [], function (err, result) {
                     if (err)
                         throw err;
-                    console.log(result);
-                    response = JSON.stringify({
-                        status: 200,
+                    console.log(result);           
+                    const response = {
                         data: {
                             auth0_id,
                             status: 'pre-application'
                         },
                         command: result.command,
                         rowCount: result.rowCount
-                    })
+                    }
                     res.status(200).json(response);
                     client.end(function (err) {
                         if (err)

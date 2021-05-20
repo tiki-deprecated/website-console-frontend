@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
+// assumes file is at project root
 const certPath = path.join(__dirname.split('pages')[0], '/ca.pem').replace('.next/server/', '');
 
 module.exports = {

@@ -7,7 +7,18 @@ import { useAppContext } from '../context/store';
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
-    const { profile, setProfile, acct, settAcct, getAcct, createAcct, setAcc, logOut, setLogOut } = useAppContext();
+    const {
+        loggedIn, 
+        setLoggedIn, 
+        profile, 
+        setProfile, 
+        acct, 
+        getAcct, 
+        createAcct, 
+        logOut, 
+        setLogOut 
+    } = useAppContext();
+
     const {
         isLoading,
         isAuthenticated,
@@ -65,11 +76,20 @@ export default function Home() {
         // check to see if acct already exists
         const auth0_id = user.sub.split('|')[1];
         await getAcct(auth0_id);
+        setLoggedIn(true);
     }
+
+    // create new acct if necessary
+    useEffect(() => {
+        if (loggedIn && profile && !acct) {
+            const auth0_id = profile.sub.split('|')[1];
+            createAcct(auth0_id);
+            alert('new user, creating new account...');
+        }
+    },[loggedIn, acct])
 
     const handleLogout = async () => {
         await setLogOut(true);
-
         logout({ returnTo: window.location.origin });
     }
 
