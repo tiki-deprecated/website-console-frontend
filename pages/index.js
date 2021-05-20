@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
+
 import Head from 'next/head'
 import Link from 'next/link';
-import { useRouter } from 'next/router'
-import { useAppContext } from '../context/store';
 import styles from '../styles/Home.module.css'
+import { useAppContext } from '../context/store';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useRouter } from 'next/router'
 
 export default function Home() {
     const { profile, setProfile, acct, settAcct, getAcct, createAcct, setAcc, logOut, setLogOut } = useAppContext();
@@ -111,14 +112,25 @@ export default function Home() {
 
     if (isAuthenticated || profile) {
         return (
-          <div>
-            Hello { profile ?  profile.name : user.name }
-            <button onClick={() => handleLogout()}>
+            <div className={styles.container}>
+            <div className={styles.loginBlock}>
+              <h1>Welcome to the Tiki Developer Portal!</h1>
+            <h3>Hello { profile ?  profile.name : user.name }</h3>
+            <button className={styles.loginButton} onClick={() => handleLogout()}>
               Log out
             </button>
           </div>
+          </div>
         );
     } else {
-        return <button onClick={loginWithRedirect}>Log in</button>;
+        return (
+            <div className={styles.container}>
+        <div className={styles.loginBlock}>
+          <h1>Welcome to the Tiki Developer Portal!</h1>
+          <h3>Please Log In to Continue</h3>
+          <button className={styles.loginButton} onClick={loginWithRedirect}>Log in</button>
+        </div>
+      </div>
+        );
     }
     }
