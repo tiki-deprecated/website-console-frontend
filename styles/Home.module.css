@@ -1,11 +1,38 @@
-.container {
-  min-height: 100vh;
-  padding: 0 0.5rem;
+@keyframes fade-in {
+  from {opacity: 0%;}
+  to {opacity: 100%;}
+}
+.container{
+  max-width: 1200px;
+  padding: 0 20px;
+  margin: 0 auto;
+  animation: fade-in 1.5s ease;
+}
+.loginBlock{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  background-color: #e89933;
+  border-radius: 10px;
+  width: 75%;
+  padding: 20px;
+  margin: 100px auto 0px;
+  color: #00133f;
+  text-align: center;
+}
+.loginBlock h1{
+  margin-bottom: 5px;
+}
+.loginButton{
+  font-size: 18px;
+  padding: 10px 35px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color .2s;
+}
+.loginButton:hover{
+  background-color: #ddd;
 }
 
 .main {
@@ -119,3 +146,5 @@
     flex-direction: column;
   }
 }
+
+
