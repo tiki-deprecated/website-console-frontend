@@ -1,6 +1,9 @@
 const pg = require('pg');
 import config from '../../components/utils/db-config'
 
+const randomNum = Math.floor(Math.random() * 1000000000);
+const randomId = 'FAKE_' + randomNum;
+
 
 export default (req, res) => {    
     const client = new pg.Client(config);
@@ -9,15 +12,18 @@ export default (req, res) => {
             client.connect(function (err) {
                 if (err)
                     throw err;
-                client.query(`SELECT * FROM users 
-                            WHERE auth0_id = '609be88b80880400696208fa'
-                            `, 
-                    [], function (err, result) {
+                client.query(`INSERT INTO accounts
+                            (auth0_id, status)
+                            VALUES('${randomId}', 'pre-application')
+                            `,
+                 [], function (err, result) {
                     if (err)
                         throw err;
-            
-                    console.log(result.rows[0]);
-                    response = result.rows[0];
+                    console.log(result);
+                    response = {
+                        command: result.command,
+                        rowCount: result.rowCount
+                    }
                     res.status(200).json({ response });
                     client.end(function (err) {
                         if (err)

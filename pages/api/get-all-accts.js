@@ -9,12 +9,12 @@ export default (req, res) => {
             client.connect(function (err) {
                 if (err)
                     throw err;
-                client.query(`SELECT * FROM users`, [], function (err, result) {
+                client.query(`SELECT * FROM accounts`, [], function (err, result) {
                     if (err)
                         throw err;
             
                     console.log(result.rows[0]);
-                    response = result.rows[0];
+                    response = result.rows;
                     res.status(200).json({ response });
                     client.end(function (err) {
                         if (err)
