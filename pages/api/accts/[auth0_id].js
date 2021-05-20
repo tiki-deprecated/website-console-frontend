@@ -3,7 +3,7 @@ import config from '../../../components/utils/db-config'
 
 // { query: { auth0_id } }
 
-const test_id = '609be88b80880400696208fa';
+const test_id = process.env.TESTER1_ID;
 
 export default (req, res) => {    
     console.log(req.method);

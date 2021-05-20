@@ -16,7 +16,7 @@ export default (req, res) => {
                     throw err;
                 client.query(`UPDATE accounts
                             SET status = 'pre-application'
-                            WHERE auth0_id = '609be88b80880400696208fa'
+                            WHERE auth0_id = '${process.env.TESTER1_ID}'
                             `,
                  [], function (err, result) {
                     if (err)
