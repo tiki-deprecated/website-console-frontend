@@ -3,9 +3,11 @@ import { useState, createContext, useContext } from 'react';
 const AppContext = createContext();
 
 export function AppWrapper({ children }) {
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [logOut, setLogOut] = useState(false);
     const [profile, setProfile] = useState()
     const [acct, setAcct] = useState();
-    const [logOut, setLogOut] = useState(false)
+
 
     const getAcct = async (auth0_id) => {
         try{
@@ -38,29 +40,31 @@ export function AppWrapper({ children }) {
 
     const createAcct = async (auth0_id) => {
         try{
-            const res = await fetch('/api/accts/[${auth0_id}]', {
+            const res = await fetch(`/api/accts/[${auth0_id}]`, {
                 method: 'POST',
                 body: '',
                 headers: {'Content-Type': 'application/json'}
             });
-            const newAcct = await res.data.json();
-            setAcct(newAcct);
+            const response = await res.json();
+            setAcct(response.data);
         } catch(err) {
             console.log(err);
         }
     }
 
-  let store = {
-      profile, 
-      setProfile,
-      acct,
-      setAcct,
-      getAcct,
-      updateAcct,
-      createAcct,
-      logOut,
-      setLogOut
-  }
+    let store = { 
+        loggedIn, 
+        setLoggedIn,  
+        logOut,
+        setLogOut,
+        profile, 
+        setProfile,
+        acct,
+        setAcct,
+        getAcct,
+        updateAcct,
+        createAcct,
+    }
 
   return (
     <AppContext.Provider value={store}>
