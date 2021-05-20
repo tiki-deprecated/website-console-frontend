@@ -1,21 +1,7 @@
-// import postgres from 'postgres';
-// const pgp = require('pg-promise')({
-//     noWarnings: true
-// })
-const fs = require('fs');
 const pg = require('pg');
+import config from '../../components/utils/db-config'
 
-export default (req, res) => {
-    console.log(req);
-    const config = {
-        database: process.env.DB_NAME,
-        host: process.env.DB_HOST,
-        password: process.env.DB_PASSWORD,
-        port: process.env.DB_PORT,
-        ssl: { ca: fs.readFileSync('/home/akin/dev/tiki/expert-hub/server-side-approach/biz-app/pages/api/ca.pem') },
-        user: process.env.DB_USER,
-    };
-    
+export default (req, res) => {    
     const client = new pg.Client(config);
     let response;
         try{
@@ -28,7 +14,7 @@ export default (req, res) => {
             
                     console.log(result.rows[0]);
                     response = result.rows[0];
-                    res.status(200).json({ status: 'Connected to db', response });
+                    res.status(200).json({ status: 'Successfully connected to db', response });
                     client.end(function (err) {
                         if (err)
                             throw err;
