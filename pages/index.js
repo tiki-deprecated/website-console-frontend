@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-
+import React, { useEffect } from 'react';
 import Head from 'next/head'
 import Link from 'next/link';
 import styles from '../styles/Home.module.css'
@@ -30,44 +29,6 @@ export default function Home() {
     } = useAuth0();
 
     const router = useRouter()
-
-    // persist profile on page refresh
-    useEffect(() => {
-        // only run in browser
-        if (typeof window !== 'undefined' && !logOut) {
-            const localProfile = window.localStorage.getItem('profile');
-            const localAcct = window.localStorage.getItem('profile');
-            // backup valid context in localStorage
-            if (profile) {
-                window.localStorage.setItem('profile', JSON.stringify(profile));
-                console.log('localProfile: ', localProfile);
-                console.log('profile context is live, backing up in localSorage...');
-            }
-            if (acct) {
-                window.localStorage.setItem('acct', JSON.stringify(acct));
-                console.log('localAcct: ', localAcct);
-                console.log('acct context is live, backing up in localSorage...');
-            }
-            // refresh context with localStorage
-            if (!profile && localProfile) {
-                setProfile(JSON.parse(localProfile));
-                console.log('profile: ', profile);
-                console.log('profile context is stale, refreshing from localStorage...');
-            }   
-            if (!acct && localAcct) {
-                setProfile(JSON.parse(localAcct));
-                console.log('acct: ', acct);
-                console.log('acct context is stale, refreshing from localStorage...');
-            }  
-        }
-        if (logOut) {
-            if (typeof window !== 'undefined') {
-                window.localStorage.clear();
-            }
-            setProfile(null);
-            settAcct(null);
-        }
-    },[profile, acct, logOut])
 
     const accountLogin = async () => {
         await setProfile(user);
@@ -153,4 +114,4 @@ export default function Home() {
       </div>
         );
     }
-    }
+}
