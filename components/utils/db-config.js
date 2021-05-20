@@ -1,8 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const certPath = path.join(__dirname, '/ca.pem').replace('.next/server/', '');
-
+const certPath = path.join(__dirname.split('pages')[0], '/ca.pem').replace('.next/server/', '');
+console.log('--- PATH ------');
+console.log(certPath)
 
 module.exports = {
     database: process.env.DB_NAME,
