@@ -12,26 +12,30 @@ export function AppWrapper({ children }) {
         try{
             const res = await fetch(`/api/accts/[${auth0_id}]`);
             const response = await res.json();
-            console.log('--- returned to store --');
-            console.log(response);
             setAcct(response.data);
         } catch(err) {
             console.log(err);
         }
     }
 
-    const updateAcct = async (updatedAcctData) => {
+    const updateAcct = async (auth0_id, updatedField, updatedValue) => {
         try{
-            const res = await fetch('/api/update-acct', {
+            const res = await fetch(`/api/accts/[${auth0_id}]`, {
                 method: 'PUT',
                 body: JSON.stringify({
-                        auth0_id: updatedAcctData.auth0_id,
-                        account_status: updatedAcctData.account_status
+                        auth0_id,
+                        updatedField,
+                        updatedValue
                     }),
                 headers: {'Content-Type': 'application/json'}
             });
-            const updatedAcct = await res.json();
+            const response = await res.json();
+            console.log(response);
+            const updatedAcct = acct;
+            updatedAcct[updatedField] = updatedValue;
+            // update context store and localStorage for consistency on refresh
             setAcct(updatedAcct);
+            window.localStorage.setItem('acct', JSON.stringify(updatedAcct));
         } catch(err) {
             console.log(err);
         }
@@ -70,7 +74,7 @@ export function AppWrapper({ children }) {
         // only run in browser
         if (typeof window !== 'undefined' && !logOut) {
             const localProfile = window.localStorage.getItem('profile');
-            const localAcct = window.localStorage.getItem('profile');
+            const localAcct = window.localStorage.getItem('acct');
             // backup valid context in localStorage
             if (profile) {
                 window.localStorage.setItem('profile', JSON.stringify(profile));
@@ -89,7 +93,7 @@ export function AppWrapper({ children }) {
                 console.log('profile context is stale, refreshing from localStorage...');
             }   
             if (!acct && localAcct) {
-                setProfile(JSON.parse(localAcct));
+                setAcct(JSON.parse(localAcct));
                 console.log('acct: ', acct);
                 console.log('acct context is stale, refreshing from localStorage...');
             }  
