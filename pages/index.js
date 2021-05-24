@@ -62,16 +62,16 @@ export default function Home() {
                 console.log(acct);
                 // alert('existing account');
                 if (acct.status === 'pre-application') {
-                    alert(`status is: [${acct.status}] redirecting to appplication page...`);
+                    router.push('/application');
                 }
                 if (acct.status === 'applied') {
-                    alert(`status is: [${acct.status}] redirecting dashboard page...`);
+                    router.push('/dashboard');
                 }
                 if (acct.status === 'approved') {
-                    alert(`status is: [${acct.status}] redirecting to paymentpage...`);
+                    router.push('/payment');
                 }
                 if (acct.status === 'paid') {
-                    alert(`status is: [${acct.status}] redirecting to dashboard to generate API key...`);
+                    router.push('/paid');;
                 }
             }
         }
