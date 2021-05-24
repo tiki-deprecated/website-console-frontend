@@ -71,7 +71,7 @@ export default function Home() {
                     router.push('/payment');
                 }
                 if (acct.status === 'paid') {
-                    router.push('/paid');;
+                    router.push('/dashboard');;
                 }
             }
         }
