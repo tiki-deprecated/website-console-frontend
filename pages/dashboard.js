@@ -1,13 +1,16 @@
 import { Accordion, Button, Card } from 'react-bootstrap';
-
 import Link from 'next/link';
+import { useAppContext } from '../context/store';
 import ReadmeLogin from '../components/ReadmeLogin';
 import styles from '../styles/Dashboard.module.css';
 
 export default function Dashboard() {
-
+    const { profile } = useAppContext();
     return (
         <div className={styles.container}>
+            {/* persistence test */}
+            <h3><i>{ profile ? profile.name : 'loading...' } is sitll logged in...</i></h3> 
+
             <h1 className={styles.pageTitle}>Account Dashboard</h1>
             <div className={styles.dashboardContainer}>
                 <h4 className={styles.sectionTitle}>Account Setup</h4>

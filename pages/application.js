@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
-
+import { useAppContext } from '../context/store';
 import ApplicationForm from '../components/ApplicationForm';
 import styles from '../styles/Application.module.css';
 
 export default function Application() {
+    const { profile } = useAppContext()
     const [applied, setApplied] = useState(false);
     
     return (
         <div className={styles.container}>
+            {/* persistence test */}
+            <h3><i>{ profile ? profile.name : 'loading...' } is sitll logged in...</i></h3>
+
             <div className={styles.applicationBlock}>
                 <h1>Thank You For Your Interest</h1>
 
