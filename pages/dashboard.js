@@ -5,10 +5,11 @@ import ReadmeLogin from '../components/ReadmeLogin';
 import styles from '../styles/Dashboard.module.css';
 
 export default function Dashboard() {
-    const { profile } = useAppContext();
+    const { profile, acct } = useAppContext();
     return (
         <div className={styles.container}>
             {/* persistence test */}
+            {console.log(acct)}
             <h3><i>{ profile ? profile.name : 'loading...' } is sitll logged in...</i></h3> 
 
             <h1 className={styles.pageTitle}>Account Dashboard</h1>
