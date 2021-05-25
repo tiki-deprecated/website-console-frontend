@@ -38,7 +38,7 @@ export default function Home() {
         // check to see if acct already exists
         const auth0_id = user.sub.split('|')[1];
         await getAcct(auth0_id);
-        setLoggedIn(true);
+        setLoggedIn(true); // only used for initial login / acct creation
     }
 
     // create new acct if necessary

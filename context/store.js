@@ -3,7 +3,7 @@ import { useState, createContext, useContext, useEffect } from 'react';
 const AppContext = createContext();
 
 export function AppWrapper({ children }) {
-    const [loggedIn, setLoggedIn] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(false); // only used for initial login / acct creation
     const [logOut, setLogOut] = useState(false);
     const [profile, setProfile] = useState()
     const [acct, setAcct] = useState();
@@ -33,7 +33,7 @@ export function AppWrapper({ children }) {
             console.log(response);
             const updatedAcct = acct;
             updatedAcct[updatedField] = updatedValue;
-            // update context store and localStorage for consistency on refresh
+            // update context and localStorage for consistency on refresh
             setAcct(updatedAcct);
             window.localStorage.setItem('acct', JSON.stringify(updatedAcct));
         } catch(err) {
@@ -103,7 +103,7 @@ export function AppWrapper({ children }) {
                 window.localStorage.clear();
             }
             setProfile(null);
-            settAcct(null);
+            setAcct(null);
         }
     },[profile, acct, logOut])    
 
