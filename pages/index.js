@@ -38,7 +38,7 @@ export default function Home() {
         // check to see if acct already exists
         const auth0_id = user.sub.split('|')[1];
         await getAcct(auth0_id);
-        setLoggedIn(true);
+        setLoggedIn(true); // only used for initial login / acct creation
     }
 
     // create new acct if necessary
@@ -62,16 +62,16 @@ export default function Home() {
                 console.log(acct);
                 // alert('existing account');
                 if (acct.status === 'pre-application') {
-                    alert(`status is: [${acct.status}] redirecting to appplication page...`);
+                    router.push('/application');
                 }
                 if (acct.status === 'applied') {
-                    alert(`status is: [${acct.status}] redirecting dashboard page...`);
+                    router.push('/dashboard');
                 }
                 if (acct.status === 'approved') {
-                    alert(`status is: [${acct.status}] redirecting to paymentpage...`);
+                    router.push('/payment');
                 }
                 if (acct.status === 'paid') {
-                    alert(`status is: [${acct.status}] redirecting to dashboard to generate API key...`);
+                    router.push('/dashboard');;
                 }
             }
         }
