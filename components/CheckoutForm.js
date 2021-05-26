@@ -2,7 +2,6 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useMemo, useState } from "react";
 
 import styles from './CheckoutForm.module.css';
-import { useAuth0 } from '@auth0/auth0-react';
 
 const useOptions = () => {
   const options = useMemo(
@@ -40,12 +39,6 @@ const useOptions = () => {
 };
 
 const CheckoutForm = (props) => {
-  const {
-    isLoading,
-    isAuthenticated,
-    error,
-    user,
-  } = useAuth0();
 
   const stripe = useStripe();
   const elements = useElements();
@@ -59,7 +52,9 @@ const CheckoutForm = (props) => {
   const [state, setState] = useState('');
   const [zip, setZip] = useState('');
 
-  const { totalCost } = props;
+  const { totalCost, profile } = props;
+
+  console.log(profile)
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -87,13 +82,13 @@ const CheckoutForm = (props) => {
         
         //UPDATE TO NEW API ENDPOINT
 
-        let response = await fetch('/.netlify/functions/charge', {
+        let response = await fetch('/api/stripe-create-customer', {
           method: 'POST',
           body: JSON.stringify({
             amount: totalCost * 100,
             paymentMethod: paymentMethod,
-            name: user.name,
-            email: user.email,
+            name: profile.name,
+            email: profile.email,
             billingInfo: {
               address: address,
               city: city,
@@ -103,6 +98,7 @@ const CheckoutForm = (props) => {
           }),
         });
 
+        console.log(response)
         if (response.ok) {
           setStatus('complete');
         } else {
@@ -113,6 +109,7 @@ const CheckoutForm = (props) => {
 
 
     } catch (err) {
+      console.log(err)
       setStatus('error');
     }
   };
@@ -165,7 +162,7 @@ const CheckoutForm = (props) => {
             }}
           />
         </div>
-        <button type="submit" disabled={!stripe} disabled={status === 'submitting'}>
+        <button type="submit" disabled={!stripe || status === 'submitting'}>
           {status === 'submitting' ? 'Submitting' : 'Pay $1'}
         </button>
         {status === 'error' && (
