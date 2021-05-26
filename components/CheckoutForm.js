@@ -87,7 +87,7 @@ const CheckoutForm = (props) => {
         
         //UPDATE TO NEW API ENDPOINT
 
-        let response = await fetch('/.netlify/functions/charge', {
+        let response = await fetch('/api/stripe-charge', {
           method: 'POST',
           body: JSON.stringify({
             amount: totalCost * 100,
@@ -165,7 +165,7 @@ const CheckoutForm = (props) => {
             }}
           />
         </div>
-        <button type="submit" disabled={!stripe} disabled={status === 'submitting'}>
+        <button type="submit" disabled={!stripe || status === 'submitting'}>
           {status === 'submitting' ? 'Submitting' : 'Pay $1'}
         </button>
         {status === 'error' && (

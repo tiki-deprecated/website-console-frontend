@@ -1,22 +1,15 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); // add your secret key here
 
-//NEEDS TO BE REWRITTEN TO FIT API FORMAT
-
-exports.handler = async function(event, context, callback) {
+export default (req, res) => {
   // Only allow POST
-  if (event.httpMethod !== 'POST') {
-    return callback(null, { statusCode: 405, body: 'Method Not Allowed' });
+  if (req.method !== 'POST') {
+    res.status(405).json({message: 'Method Not Allowed'})
   }
 
-  const data = JSON.parse(event.body);
+  const data = JSON.parse(req.body);
 
   if (!data.paymentMethod || parseInt(data.amount) < 1 || !data.email || !data.billingInfo) {
-    return callback(null, {
-      statusCode: 400,
-      body: JSON.stringify({
-        message: 'Some required fields were not supplied.',
-      }),
-    });
+    res.status(400).json({message: 'Some required fields were not supplied.'})
   }
 
   //Create the Customer
@@ -31,12 +24,7 @@ exports.handler = async function(event, context, callback) {
     },
     payment_method: data.paymentMethod,
   }).catch(err => {
-    return callback(null, {
-      statusCode: 400,
-      body: JSON.stringify({
-        message: `Error: ${err.message}`,
-      }),
-    });
+    res.status(400).json({message:  `Error: ${err.message}`})
   });
 
 
@@ -49,17 +37,9 @@ exports.handler = async function(event, context, callback) {
       customer: customer.id,
     })
     .then(({ status }) => {
-      return callback(null, {
-        statusCode: 200,
-        body: JSON.stringify({ status }),
-      });
+      res.status(200).json({status})
     })
     .catch(err => {
-      return callback(null, {
-        statusCode: 400,
-        body: JSON.stringify({
-          message: `Error: ${err.message}`,
-        }),
-      });
+      res.status(400).json({message:  `Error: ${err.message}`})
     });
 };
