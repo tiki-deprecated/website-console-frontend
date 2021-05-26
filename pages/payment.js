@@ -30,7 +30,7 @@ export default function Payment() {
                 <h3><i>{ profile ? profile.name : 'loading...' } is sitll logged in...</i></h3>
     
                 <Elements stripe={stripePromise}>
-                    <CheckoutForm totalCost={1} />
+                    <CheckoutForm totalCost={1} profile={profile}/>
                 </Elements>
             </>
         )

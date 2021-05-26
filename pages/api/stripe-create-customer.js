@@ -13,7 +13,7 @@ export default (req, res) => {
   }
 
   //Create the Customer
-  const customer = await stripe.customers.create({
+  const customer = stripe.customers.create({
     name: data.name,
     email: data.email,
     address: {
@@ -22,24 +22,10 @@ export default (req, res) => {
       state: data.billingInfo.state,
       postal_code: data.billingInfo.zip,
     },
-    payment_method: data.paymentMethod,
+    payment_method: data.paymentMethod.id,
+  }).then(({ status }) => {
+    res.status(200).json({status})
   }).catch(err => {
     res.status(400).json({message:  `Error: ${err.message}`})
   });
-
-
-  stripe.charges
-    .create({
-      amount: parseInt(data.amount),
-      currency: 'usd',
-      description: 'Account Setup Payment',
-      source: data.paymentMethod,
-      customer: customer.id,
-    })
-    .then(({ status }) => {
-      res.status(200).json({status})
-    })
-    .catch(err => {
-      res.status(400).json({message:  `Error: ${err.message}`})
-    });
 };
