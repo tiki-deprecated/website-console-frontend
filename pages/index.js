@@ -5,6 +5,8 @@ import styles from '../styles/Home.module.css'
 import { useAppContext } from '../context/store';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useRouter } from 'next/router'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Home() {
     const {
@@ -73,6 +75,12 @@ export default function Home() {
                 if (acct.status === 'paid') {
                     router.push('/dashboard');;
                 }
+                if (acct.status === 'denied') {
+                    toast.dark("Sorry, you applicaiton was denied, now logging you out.");
+                    setTimeout(() => {
+                        handleLogout();
+                    }, 5000);  
+                }
             }
         }
     },[profile, acct])
@@ -93,15 +101,20 @@ export default function Home() {
 
     if (isAuthenticated || profile) {
         return (
+            <>
+            <div>
+                <ToastContainer /> 
+            </div>
             <div className={styles.container}>
-            <div className={styles.loginBlock}>
-              <h1>Welcome to the Tiki Developer Portal!</h1>
-            <h3>Hello { profile ?  profile.name : user.name }</h3>
-            <button className={styles.loginButton} onClick={() => handleLogout()}>
-              Log out
-            </button>
+                <div className={styles.loginBlock}>
+                    <h1>Welcome to the Tiki Developer Portal!</h1>
+                    <h3>Hello { profile ?  profile.name : user.name }</h3>
+                    <button className={styles.loginButton} onClick={() => handleLogout()}>
+                    Log out
+                    </button>
+                </div>
           </div>
-          </div>
+        </>
         );
     } else {
         return (

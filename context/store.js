@@ -45,14 +45,31 @@ export function AppWrapper({ children }) {
         try{
             const res = await fetch(`/api/accts/[${auth0_id}]`, {
                 method: 'POST',
-                body: '',
+                body: JSON.stringify({
+                    auth0_id
+                }),
                 headers: {'Content-Type': 'application/json'}
             });
             const response = await res.json();
-            setAcct(response.data);
+            // refresh account data
+            getAcct(auth0_id);
         } catch(err) {
             console.log(err);
         }
+    }
+
+    const genKey = async (auth0_id) => {
+        let response;
+        // get new random string
+        try{
+            const res = await fetch(`/api/gen-key`);
+            response = await res.json();
+            console.log(response.key); // debug
+        } catch(err) {
+            console.log(err);
+        }
+        // update account with new key
+        updateAcct(auth0_id, 'api_key', response.key);
     }
 
     let store = { 
@@ -67,6 +84,7 @@ export function AppWrapper({ children }) {
         getAcct,
         updateAcct,
         createAcct,
+        genKey
     }
 
     // persist profile on page refresh
