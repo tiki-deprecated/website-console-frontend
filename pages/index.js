@@ -6,6 +6,7 @@ import { useAppContext } from '../context/store';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useRouter } from 'next/router'
 import { ToastContainer, toast } from 'react-toastify';
+import Loading from '../components/Loading';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Home() {
@@ -69,17 +70,17 @@ export default function Home() {
                 if (acct.status === 'applied') {
                     router.push('/dashboard');
                 }
-                if (acct.status === 'approved') {
-                    router.push('/payment');
-                }
-                if (acct.status === 'paid') {
-                    router.push('/dashboard');;
-                }
                 if (acct.status === 'denied') {
                     toast.dark("Sorry, you applicaiton was denied, now logging you out.");
                     setTimeout(() => {
                         handleLogout();
                     }, 5000);  
+                }
+                if (acct.status === 'approved') {
+                    router.push('/payment');
+                }
+                if (acct.status === 'paid') {
+                    router.push('/dashboard');;
                 }
             }
         }
@@ -93,7 +94,7 @@ export default function Home() {
     },[isAuthenticated])
 
     if (isLoading && !profile) {
-        return <div>Loading...</div>;
+        return <Loading/>
     }
     if (error) {
         return <div>Oops... {error.message}</div>;
