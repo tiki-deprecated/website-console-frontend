@@ -11,10 +11,11 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-
 export default function Dashboard() {
-    const { profile, acct, getAcct, setLogOut, genKey } = useAppContext();
+    const { profile, acct, getAcct, setLogOut, genKey, updateKey } = useAppContext();
     const { logout } = useAuth0();
+    const [newKey, setNewKey] = useState(false);
+    const [apiKey, setApiKey] = useState('-');
     const [viewKey, setViewKey] = useState(false);
 
     useEffect((profile) => {
@@ -24,16 +25,22 @@ export default function Dashboard() {
         }
     },[profile])
 
+    /**
+     * only make api_key visible upon generating a new one
+     * once it's saved in the db it is encrypted and can never be viewed again
+     **/
     const handleKeyGen = async () => {
         const { auth0_id } = acct;
-        await genKey(auth0_id);
-        setViewKey(false);
+        const api_key = await genKey();
+        await updateKey(auth0_id, api_key);
+        setApiKey(api_key);
+        setNewKey(true);
         getAcct(auth0_id);
         toast.dark("New 👋, API Key Generated!");
     }
 
     const copyKeyToClipboard = () => {
-        navigator.clipboard.writeText(acct.api_key);
+        navigator.clipboard.writeText(apiKey);
         setViewKey(false);
     }
     
@@ -107,19 +114,22 @@ export default function Dashboard() {
                                             <h6>Sorry, you can only access the API once your application has been approved and you have paid the nominal fee. &#128522;</h6>
                                         </Card.Body>  
                                     }                          
-                                    { acct.api_key && 
+                                    { newKey && 
                                             <Card.Body className={styles.accordionBody}>
                                                 <Link href='/dashboard'><a><h6  onClick={() => !viewKey ? setViewKey(true) : setViewKey(false)} className={styles.link}>{!viewKey ? 'View API Key' : 'Hide API Key'}</h6></a></Link>
                                                 <input
                                                     disabled
                                                     size="50"
-                                                    placeholder={viewKey ? acct.api_key : '++++++++++++++++++++++++++++++++++++++++++'}
+                                                    placeholder={viewKey ? apiKey : '++++++++++++++++++++++++++++++++++++++++++'}
                                                     name="api_key"
                                                 />  
                                                 { viewKey &&
-                                                    <button
-                                                        onClick={() => copyKeyToClipboard()}
-                                                    >copy</button>
+                                                    <span>
+                                                        <button
+                                                            onClick={() => copyKeyToClipboard()}
+                                                        >copy</button>
+                                                        <p><b>Note:</b> You will not be able to see this API Key again. Please save it securely.</p>
+                                                    </span>
                                                 }
                                             </Card.Body>
                                     }

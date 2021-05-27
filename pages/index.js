@@ -49,7 +49,6 @@ export default function Home() {
         if (loggedIn && profile && !acct) {
             const auth0_id = profile.sub.split('|')[1];
             createAcct(auth0_id);
-            alert('new user, creating new account...');
         }
     },[loggedIn, acct])
 

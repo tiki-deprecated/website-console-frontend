@@ -1,5 +1,6 @@
 const pg = require('pg');
 import config from '../../../components/utils/db-config'
+const { decrypt } = require('../../../components/utils/crypto');
 
 export default (req, res) => {    
 
@@ -29,8 +30,6 @@ export default (req, res) => {
                         data: result.rows[0],
                         rowCount: result.rowCount
                     }
-                    console.log('-- getAcct api --');
-                    console.log(response);
                     res.status(200).json(response);
                     client.end(function (err) {
                         if (err)

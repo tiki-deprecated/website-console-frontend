@@ -58,18 +58,34 @@ export function AppWrapper({ children }) {
         }
     }
 
-    const genKey = async (auth0_id) => {
-        let response;
-        // get new random string
+    const genKey = async () => {
         try{
             const res = await fetch(`/api/gen-key`);
-            response = await res.json();
-            console.log(response.key); // debug
+            const response = await res.json();
+            console.log('---- gen API key -----');
+            console.log(response); // delete
+            return response.api_key;    
         } catch(err) {
             console.log(err);
         }
-        // update account with new key
-        updateAcct(auth0_id, 'api_key', response.key);
+    }
+
+    const updateKey = async (auth0_id, api_key) => {
+        let response;
+        // get new random string
+        try{
+            const res = await fetch(`/api/update-key`, {
+                method: 'PUT',
+                body: JSON.stringify({
+                        auth0_id,
+                        api_key
+                    }),
+                headers: {'Content-Type': 'application/json'}
+            });
+            response = await res.json();
+        } catch(err) {
+            console.log(err);
+        }
     }
 
     let store = { 
@@ -84,7 +100,8 @@ export function AppWrapper({ children }) {
         getAcct,
         updateAcct,
         createAcct,
-        genKey
+        genKey, 
+        updateKey
     }
 
     // persist profile on page refresh
