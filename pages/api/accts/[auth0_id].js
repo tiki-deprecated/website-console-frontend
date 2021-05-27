@@ -1,6 +1,5 @@
 const pg = require('pg');
 import config from '../../../components/utils/db-config'
-const { decrypt } = require('../../../components/utils/crypto');
 
 export default (req, res) => {    
 
