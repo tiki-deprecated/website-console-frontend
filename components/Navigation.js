@@ -6,7 +6,7 @@ import { useAppContext } from '../context/store';
 
 
 function Navigation() {
-    const { setLogOut } = useAppContext();
+    const { profile, acct, setLogOut } = useAppContext();
     const { logout } = useAuth0();
 
     const handleLogout = async () => {
@@ -14,42 +14,42 @@ function Navigation() {
         logout({ returnTo: window.location.origin });
     }
 
-
-    return (
-        <div className="navigation">
-            <div className="navigationContainer">
-                <ul>
-                    <li>
-                        <Link className="logo" href="/">
-                            <a><Image src='/TIKI_logo_black.png' width={100} height={33}/>
-                            </a>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="">
-                            <a className="navLink" onClick={() => handleLogout()}>Logout</a>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="/dashboard">
-                            <a className="navLink">Dashboard</a>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="/payment">
-                            <a className="navLink">Payment</a>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="/application">
-                            <a className="navLink">Application</a>
-                        </Link>
-                    </li>
-                </ul>
+    if (profile && acct && acct.status !== 'denied') {
+        return (
+            <div className="navigation">
+                <div className="navigationContainer">
+                    <ul>
+                        <li>
+                            <Link className="logo" href="/">
+                                <a><Image src='/TIKI_logo_black.png' width={100} height={33}/>
+                                </a>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href="">
+                                <a className="navLink" onClick={() => handleLogout()}>Logout</a>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href="/dashboard">
+                                <a className="navLink">Dashboard</a>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href="/payment">
+                                <a className="navLink">Payment</a>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href="/application">
+                                <a className="navLink">Application</a>
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-
-    );
+        );
+    } else return ''
 }
 
 export default Navigation;

@@ -23,16 +23,39 @@ export default function Payment() {
     },[profile])
 
     if (profile) {
-        return (
-            <>
-                {/* persistence test */}
-                {console.log(acct)}
-                <h3><i>{ profile ? profile.name : 'loading...' } is sitll logged in...</i></h3>
-    
-                <Elements stripe={stripePromise}>
-                    <CheckoutForm totalCost={1} profile={profile}/>
-                </Elements>
-            </>
-        )
+        {console.log(acct)}
+        if (acct.status === 'pre-application') {
+            return (
+                <>
+                    <h1>First Things First!</h1>
+                    <h4>You must apply and be approved before providing your payment info.</h4>
+                </>
+            )
+        } 
+        if (acct.status === 'applied') {
+            return (
+                <>
+                    <h1>Thanks For Submitting Your Application!</h1>
+                    <h4>If approved, you will then provide your payment information.</h4>
+                </>
+            )
+        } 
+        if (acct.status === 'paid') {
+            return (
+                <>
+                    <h1>Thanks For Setting Up Your Account!</h1>
+                    <h4>We alrady have your payment information.</h4>
+                </>
+            )
+        } 
+        if (acct.status === 'approved') {
+            return (
+                <>
+                    <Elements stripe={stripePromise}>
+                        <CheckoutForm totalCost={1} profile={profile}/>
+                    </Elements>
+                </>
+            );
+        } 
     } else return <Loading/>
 }

@@ -5,6 +5,9 @@ import styles from '../styles/Home.module.css'
 import { useAppContext } from '../context/store';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useRouter } from 'next/router'
+import { ToastContainer, toast } from 'react-toastify';
+import Loading from '../components/Loading';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Home() {
     const {
@@ -46,7 +49,6 @@ export default function Home() {
         if (loggedIn && profile && !acct) {
             const auth0_id = profile.sub.split('|')[1];
             createAcct(auth0_id);
-            alert('new user, creating new account...');
         }
     },[loggedIn, acct])
 
@@ -67,6 +69,12 @@ export default function Home() {
                 if (acct.status === 'applied') {
                     router.push('/dashboard');
                 }
+                if (acct.status === 'denied') {
+                    toast.dark("Sorry, you applicaiton was denied, now logging you out.");
+                    setTimeout(() => {
+                        handleLogout();
+                    }, 5000);  
+                }
                 if (acct.status === 'approved') {
                     router.push('/payment');
                 }
@@ -85,7 +93,7 @@ export default function Home() {
     },[isAuthenticated])
 
     if (isLoading && !profile) {
-        return <div>Loading...</div>;
+        return <Loading/>
     }
     if (error) {
         return <div>Oops... {error.message}</div>;
@@ -93,15 +101,20 @@ export default function Home() {
 
     if (isAuthenticated || profile) {
         return (
+            <>
+            <div>
+                <ToastContainer /> 
+            </div>
             <div className={styles.container}>
-            <div className={styles.loginBlock}>
-              <h1>Welcome to the Tiki Developer Portal!</h1>
-            <h3>Hello { profile ?  profile.name : user.name }</h3>
-            <button className={styles.loginButton} onClick={() => handleLogout()}>
-              Log out
-            </button>
+                <div className={styles.loginBlock}>
+                    <h1>Welcome to the Tiki Developer Portal!</h1>
+                    <h3>Hello { profile ?  profile.name : user.name }</h3>
+                    <button className={styles.loginButton} onClick={() => handleLogout()}>
+                    Log out
+                    </button>
+                </div>
           </div>
-          </div>
+        </>
         );
     } else {
         return (

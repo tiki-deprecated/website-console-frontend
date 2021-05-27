@@ -29,13 +29,8 @@ export default function Application() {
     if (profile) {
         return (
             <div className={styles.container}>
-                {/* persistence test */}
                 {console.log(acct)}
-                <h3><i>{profile ? profile.name : 'loading...'} is still logged in...</i></h3>
-
                 <div className={styles.applicationBlock}>
-                    
-
                     {!applied && (
                         <>
                             <h1>Thank You For Your Interest</h1>

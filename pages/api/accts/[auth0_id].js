@@ -29,8 +29,6 @@ export default (req, res) => {
                         data: result.rows[0],
                         rowCount: result.rowCount
                     }
-                    console.log('-- getAcct api --');
-                    console.log(response);
                     res.status(200).json(response);
                     client.end(function (err) {
                         if (err)
