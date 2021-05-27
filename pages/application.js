@@ -16,7 +16,13 @@ export default function Application() {
             setLogOut(true);
             logout({ returnTo: window.location.origin });
         }
-    },[profile])
+        if (acct) {
+            if (acct.status != 'pre-application') {
+                setApplied(true);
+            }
+        }
+
+    }, [profile])
 
 
 
@@ -25,26 +31,27 @@ export default function Application() {
             <div className={styles.container}>
                 {/* persistence test */}
                 {console.log(acct)}
-                <h3><i>{ profile ? profile.name : 'loading...' } is sitll logged in...</i></h3>
+                <h3><i>{profile ? profile.name : 'loading...'} is still logged in...</i></h3>
 
                 <div className={styles.applicationBlock}>
-                    <h1>Thank You For Your Interest</h1>
+                    
 
                     {!applied && (
                         <>
+                            <h1>Thank You For Your Interest</h1>
                             <h3>Please Apply to Become a Registered Developer</h3>
-                            <ApplicationForm />
+                            <ApplicationForm profile={profile} setApplied={setApplied}/>
                         </>
                     )}
                     {applied && (
                         <>
-                            <h3>Thank You For Applying!</h3>
-                            <p>Your application is being processed and you will be notified by email when you have been approved.</p>
+                            <h1>Thank You For Applying!</h1>
+                            <h4>Your application is being processed and you will be notified by email when you have been approved.</h4>
                         </>
                     )}
                 </div>
                 <button className={styles.demoButton} onClick={() => setApplied(!applied)}>Toggle Applied Status</button>
             </div>
         )
-    } else return <Loading/>
+    } else return <Loading />
 }

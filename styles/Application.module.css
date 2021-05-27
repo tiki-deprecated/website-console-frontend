@@ -9,61 +9,84 @@
     color: #00133f;
     animation: fade-in 2s ease;
 }
-.applicationBlock{
-    display: flex;
-    flex-direction: column;
-    background-color: #00133f;
-    border-radius: 10px;
+ .applicationBlock{
     width: 75%;
     padding: 30px 50px 50px;
     margin: 0px auto;
-    color: #eee;
-    text-align: center;
 }
-.applicationForm{
-    width: 100%;
+.applicationFormWrapper{
+    max-width: 600px;
+    margin: 0 auto;
+    padding-top: 50px;
 }
-.applicationForm form{
-    width: 100%;
-}
-.applicationForm input, .applicationForm textarea{
-    border-radius: 5px;
-    border: solid 1px #ccc;
-    padding: 15px 20px;
-    width: 75%;
-    max-width: 400px;
-    box-shadow: none;
-    font-size: 18px;
-    margin-top: 15px;
-}
-.applicationForm textarea{
-    min-height: 150px;
-}
-.applicationForm span{
-    display: none;
-    margin: 5px 0px;
-    color: #eee;
-    font-weight: 600;
-    margin-top: 15px;
-}
-.applicationForm label{
-    color: white;
+.row {
     display: block;
-}
-.applicationForm ul{
-    list-style-type: none;
-    padding: 0px;
-    margin: 0px;
-}
-.applicationForm input[type=submit]{
+    width: 100%;
+  }
+  .flexRow{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .field{
+    width: 100%;
+  }
+  .fullWidth {
+    width: 100%;
+  }
+  .halfWidth{
+    width: 49%;
+  }
+  .quarterWidth{
+    width: 25%;
+  }
+  .flexRow input{
+    width: 100%;
+  }
+  .formInput{
+    display: block;
+    margin-bottom: 20px;
+    padding: 10px 14px;
+    font-size: 1em;
+    font-family: "Source Code Pro", monospace;
+    box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px,
+      rgba(0, 0, 0, 0.0196078) 0px 1px 0px;
+    border: 0;
+    outline: 0;
+    border-radius: 4px;
+    background: white;
+  }
+  .formInput:focus {
+    box-shadow: rgba(50, 50, 93, 0.109804) 0px 4px 6px,
+      rgba(0, 0, 0, 0.0784314) 0px 1px 3px;
+    -webkit-transition: all 150ms ease;
+    transition: all 150ms ease;
+  }
+.formSubmit{
     margin-top: 15px;
-    padding: 10px 30px;
+    padding: 7px 30px;
+    width: 100%;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color .2s;
+    border-radius: 4px;
+    box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px,
+      rgba(0, 0, 0, 0.0196078) 0px 1px 0px;
+    border: 1px solid #ced4da;
+    outline: 0;
+    background-color: #00133f;
+    color: #ddd;
+    transition: opacity .2s;
 }
-.applicationForm input[type=submit]:hover{
-    background-color: #ccc;
+.formSubmit:hover{
+    opacity: .8;
+}
+.formSubmit:disabled{
+  color: #aaa;
+  border-color: #bbb;
+  background-color: #ddd;
+}
+.FormError{
+  color: #dc4545;
 }
 
 /* DEMO STYLES */
