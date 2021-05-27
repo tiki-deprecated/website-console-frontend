@@ -5,7 +5,7 @@ import styles from '../styles/Application.module.css';
 //POST https://api.hsforms.com/submissions/v3/integration/submit/9337300/ca9e267d-252d-40b5-95e6-d3983dd09ac0
 
 function ApplicationForm(props) {
-    const { profile, setApplied } = props;
+    const { profile, setApplied, updateAcct } = props;
     const [status, setStatus] = useState('default');
 
     //Form Values
@@ -58,7 +58,7 @@ function ApplicationForm(props) {
             if (response.ok) {
                 setStatus('complete');
                 setApplied(true);
-                
+                updateAcct(acct.auth0_id, 'status', 'applied');
             } else {
                 throw new Error('Network response was not ok.');
             }

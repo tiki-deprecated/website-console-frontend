@@ -12,7 +12,7 @@ import styles from '../styles/Home.module.css'
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
 export default function Payment() {
-    const { profile, acct, setLogOut } = useAppContext();
+    const { profile, acct, setLogOut, updateAcct } = useAppContext();
     const { logout } = useAuth0();
     
     useEffect((profile) => {
@@ -44,7 +44,7 @@ export default function Payment() {
             return (
                 <>
                     <h1>Thanks For Setting Up Your Account!</h1>
-                    <h4>We alrady have your payment information.</h4>
+                    <h4>We already have your payment information.</h4>
                 </>
             )
         } 
@@ -52,7 +52,7 @@ export default function Payment() {
             return (
                 <>
                     <Elements stripe={stripePromise}>
-                        <CheckoutForm totalCost={1} profile={profile}/>
+                        <CheckoutForm totalCost={1} profile={profile} updateAcct={updateAcct}/>
                     </Elements>
                 </>
             );

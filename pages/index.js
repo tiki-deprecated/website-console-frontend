@@ -70,7 +70,7 @@ export default function Home() {
                     router.push('/dashboard');
                 }
                 if (acct.status === 'denied') {
-                    toast.dark("Sorry, you applicaiton was denied, now logging you out.");
+                    toast.dark("Sorry, you application was denied, now logging you out.");
                     setTimeout(() => {
                         handleLogout();
                     }, 5000);  

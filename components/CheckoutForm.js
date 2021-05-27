@@ -52,7 +52,7 @@ const CheckoutForm = (props) => {
   const [state, setState] = useState('');
   const [zip, setZip] = useState('');
 
-  const { totalCost, profile } = props;
+  const { totalCost, profile, updateAcct} = props;
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -99,6 +99,7 @@ const CheckoutForm = (props) => {
         console.log(response)
         if (response.ok) {
           setStatus('complete');
+          updateAcct(acct.auth0_id, 'status', 'paid');
         } else {
           throw new Error('Network response was not ok.');
         }

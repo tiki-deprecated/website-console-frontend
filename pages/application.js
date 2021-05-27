@@ -7,7 +7,7 @@ import Loading from '../components/Loading';
 import styles from '../styles/Application.module.css';
 
 export default function Application() {
-    const { profile, acct, setLogOut } = useAppContext();
+    const { profile, acct, setLogOut, updateAcct } = useAppContext();
     const { logout } = useAuth0();
     const [applied, setApplied] = useState(false);
 
@@ -35,7 +35,7 @@ export default function Application() {
                         <>
                             <h1>Thank You For Your Interest</h1>
                             <h3>Please Apply to Become a Registered Developer</h3>
-                            <ApplicationForm profile={profile} setApplied={setApplied}/>
+                            <ApplicationForm profile={profile} setApplied={setApplied} updateAcct={updateAcct}/>
                         </>
                     )}
                     {applied && (
