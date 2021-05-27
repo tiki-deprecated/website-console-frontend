@@ -55,8 +55,6 @@ function ApplicationForm(props) {
                 }),
             });
 
-            console.log(response);
-
             if (response.ok) {
                 setStatus('complete');
                 setApplied(true);

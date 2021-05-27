@@ -54,8 +54,6 @@ const CheckoutForm = (props) => {
 
   const { totalCost, profile } = props;
 
-  console.log(profile)
-
   const handleSubmit = async event => {
     event.preventDefault();
 
@@ -109,7 +107,6 @@ const CheckoutForm = (props) => {
 
 
     } catch (err) {
-      console.log(err)
       setStatus('error');
     }
   };
@@ -163,7 +160,7 @@ const CheckoutForm = (props) => {
           />
         </div>
         <button type="submit" disabled={!stripe || status === 'submitting'}>
-          {status === 'submitting' ? 'Submitting' : 'Pay $1'}
+          {status === 'submitting' ? 'Submitting' : 'Save Billing Info'}
         </button>
         {status === 'error' && (
           <div className={styles.CheckoutFormError}>Something went wrong.</div>
