@@ -13,7 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function Dashboard() {
-    const { profile, acct, setLogOut, genKey } = useAppContext();
+    const { profile, acct, getAcct, setLogOut, genKey } = useAppContext();
     const { logout } = useAuth0();
     const [viewKey, setViewKey] = useState(false);
 
@@ -27,8 +27,9 @@ export default function Dashboard() {
     const handleKeyGen = async () => {
         const { auth0_id } = acct;
         await genKey(auth0_id);
-        toast.dark("New 👋, API Key Generated!");
         setViewKey(false);
+        getAcct(auth0_id);
+        toast.dark("New 👋, API Key Generated!");
     }
 
     const copyKeyToClipboard = () => {
@@ -46,31 +47,55 @@ export default function Dashboard() {
                 <div className={styles.dashboardContainer}>
                     <h4 className={styles.sectionTitle}>Account Setup</h4>
                     <Accordion>
+                    <Card>
+                        <Accordion.Toggle className={styles.accordionToggle} as={Card.Header} eventKey="0">
+                            <h5>Application Status: <span className={acct.status === 'pre-application' ? styles.incomplete : styles.complete}>{acct.status === 'pre-application' ? 'Incomplete' : acct.status === 'applied' ? 'Pending' : 'Approved'}</span></h5>
+                        </Accordion.Toggle>
+                            <Accordion.Collapse eventKey="0">
+                                <div>
+                                    { acct.status === 'pre-application' &&
+                                        <Card.Body className={styles.accordionBody}>
+                                            <Link href='/application'><a><h6 className={styles.link}>Complete Your Application</h6></a></Link>
+                                        </Card.Body>
+                                    }
+                                    { acct.status === 'applied' &&
+                                        <Card.Body className={styles.accordionBody}>
+                                           <h6>Thanks for applying! We are currently reviewing your application and will get back to you in no time! &#128522;</h6>
+                                       </Card.Body>  
+                                    }
+                                </div>
+                            </Accordion.Collapse>
+                        </Card>
                         <Card>
-                            <Accordion.Toggle className={styles.accordionToggle} as={Card.Header} eventKey="0">
+                            <Accordion.Toggle className={styles.accordionToggle} as={Card.Header} eventKey="1">
                                 <h5>Payment Status: <span className={acct.status === 'paid' ? styles.complete : styles.incomplete}>{acct.status === 'paid' ? 'Complete' : 'InComplete'}</span></h5>
                             </Accordion.Toggle>
-                                <Accordion.Collapse eventKey="0">
+                                <Accordion.Collapse eventKey="1">
                                     <div>
+                                        { (acct.status === 'pre-application' || acct.status === 'applied') &&
+                                        <Card.Body className={styles.accordionBody}>
+                                            <h6>Once your applicaiton is approved, you can make the nominal payment. &#128522;</h6>
+                                        </Card.Body>  
+                                        } 
+                                        { acct.status === 'approved' &&
+                                            <Card.Body className={styles.accordionBody}>
+                                                <Link href='/payment'><a><h6 className={styles.link}>Make Nominal Payment</h6></a></Link>
+                                            </Card.Body>
+                                        }
                                         { acct.status === 'paid' && 
                                             <Card.Body className={styles.accordionBody}>
                                                 <h6>Payment History</h6>
                                                 <p>5/1/2021 - $1</p>
                                             </Card.Body>
-                                        }   
-                                        { acct.status !== 'paid' &&
-                                            <Card.Body className={styles.accordionBody}>
-                                                <Link href='/payment'><a><h6 className={styles.link}>Make Nominal Payment</h6></a></Link>
-                                            </Card.Body>
-                                        }
+                                        }  
                                     </div>
                                 </Accordion.Collapse>
                         </Card>
                         <Card>
-                            <Accordion.Toggle className={styles.accordionToggle} as={Card.Header} eventKey="1">
+                            <Accordion.Toggle className={styles.accordionToggle} as={Card.Header} eventKey="2">
                                 <h5>API Access: <span className={acct.api_key ?  styles.complete : styles.incomplete}>{ acct.api_key ? 'Complete' : 'Incomplete'}</span></h5>
                             </Accordion.Toggle>
-                            <Accordion.Collapse eventKey="1">
+                            <Accordion.Collapse eventKey="2">
                                 <div>
                                     { acct.status === 'paid' && 
                                         <Card.Body className={styles.accordionBody}>
@@ -82,8 +107,7 @@ export default function Dashboard() {
                                             <h6>Sorry, you can only access the API once your application has been approved and you have paid the nominal fee. &#128522;</h6>
                                         </Card.Body>  
                                     }                          
-                                    { acct.api_key &&
-                                        <span>   
+                                    { acct.api_key && 
                                             <Card.Body className={styles.accordionBody}>
                                                 <Link href='/dashboard'><a><h6  onClick={() => !viewKey ? setViewKey(true) : setViewKey(false)} className={styles.link}>{!viewKey ? 'View API Key' : 'Hide API Key'}</h6></a></Link>
                                                 <input
@@ -98,7 +122,6 @@ export default function Dashboard() {
                                                     >copy</button>
                                                 }
                                             </Card.Body>
-                                        </span>
                                     }
                                 </div>
                             </Accordion.Collapse>
