@@ -10,6 +10,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  environment: Production
   deploy:
     runs-on: ubuntu-latest
     steps:
