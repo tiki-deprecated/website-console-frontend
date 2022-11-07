@@ -1,4 +1,0 @@
-[build]
-  Functions = "functions-build"
-  Command = "npm run export"
-  Publish = "out"
