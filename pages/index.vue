@@ -4,10 +4,11 @@
   -->
 
 <template>
-  <Tutorial />
+  <div>hello world</div>
 </template>
 
 <script>
+
 export default {
   name: 'IndexPage'
 }
