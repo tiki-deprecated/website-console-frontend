@@ -10,6 +10,3 @@ locals {
 data "digitalocean_project" "production" {
   name = "production"
 }
-
-variable "sem_ver" {}
-variable "doppler_st" {}
