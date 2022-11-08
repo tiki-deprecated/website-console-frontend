@@ -22,10 +22,20 @@ export default {
   plugins: [],
   components: true,
   buildModules: ['@nuxtjs/eslint-module'],
-  modules: ['@nuxtjs/axios'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/axios', '@nuxtjs/auth-next'],
   axios: {
     baseURL: '/',
   },
   build: {},
-  router: {},
+  router: {
+    middleware: ['auth'],
+  },
+  auth: {
+    strategies: {
+      l0auth: {
+        scheme: '~/schemes/l0auth',
+        server: 'http://localhost:10502/api/latest',
+      },
+    },
+  },
 }
