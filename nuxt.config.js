@@ -33,7 +33,7 @@ export default {
   auth: {
     strategies: {
       l0auth: {
-        scheme: '~/schemes/l0auth',
+        scheme: '~/scripts/l0auth',
         server: 'http://localhost:10502/api/latest',
       },
     },
