@@ -33,8 +33,9 @@ export default {
   auth: {
     strategies: {
       l0auth: {
-        scheme: '~/schemes/l0auth',
-        server: 'http://localhost:10502/api/latest',
+        scheme: '~/scripts/l0auth',
+        server: 'https://auth.l0.mytiki.com/api/latest',
+        audience: ['storage.l0.mytiki.com'],
       },
     },
   },

@@ -11,6 +11,7 @@ const DEFAULTS = {
   autoLogout: false,
   server: 'https://auth.l0.mytiki.com/api/latest',
   home: '/',
+  audience: [],
   endpoints: {
     otp: '/otp/start',
     revoke: '/oauth/revoke',
@@ -61,6 +62,7 @@ export default class L0auth extends Oauth2Scheme {
         },
         data: {
           email: params.email,
+          notAnonymous: true,
         },
       })
       .catch((error) => {
@@ -91,6 +93,7 @@ export default class L0auth extends Oauth2Scheme {
           username: deviceId,
           password: params.otp,
           scopes: this.scope,
+          audience: this.options.audience,
           client_id: this.options.clientId,
         }),
       })
@@ -216,10 +219,6 @@ export default class L0auth extends Oauth2Scheme {
       response.valid = true
       return response
     }
-
-    const _key = this.options.token.expirationPrefix + this.name
-    const exp = this.$auth.$storage.getUniversal(_key)
-    console.log(exp)
 
     const tokenStatus = this.token.status()
     const refreshTokenStatus = this.refreshToken.status()
