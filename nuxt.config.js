@@ -22,10 +22,21 @@ export default {
   plugins: [],
   components: true,
   buildModules: ['@nuxtjs/eslint-module'],
-  modules: ['@nuxtjs/axios'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/axios', '@nuxtjs/auth-next'],
   axios: {
     baseURL: '/',
   },
   build: {},
-  router: {},
+  router: {
+    middleware: ['auth'],
+  },
+  auth: {
+    strategies: {
+      l0auth: {
+        scheme: '~/scripts/l0auth',
+        server: 'https://auth.l0.mytiki.com/api/latest',
+        audience: ['storage.l0.mytiki.com'],
+      },
+    },
+  },
 }
