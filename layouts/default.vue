@@ -13,4 +13,14 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="sass">
+@import "assets/styles/theme"
+
+body
+  margin: 0
+  font-family: $font-family-space-grotesk
+  font-weight: normal
+  color: $blue
+  font-size: 90%
+  background-color: $gray
+</style>

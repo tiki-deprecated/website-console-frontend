@@ -56,8 +56,10 @@ export default {
 }
 </script>
 
-<style scoped>
-.logout {
-  margin-top: 100px;
-}
+<style scoped lang="sass">
+body
+  background-color: $green-light
+
+.logout
+  margin-top: 100px
 </style>

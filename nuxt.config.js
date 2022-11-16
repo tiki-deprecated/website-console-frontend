@@ -6,7 +6,7 @@
 export default {
   target: 'static',
   head: {
-    title: 'console',
+    title: 'TIKI Console | Choose Better Data',
     htmlAttrs: {
       lang: 'en',
     },
@@ -18,15 +18,49 @@ export default {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
-  css: [],
-  plugins: [],
+  css: [
+    '@/assets/fonts/koara/stylesheet.css',
+    '@/assets/fonts/space-grotesk/stylesheet.css',
+  ],
+  styleResources: {
+    sass: ['@/assets/styles/*.sass'],
+    scss: ['@/assets/styles/*.scss'],
+  },
+  plugins: ['~/plugins/plausible.js'],
   components: true,
-  buildModules: ['@nuxtjs/eslint-module'],
-  modules: ['@nuxtjs/axios', '@nuxtjs/axios', '@nuxtjs/auth-next'],
+  buildModules: [
+    '@nuxtjs/eslint-module',
+    [
+      'nuxt-compress',
+      {
+        gzip: {
+          cache: true,
+        },
+        brotli: {
+          threshold: 10240,
+        },
+      },
+    ],
+  ],
+  modules: [
+    '@nuxtjs/style-resources',
+    '@nuxtjs/svg',
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
+  ],
   axios: {
     baseURL: '/',
   },
-  build: {},
+  build: {
+    extend(config, ctx) {
+      if (ctx.isDev && ctx.isClient) {
+        config.devtool = 'eval-source-map'
+      }
+    },
+  },
+  generate: {
+    fallback: false,
+  },
   router: {
     middleware: ['auth'],
   },
