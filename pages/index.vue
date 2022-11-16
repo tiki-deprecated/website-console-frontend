@@ -66,7 +66,6 @@ import GetStartedCmp from '~/components/GetStartedCmp'
 export default {
   name: 'IndexPage',
   components: { GetStartedCmp },
-  auth: false,
 }
 </script>
 
