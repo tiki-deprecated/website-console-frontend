@@ -18,7 +18,7 @@ resource "digitalocean_app" "console-app" {
 
       git {
         repo_clone_url = "https://github.com/tiki/console.git"
-        branch         = var.sem_ver
+        branch         = "main"
       }
     }
 
