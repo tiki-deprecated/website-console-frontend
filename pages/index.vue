@@ -5,6 +5,7 @@
 
 <template>
   <div>
+    <div class="bkg" />
     <picture class="palmCoconut mobile">
       <img
         sizes="(max-width: 1400px) 100vw, 1400px"
@@ -74,16 +75,16 @@ export default {
 }
 </script>
 
-<style lang="sass">
-@import "assets/styles/theme"
-
-body
-  background-color: $green-light
-</style>
-
 <style scoped lang="sass">
 @import "assets/styles/theme"
 @import "assets/styles/mixins"
+
+.bkg
+  position: fixed
+  width: 100%
+  height: 100%
+  z-index: 0
+  background-color: $green-light
 
 .title
   font-family: $font-family-koara
