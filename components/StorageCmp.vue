@@ -128,6 +128,25 @@ export default {
   transform: translate(-50%, -50%)
 
 @include for-phone
+  .value
+    font-size: 1.2em
+    height: 50px
+    width: 100%
+    line-height: 50px
+    padding: 0 12px
+    margin-right: 10px
+
+  .button
+    height: 50px
+    width: 50px
+    flex-shrink: 0
+
+  .label
+    margin-bottom: 5px
+
+  .field1
+    margin-bottom: 20px
+
 @include for-tablet
   .value
     font-size: 1.2em

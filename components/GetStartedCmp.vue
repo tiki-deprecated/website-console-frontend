@@ -64,7 +64,7 @@ export default {
   .title
     font-size: 1.4em
     text-align: center
-    margin-bottom: 50px
+    margin-bottom: 30px
 
   .btnContainer
     font-size: 1.3em
