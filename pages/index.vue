@@ -119,10 +119,13 @@ export default {
     display: none
 
   .palmCoconut
-    position: absolute
+    position: fixed
     bottom: 0
     left: 0
     z-index: 1
+
+  .storageCmp, .startedCmp, .accountCmp
+    margin: 40px auto
 
 @include for-tablet
   .content
@@ -144,14 +147,14 @@ export default {
     display: none
 
   .palm
-    position: absolute
+    position: fixed
     bottom: 0
     left: 0
     z-index: 1
     width: 30%
 
   .coconut
-    position: absolute
+    position: fixed
     bottom: 25px
     right: 25px
     z-index: 1

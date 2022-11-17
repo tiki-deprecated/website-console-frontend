@@ -115,14 +115,41 @@ export default {
 .logoutBtnCnt:hover
   background-color: rgba($green-dark, .75)
 
-.logoutBtnCnt:active
-  background-color: $green
+.button:hover
+  background-color: rgba($green-dark, .75)
 
 @include for-phone
   .title
     font-size: 1.4em
     text-align: center
-    margin-bottom: 50px
+
+  .value
+    font-size: 1.2em
+    height: 50px
+    width: 100%
+    line-height: 50px
+    padding: 0 12px
+    margin-right: 10px
+
+  .button
+    height: 50px
+    width: 50px
+    flex-shrink: 0
+
+  .label
+    margin-bottom: 5px
+
+  .logoutBtnCnt
+    font-size: 1.2em
+    padding: 14px 30px
+    width: 125px
+    margin: auto
+
+  .buttons
+    display: flex
+
+  .field
+    margin-bottom: 30px
 
 @include for-tablet
   .value
@@ -149,7 +176,7 @@ export default {
     font-size: 1em
     padding: 14px 30px
     width: 125px
-    margin: 0 25px 0 0
+    margin: 0
 
   .buttons
     display: flex
