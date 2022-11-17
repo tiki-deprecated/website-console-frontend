@@ -15,7 +15,6 @@ resource "digitalocean_app" "console-app" {
       name              = "console"
       build_command     = "npm ci; npm run build; npm run generate"
       output_dir        = "/dist"
-      error_document    = "404.html"
       catchall_document = "404.html"
 
       github {
