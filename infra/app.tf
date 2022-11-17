@@ -12,13 +12,16 @@ resource "digitalocean_app" "console-app" {
     }
 
     static_site {
-      name          = "console"
-      build_command = "npm ci; npm run build; npm run generate"
-      output_dir    = "/dist"
+      name              = "console"
+      build_command     = "npm ci; npm run build; npm run generate"
+      output_dir        = "/dist"
+      error_document    = "404.html"
+      catchall_document = "404.html"
 
-      git {
-        repo_clone_url = "https://github.com/tiki/console.git"
+      github {
+        repo           = "tiki/console"
         branch         = "main"
+        deploy_on_push = true
       }
     }
 
