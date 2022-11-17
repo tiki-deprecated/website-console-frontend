@@ -55,27 +55,30 @@
         Our console is still in beta. <br class="desktop" />
         Please bear with us as we add features and docs, quickly.
       </p>
-      <get-started-cmp />
+      <storage-cmp class="storageCmp" />
+      <get-started-cmp class="startedCmp" />
+      <act-details-cmp class="accountCmp" />
     </div>
   </div>
 </template>
 
 <script>
 import GetStartedCmp from '~/components/GetStartedCmp'
+import StorageCmp from '~/components/StorageCmp'
+import ActDetailsCmp from '~/components/ActDetailsCmp'
 
 export default {
   name: 'IndexPage',
-  components: { GetStartedCmp },
+  components: { GetStartedCmp, StorageCmp, ActDetailsCmp },
+  layout: 'home',
 }
 </script>
 
 <style lang="sass">
 @import "assets/styles/theme"
-@import "assets/styles/mixins"
 
 body
   background-color: $green-light
-  color: $green-dark
 </style>
 
 <style scoped lang="sass">
@@ -93,6 +96,7 @@ body
   width: 100%
   transform: translateX(-50%)
   z-index: 99
+  color: $green-dark
 
 @include for-phone
   .content
@@ -151,4 +155,7 @@ body
     right: 25px
     z-index: 1
     width: 15%
+
+  .storageCmp, .startedCmp, .accountCmp
+    margin: 50px auto
 </style>

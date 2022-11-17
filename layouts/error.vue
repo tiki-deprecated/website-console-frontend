@@ -41,8 +41,12 @@ export default {
 <style scoped lang="sass">
 @import "assets/styles/mixins"
 @import "assets/styles/theme"
+
 body
   margin: 0
+  font-family: $font-family-space-grotesk
+  font-weight: normal
+  font-size: 90%
   background-color: $gray
 
 .container

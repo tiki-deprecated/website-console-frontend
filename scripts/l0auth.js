@@ -6,7 +6,6 @@
 import { ExpiredAuthSessionError, Oauth2Scheme } from '~auth/runtime'
 
 const DEFAULTS = {
-  name: 'oauth2',
   clientId: 'console',
   autoLogout: false,
   server: 'https://auth.l0.mytiki.com/api/latest',
@@ -16,7 +15,7 @@ const DEFAULTS = {
     otp: '/otp/start',
     revoke: '/oauth/revoke',
     token: '/oauth/token',
-    userInfo: null,
+    userInfo: '/userinfo',
     refresh: '/oauth/token',
   },
   scope: [],
@@ -36,7 +35,6 @@ const DEFAULTS = {
     expirationPrefix: '_refresh_token_expiration.',
   },
   user: {
-    property: false,
     autoFetch: false,
   },
   otp: {
@@ -158,7 +156,7 @@ export default class L0auth extends Oauth2Scheme {
     return response
   }
 
-  fetchUser() {
+  async fetchUser() {
     if (!this.check().valid) {
       return
     }
@@ -166,6 +164,24 @@ export default class L0auth extends Oauth2Scheme {
     if (!this.options.endpoints.userInfo) {
       this.$auth.setUser({})
     }
+    const response = await this.$auth
+      .request({
+        method: 'get',
+        url: this.options.endpoints.userInfo,
+        baseURL: this.options.server,
+        headers: {
+          Authorization: this.token.get(),
+        },
+      })
+      .catch((error) => {
+        this.$auth.callOnError(error, { method: 'fetchUser' })
+        return Promise.reject(error)
+      })
+
+    this.$auth.setUser({
+      email: response.data.email,
+      uid: response.data.sub,
+    })
   }
 
   async logout() {
@@ -232,6 +248,28 @@ export default class L0auth extends Oauth2Scheme {
     }
     response.valid = true
     return response
+  }
+
+  async updateUser(req) {
+    if (!this.options.endpoints.userInfo) {
+      return
+    }
+    await this.$auth
+      .request({
+        method: 'post',
+        url: this.options.endpoints.userInfo,
+        baseURL: this.options.server,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: this.token.get(),
+        },
+        data: req,
+      })
+      .catch((error) => {
+        this.$auth.callOnError(error, { method: 'updateUser' })
+        return Promise.reject(error)
+      })
+    await this.fetchUser()
   }
 }
 

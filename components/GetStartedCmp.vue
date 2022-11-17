@@ -52,6 +52,13 @@ export default {
   background-color: $green-dark
   justify-content: center
   border-radius: 10px
+  cursor: pointer
+
+.btnContainer:hover
+  background-color: rgba($green-dark, .75)
+
+.btnContainer:active
+  background-color: $green
 
 @include for-phone
   .title

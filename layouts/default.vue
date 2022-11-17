@@ -20,7 +20,7 @@ body
   margin: 0
   font-family: $font-family-space-grotesk
   font-weight: normal
-  color: $blue
   font-size: 90%
+  color: $blue
   background-color: $gray
 </style>

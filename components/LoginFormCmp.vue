@@ -62,6 +62,7 @@ export default {
   box-sizing: border-box
   font-size: 1em
   margin-bottom: 30px
+  caret-color: $green
 
 .submit
   width: 100%
@@ -76,6 +77,9 @@ export default {
   color: $blue
   background-color: $yellow
 
+.submit:active
+  background-color: rgba($yellow, 0.75)
+
 .input:focus
-  outline: $blue
+  outline: $green
 </style>
