@@ -16,7 +16,7 @@ export default {
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/fav.ico' }],
   },
   css: [
     '@/assets/fonts/koara/stylesheet.css',
@@ -59,7 +59,7 @@ export default {
     },
   },
   generate: {
-    fallback: false,
+    fallback: '404.html',
   },
   router: {
     middleware: ['auth'],
