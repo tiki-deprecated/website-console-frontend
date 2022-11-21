@@ -9,7 +9,7 @@
     <div class="buttons">
       <div class="btnContainer">
         <utils-svg-cmp name="readme" class="icon" />
-        <a class="btn" href="https://mytiki.readme.io">Docs</a>
+        <a class="btn" href="https://docs.mytiki.com">Docs</a>
       </div>
       <div class="btnContainer">
         <utils-svg-cmp name="discord" class="icon" />
