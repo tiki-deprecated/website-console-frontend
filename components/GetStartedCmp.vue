@@ -7,18 +7,18 @@
   <div>
     <h1 class="title">For help getting started check out:</h1>
     <div class="buttons">
-      <div class="btnContainer">
+      <a class="btnContainer" href="https://docs.mytiki.com">
         <utils-svg-cmp name="readme" class="icon" />
-        <a class="btn" href="https://docs.mytiki.com">Docs</a>
-      </div>
-      <div class="btnContainer">
+        Docs
+      </a>
+      <a class="btnContainer" href="https://discord.gg/tiki">
         <utils-svg-cmp name="discord" class="icon" />
-        <a class="btn" href="https://discord.gg/tiki">Discord</a>
-      </div>
-      <div class="btnContainer">
+        Discord
+      </a>
+      <a class="btnContainer" href="https://github.com/tiki">
         <utils-svg-cmp name="github" class="icon" />
-        <a class="btn" href="https://github.com/tiki">Github</a>
-      </div>
+        Github
+      </a>
     </div>
   </div>
 </template>
@@ -36,10 +36,6 @@ export default {
 @import "assets/styles/theme"
 @import "assets/styles/mixins"
 
-.btn
-  color: $white
-  text-decoration: none
-
 ::v-deep .icon.svg
   fill: $white
   height: auto
@@ -53,6 +49,8 @@ export default {
   justify-content: center
   border-radius: 10px
   cursor: pointer
+  color: $white
+  text-decoration: none
 
 .btnContainer:hover
   background-color: rgba($green-dark, .75)
