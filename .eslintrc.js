@@ -13,7 +13,13 @@ module.exports = {
     parser: '@babel/eslint-parser',
     requireConfigFile: false,
   },
-  extends: ['@nuxtjs', 'plugin:nuxt/recommended', 'prettier'],
-  plugins: [],
-  rules: {},
+  extends: [
+    '@nuxtjs/eslint-config-typescript',
+    'plugin:nuxt/recommended',
+    'plugin:prettier/recommended',
+  ],
+  plugins: ['prettier'],
+  rules: {
+    'prettier/prettier': 'error',
+  },
 }
