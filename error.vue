@@ -15,10 +15,10 @@
             class="h-20 w-auto"
             sizes="(max-width: 317px) 100vw, 317px"
             srcset="
-              ~/assets/images/png/sad_pineapple_w_200.png 200w,
-              ~/assets/images/png/sad_pineapple_w_317.png 317w
+              ~/assets/images/png/pineapple-sad-w-200.png 200w,
+              ~/assets/images/png/pineapple-sad-w-317.png 317w
             "
-            src="~/assets/images/png/sad_pineapple_w_317.png"
+            src="~/assets/images/png/pineapple-sad-w-317.png"
             alt="Sad Pineapple"
           />
         </a>

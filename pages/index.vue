@@ -53,12 +53,9 @@
   </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
-import WarnCmp from '~/components/alert/WarnCmp.vue'
-
-export default defineComponent({
-  components: { WarnCmp },
+<script setup lang="ts">
+definePageMeta({
+  layout: 'home-layout',
 })
 </script>
 
