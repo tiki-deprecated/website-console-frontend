@@ -95,31 +95,3 @@ div#__nuxt {
   @apply h-full;
 }
 </style>
-
-<!--<style scoped>-->
-<!--body-->
-<!--  margin: 0-->
-<!--  font-family: $font-family-space-grotesk-->
-<!--  font-weight: normal-->
-<!--  font-size: 90%-->
-<!--  background-color: $gray-->
-
-<!--.container-->
-<!--  position: absolute-->
-<!--  top: 50%-->
-<!--  left: 50%-->
-<!--  transform: translate(-50%, -50%)-->
-<!--  width: fit-content-->
-
-<!--.text-->
-<!--  font-family: $font-family-koara-->
-<!--  font-weight: bold-->
-<!--  color: $blue-->
-<!--  width: fit-content-->
-<!--  margin: 0 auto 10px auto-->
-
-<!--.image-->
-<!--  width: 50px-->
-<!--  margin: auto-->
-<!--  display: block-->
-<!--</style>-->

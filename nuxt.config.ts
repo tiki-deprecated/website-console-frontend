@@ -17,4 +17,6 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  modules: ['@nuxtjs/plausible', '@sidebase/nuxt-auth'],
+  auth: {},
 })

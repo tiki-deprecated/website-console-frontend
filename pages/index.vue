@@ -4,44 +4,70 @@
   -->
 
 <template>
-  <div>hello</div>
-  <!--  <div-->
-  <!--    class="min-h-full bg-white py-16 px-6 sm:py-24 md:grid md:place-items-center lg:px-8"-->
-  <!--  >-->
-  <!--    <div class="mx-auto max-w-max">-->
-  <!--      <main class="sm:flex">-->
-  <!--        <p-->
-  <!--          class="text-4xl font-bold tracking-tight text-indigo-600 sm:text-5xl"-->
-  <!--        >-->
-  <!--          404-->
-  <!--        </p>-->
-  <!--        <div class="sm:ml-6">-->
-  <!--          <div class="sm:border-l sm:border-gray-200 sm:pl-6">-->
-  <!--            <h1-->
-  <!--              class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl"-->
-  <!--            >-->
-  <!--              Page not found-->
-  <!--            </h1>-->
-  <!--            <p class="mt-1 text-base text-gray-500">-->
-  <!--              Please check the URL in the address bar and try again.-->
-  <!--            </p>-->
-  <!--          </div>-->
-  <!--          <div-->
-  <!--            class="mt-10 flex space-x-3 sm:border-l sm:border-transparent sm:pl-6"-->
-  <!--          >-->
-  <!--            <a-->
-  <!--              href="#"-->
-  <!--              class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"-->
-  <!--              >Go back home</a-->
-  <!--            >-->
-  <!--            <a-->
-  <!--              href="#"-->
-  <!--              class="inline-flex items-center rounded-md border border-transparent bg-indigo-100 px-4 py-2 text-sm font-medium text-indigo-700 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"-->
-  <!--              >Contact support</a-->
-  <!--            >-->
-  <!--          </div>-->
-  <!--        </div>-->
-  <!--      </main>-->
-  <!--    </div>-->
-  <!--  </div>-->
+  <div
+    class="min-h-screen bg-contain bg-bottom bg-no-repeat sm:bg-[url('~/assets/images/png/palm_05x.png')] md:bg-[url('~/assets/images/png/palm_075x.png')] lg:bg-[url('~/assets/images/png/palm_1x.png')] xl:bg-[url('~/assets/images/png/palm_15x.png')] 2xl:bg-[url('~/assets/images/png/palm_2x.png')]"
+  >
+    <div
+      class="border-b border-green bg-white bg-opacity-20 px-12 py-10 backdrop-blur-lg md:flex md:items-center md:justify-between"
+    >
+      <div class="min-w-0 flex-1">
+        <h2
+          class="text-2xl font-bold leading-7 text-green sm:truncate sm:text-3xl sm:tracking-tight"
+        >
+          Welcome!
+        </h2>
+      </div>
+      <div class="mt-4 flex md:mt-0 md:ml-4">
+        <button
+          type="button"
+          class="ml-3 inline-flex items-center border border-green bg-white px-4 py-2 text-sm font-medium text-green shadow-sm focus:outline-none active:bg-greenLight"
+        >
+          <UtilsSvgCmp name="discord" class="mr-2 h-3 w-auto fill-green" />
+          Discord
+        </button>
+        <button
+          type="button"
+          class="ml-3 inline-flex items-center border border-green bg-white px-4 py-2 text-sm font-medium text-green shadow-sm focus:outline-none active:bg-greenLight"
+        >
+          <UtilsSvgCmp name="github" class="mr-2 h-3 w-auto fill-green" />
+          GitHub
+        </button>
+        <button
+          type="button"
+          class="border-transparent ml-3 inline-flex items-center border bg-green px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none active:bg-greenDark"
+        >
+          <UtilsSvgCmp name="readme" class="mr-2 h-3 w-auto fill-white" />
+          Docs
+        </button>
+      </div>
+    </div>
+    <AlertWarnCmp
+      title="Our console is still in beta"
+      body="Please bear with us as we add features and docs, quickly. "
+    />
+    <AppInfoCmp class="mx-auto w-1/2" />
+    <UtilsDividerCmp class="my-5"
+      ><span class="text-sm text-greenDark">USER ACCOUNT</span></UtilsDividerCmp
+    >
+    <UserInfoCmp class="mx-auto w-1/2" />
+  </div>
 </template>
+
+<script>
+import { defineComponent } from 'vue'
+import WarnCmp from '~/components/alert/WarnCmp.vue'
+
+export default defineComponent({
+  components: { WarnCmp },
+})
+</script>
+
+<style lang="postcss">
+div#__nuxt {
+  @apply min-h-screen;
+}
+
+html {
+  @apply bg-white;
+}
+</style>
