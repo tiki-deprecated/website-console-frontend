@@ -26,7 +26,7 @@
 const copyBtn = {
   name: 'Copy',
   icon: 'copy',
-  onClick: (text: string) => navigator.clipboard.writeText(text),
+  onClick: copyToClipboard,
 }
 
 const rotateBtn = {
