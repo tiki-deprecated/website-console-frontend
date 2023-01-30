@@ -4,162 +4,70 @@
   -->
 
 <template>
-  <div>
-    <div class="bkg" />
-    <picture class="palmCoconut mobile">
-      <img
-        sizes="(max-width: 1400px) 100vw, 1400px"
-        srcset="
-          ~/assets/images/png/palm_coconut_w_200.png   200w,
-          ~/assets/images/png/palm_coconut_w_485.png   485w,
-          ~/assets/images/png/palm_coconut_w_708.png   708w,
-          ~/assets/images/png/palm_coconut_w_911.png   911w,
-          ~/assets/images/png/palm_coconut_w_1093.png 1093w,
-          ~/assets/images/png/palm_coconut_w_1400.png 1400w
-        "
-        src="~/assets/images/png/palm_coconut_w_1400.png"
-        alt="Palm Tree"
-        style="width: 100%"
-      />
-    </picture>
-    <picture class="coconut desktop">
-      <img
-        sizes="(max-width: 1063px) 100vw, 1063px"
-        srcset="
-          ~/assets/images/png/coconut_w_200.png   200w,
-          ~/assets/images/png/coconut_w_637.png   637w,
-          ~/assets/images/png/coconut_w_1063.png 1063w
-        "
-        src="~/assets/images/png/coconut_w_1063.png"
-        alt="Coconut"
-        style="width: 100%"
-      />
-    </picture>
-    <picture class="palm desktop">
-      <img
-        sizes="(max-width: 1400px) 100vw, 1400px"
-        srcset="
-          ~/assets/images/png/palm_w_200.png   200w,
-          ~/assets/images/png/palm_w_610.png   610w,
-          ~/assets/images/png/palm_w_928.png   928w,
-          ~/assets/images/png/palm_w_1216.png 1216w,
-          ~/assets/images/png/palm_w_1400.png 1400w
-        "
-        src="~/assets/images/png/palm_w_1400.png"
-        alt="Palm Tree"
-        style="width: 100%"
-      />
-    </picture>
-    <div class="content">
-      <h1 class="title">Welcome!</h1>
-      <p class="subtitle">
-        Our console is still in beta. <br class="desktop" />
-        Please bear with us as we add features and docs, quickly.
-      </p>
-      <storage-cmp class="storageCmp" />
-      <get-started-cmp class="startedCmp" />
-      <act-details-cmp class="accountCmp" />
+  <div
+    class="min-h-screen bg-contain bg-bottom bg-no-repeat sm:bg-[url('~/assets/images/png/palm_05x.png')] md:bg-[url('~/assets/images/png/palm_075x.png')] lg:bg-[url('~/assets/images/png/palm_1x.png')] xl:bg-[url('~/assets/images/png/palm_15x.png')] 2xl:bg-[url('~/assets/images/png/palm_2x.png')]"
+  >
+    <div
+      class="border-b border-green bg-white bg-opacity-20 px-12 py-10 backdrop-blur-lg md:flex md:items-center md:justify-between"
+    >
+      <div class="min-w-0 flex-1">
+        <h2
+          class="text-2xl font-bold leading-7 text-green sm:truncate sm:text-3xl sm:tracking-tight"
+        >
+          Welcome!
+        </h2>
+      </div>
+      <div class="mt-4 flex md:mt-0 md:ml-4">
+        <button
+          type="button"
+          class="ml-3 inline-flex items-center border border-green bg-white px-4 py-2 text-sm font-medium text-green shadow-sm focus:outline-none active:bg-greenLight"
+        >
+          <UtilsSvgCmp name="discord" class="mr-2 h-3 w-auto fill-green" />
+          Discord
+        </button>
+        <button
+          type="button"
+          class="ml-3 inline-flex items-center border border-green bg-white px-4 py-2 text-sm font-medium text-green shadow-sm focus:outline-none active:bg-greenLight"
+        >
+          <UtilsSvgCmp name="github" class="mr-2 h-3 w-auto fill-green" />
+          GitHub
+        </button>
+        <button
+          type="button"
+          class="border-transparent ml-3 inline-flex items-center border bg-green px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none active:bg-greenDark"
+        >
+          <UtilsSvgCmp name="readme" class="mr-2 h-3 w-auto fill-white" />
+          Docs
+        </button>
+      </div>
     </div>
+    <AlertWarnCmp
+      title="Our console is still in beta"
+      body="Please bear with us as we add features and docs, quickly. "
+    />
+    <AppInfoCmp class="mx-auto w-1/2" />
+    <UtilsDividerCmp class="my-5"
+      ><span class="text-sm text-greenDark">USER ACCOUNT</span></UtilsDividerCmp
+    >
+    <UserInfoCmp class="mx-auto w-1/2" />
   </div>
 </template>
 
 <script>
-import GetStartedCmp from '~/components/GetStartedCmp'
-import StorageCmp from '~/components/StorageCmp'
-import ActDetailsCmp from '~/components/ActDetailsCmp'
+import { defineComponent } from 'vue'
+import WarnCmp from '~/components/alert/WarnCmp.vue'
 
-export default {
-  name: 'IndexPage',
-  components: { GetStartedCmp, StorageCmp, ActDetailsCmp },
-  layout: 'home',
-}
+export default defineComponent({
+  components: { WarnCmp },
+})
 </script>
 
-<style scoped lang="sass">
-@import "assets/styles/theme"
-@import "assets/styles/mixins"
+<style lang="postcss">
+div#__nuxt {
+  @apply min-h-screen;
+}
 
-.bkg
-  position: fixed
-  width: 100%
-  height: 100%
-  z-index: 0
-  background-color: $green-light
-
-.title
-  font-family: $font-family-koara
-  color: $green-dark
-
-.content
-  position: absolute
-  top: 0
-  left: 50%
-  width: 100%
-  transform: translateX(-50%)
-  z-index: 99
-  color: $green-dark
-
-@include for-phone
-  .content
-    width: 90%
-    margin: auto
-
-  .title
-    text-align: center
-    font-size: 3em
-    margin: 50px auto 30px auto
-
-  .subtitle
-    width: 80%
-    text-align: center
-    margin: auto
-    font-size: 1.2em
-
-  .desktop
-    display: none
-
-  .palmCoconut
-    position: fixed
-    bottom: 0
-    left: 0
-    z-index: 1
-
-  .storageCmp, .startedCmp, .accountCmp
-    margin: 40px auto
-
-@include for-tablet
-  .content
-    width: 80%
-    margin: auto
-
-  .title
-    text-align: left
-    font-size: 3em
-    margin: 50px 0 15px 0
-
-  .subtitle
-    width: 80%
-    text-align: left
-    margin: 0
-    font-size: 1.1em
-
-  .mobile
-    display: none
-
-  .palm
-    position: fixed
-    bottom: 0
-    left: 0
-    z-index: 1
-    width: 30%
-
-  .coconut
-    position: fixed
-    bottom: 25px
-    right: 25px
-    z-index: 1
-    width: 15%
-
-  .storageCmp, .startedCmp, .accountCmp
-    margin: 50px auto
+html {
+  @apply bg-white;
+}
 </style>
