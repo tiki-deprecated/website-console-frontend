@@ -3,14 +3,13 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import { hasAuth } from '~/composables/auth-state'
-
-export default defineNuxtRouteMiddleware((to, from) => {
+export default defineNuxtRouteMiddleware(async (to, from) => {
+  const isAuthorized: boolean = await useNuxtApp().$isAuthorized()
   if (
     to.name !== 'login' &&
     to.name !== 'otp' &&
     to.name !== undefined &&
-    !hasAuth()
+    !isAuthorized
   )
     return navigateTo('/login')
 })

@@ -35,7 +35,6 @@ async function refresh(
   })
   if (response.ok) return await response.json()
   else {
-    console.log(await response.json())
-    return Promise.reject(response.status)
+    return Promise.reject(response)
   }
 }

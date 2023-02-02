@@ -5,7 +5,16 @@
 
 <template>
   <div>
-    home layout test
+    <button @click.stop.prevent="logout">logout</button>
     <slot />
   </div>
 </template>
+
+<script setup lang="ts">
+const { $logout } = useNuxtApp()
+
+const logout = async () => {
+  await $logout()
+  navigateTo('/login')
+}
+</script>

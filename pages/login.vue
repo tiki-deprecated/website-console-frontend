@@ -16,6 +16,8 @@
 </template>
 
 <script setup lang="ts">
+const { $otp } = useNuxtApp()
+
 definePageMeta({
   layout: 'login-layout',
 })
@@ -27,7 +29,8 @@ const input: HTMLInputElement = {
   placeholder: 'hello@mytiki.com',
 }
 
-const onSubmit = () => {
-  console.log('sucka')
+const onSubmit = async (email: string) => {
+  const success: boolean = await $otp(email)
+  if (success) navigateTo('/otp')
 }
 </script>

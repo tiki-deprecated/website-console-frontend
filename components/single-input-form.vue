@@ -30,7 +30,7 @@
               >
               <div class="mt-1">
                 <input
-                  id="input1"
+                  ref="input1"
                   :name="input.name"
                   :type="input.type"
                   :autocomplete="input.autocomplete"
@@ -46,7 +46,7 @@
             <div>
               <button
                 type="submit"
-                @click.stop.prevent="onSubmit"
+                @click.stop.prevent="onSubmit($refs.input1.value)"
                 class="flex w-full justify-center rounded-md border border-none bg-yellow py-4 px-4 text-sm font-medium text-blue shadow-sm focus:outline-none focus:ring-yellowDark active:bg-yellowDark"
               >
                 {{ cta }}

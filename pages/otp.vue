@@ -15,6 +15,8 @@
 </template>
 
 <script setup lang="ts">
+const { $grant } = useNuxtApp()
+
 definePageMeta({
   layout: 'login-layout',
 })
@@ -25,7 +27,9 @@ const input: HTMLInputElement = {
   placeholder: 'ABC123',
 }
 
-const onSubmit = () => {
-  console.log('sucka')
+const onSubmit = async (code: string) => {
+  const success = await $grant(code)
+  if (success) navigateTo('/')
+  else navigateTo('/login')
 }
 </script>
