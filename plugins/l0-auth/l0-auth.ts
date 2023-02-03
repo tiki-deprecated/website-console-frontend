@@ -12,6 +12,7 @@ interface L0AuthConfig {
   worker: string
   cookie: string
   secure: boolean | undefined
+  bypass: boolean | undefined
 }
 
 export default class L0Auth {
@@ -77,6 +78,7 @@ export default class L0Auth {
   }
 
   async isAuthorized(): Promise<boolean> {
+    if (this.config.bypass) return true
     const accessToken = useState<L0AuthToken>(tokenState).value
     if (accessToken != null && accessToken.expires > new Date()) return true
     else {
