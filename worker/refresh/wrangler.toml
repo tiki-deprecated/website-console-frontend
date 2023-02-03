@@ -13,5 +13,3 @@ L0_AUTH_URL = "https://auth.l0.mytiki.com/api/latest/oauth/token"
 COOKIE = "refresh_token"
 ORIGIN = "https://console.mytiki.com"
 SECURE = true
-
-

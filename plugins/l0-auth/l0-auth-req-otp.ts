@@ -3,6 +3,7 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-export function hasAuth(): boolean {
-  return false
+interface L0AuthReqOtp {
+  email: string
+  notAnonymous: boolean
 }

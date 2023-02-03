@@ -7,6 +7,13 @@ updates:
     commit-message:
       prefix: "npm"
 
+  - package-ecosystem: "npm"
+    directory: "/worker/refresh/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "npm"
+
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
