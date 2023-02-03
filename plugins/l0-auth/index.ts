@@ -13,6 +13,15 @@ export default defineNuxtPlugin((nuxtApp) => {
       grant: (code: string) => l0Auth.grant(code),
       isAuthorized: () => l0Auth.isAuthorized(),
       logout: () => l0Auth.logout(),
+      getUser: () => l0Auth.getUser(),
+      updateUser: (userId: string, req: L0AuthReqUser) =>
+        l0Auth.updateUser(userId, req),
+      getApp: (appId: string) => l0Auth.getApp(appId),
+      createApp: (req: L0AuthReqApp) => l0Auth.createApp(req),
+      getKeys: (appId: string) => l0Auth.getKeys(appId),
+      createKey: (appId: string, isPublic: boolean) =>
+        l0Auth.createKey(appId, isPublic),
+      deleteKey: (keyId: string) => l0Auth.deleteKey(keyId),
     },
   }
 })
