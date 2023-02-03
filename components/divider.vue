@@ -5,8 +5,11 @@
 
 <template>
   <div class="relative">
-    <div class="absolute inset-0 flex items-center" aria-hidden="true">
-      <div class="w-full border-t border-greenLight" />
+    <div
+      class="absolute inset-0 flex items-center border-inherit"
+      aria-hidden="true"
+    >
+      <div class="w-full border-t border-inherit" />
     </div>
     <div class="relative flex justify-center">
       <slot />

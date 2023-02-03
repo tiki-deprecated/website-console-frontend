@@ -18,6 +18,9 @@ module.exports = {
   ],
   theme: {
     colors: {
+      transparent: 'transparent',
+      current: 'currentColor',
+      inherit: 'inherit',
       yellow: '#FFD225',
       yellowLight: '#FFE68F',
       yellowDark: '#FFB822',
