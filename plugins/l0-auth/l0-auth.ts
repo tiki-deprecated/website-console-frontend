@@ -88,8 +88,161 @@ export default class L0Auth {
     }
   }
 
+  async getUser(): Promise<L0AuthRspUser | undefined> {
+    const accessToken = this.getToken()
+    if (accessToken == null) return
+    const response = await fetch(this.config.host + '/api/latest/user', {
+      method: 'get',
+      headers: {
+        Accept: 'application/json',
+        Authorization: 'Bearer ' + accessToken.accessToken,
+      },
+    }).catch((error) => {
+      console.log(error)
+      return Promise.reject(error)
+    })
+    if (response.ok) {
+      return await response.json()
+    }
+  }
+
+  async updateUser(
+    userId: string,
+    req: L0AuthReqUser
+  ): Promise<L0AuthRspUser | undefined> {
+    const accessToken = this.getToken()
+    if (accessToken == null) return
+    const response = await fetch(
+      this.config.host + '/api/latest/user/' + userId,
+      {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + accessToken.accessToken,
+        },
+        body: JSON.stringify(req),
+      }
+    ).catch((error) => {
+      console.log(error)
+      return Promise.reject(error)
+    })
+    if (response.ok) {
+      return await response.json()
+    }
+  }
+
+  async createApp(req: L0AuthReqApp): Promise<L0AuthRspApp | undefined> {
+    const accessToken = this.getToken()
+    if (accessToken == null) return
+    const response = await fetch(this.config.host + '/api/latest/app', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: 'Bearer ' + accessToken.accessToken,
+      },
+      body: JSON.stringify(req),
+    }).catch((error) => {
+      console.log(error)
+      return Promise.reject(error)
+    })
+    if (response.ok) {
+      return await response.json()
+    }
+  }
+
+  async getApp(appId: string): Promise<L0AuthRspApp | undefined> {
+    const accessToken = this.getToken()
+    if (accessToken == null) return
+    const response = await fetch(
+      this.config.host + '/api/latest/app/' + appId,
+      {
+        method: 'get',
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + accessToken.accessToken,
+        },
+      }
+    ).catch((error) => {
+      console.log(error)
+      return Promise.reject(error)
+    })
+    if (response.ok) {
+      return await response.json()
+    }
+  }
+
+  async createKey(
+    appId: string,
+    isPublic: boolean
+  ): Promise<L0AuthRspKey | L0AuthRspSecret | undefined> {
+    const accessToken = this.getToken()
+    if (accessToken == null) return
+    const response = await fetch(
+      this.config.host + '/api/latest/app/' + appId + '/key',
+      {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + accessToken.accessToken,
+        },
+        body: new URLSearchParams({
+          isPublic: String(isPublic),
+        }),
+      }
+    ).catch((error) => {
+      console.log(error)
+      return Promise.reject(error)
+    })
+    if (response.ok) {
+      return await response.json()
+    }
+  }
+
+  async getKeys(appId: string): Promise<L0AuthRspKey[] | undefined> {
+    const accessToken = this.getToken()
+    if (accessToken == null) return
+    const response = await fetch(
+      this.config.host + '/api/latest/app/' + appId + '/key',
+      {
+        method: 'get',
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + accessToken.accessToken,
+        },
+      }
+    ).catch((error) => {
+      console.log(error)
+      return Promise.reject(error)
+    })
+    if (response.ok) {
+      return await response.json()
+    }
+  }
+
+  async deleteKey(keyId: string): Promise<any> {
+    const accessToken = this.getToken()
+    if (accessToken == null) return
+    const response = await fetch(
+      this.config.host + '/api/latest/key/' + keyId,
+      {
+        method: 'delete',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + accessToken.accessToken,
+        },
+      }
+    ).catch((error) => {
+      console.log(error)
+      return Promise.reject(error)
+    })
+  }
+
   async logout(): Promise<any> {
-    const accessToken = useState<L0AuthToken>(tokenState).value
+    const accessToken = this.getToken()
     useState(tokenState, () => null)
     useCookie(this.config.cookie).value = null
     if (accessToken != null)
@@ -114,11 +267,6 @@ export default class L0Auth {
       return false
     }
   }
-
-  //user
-  //app
-  //getToken
-  //revoke
 
   private async revoke(
     accessToken: string,
@@ -156,5 +304,10 @@ export default class L0Auth {
       httpOnly: true,
       secure: this.config.secure ? true : undefined,
     })
+  }
+
+  private getToken(): L0AuthToken | undefined {
+    const state = useState<L0AuthToken>(tokenState)
+    if (state != null) return state.value
   }
 }
