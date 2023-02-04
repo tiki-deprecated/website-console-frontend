@@ -5,6 +5,7 @@
 
 interface L0AuthRspApp {
   appId: string
+  name: string
   users: string[]
   modified: Date
   created: Date

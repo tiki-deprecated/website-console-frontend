@@ -1,0 +1,13 @@
+/*
+ * Copyright (c) TIKI Inc.
+ * MIT license. See LICENSE file in root directory.
+ */
+
+@layer base {
+  h1 {
+    @apply text-5xl font-extralight leading-7 text-greenDark
+  }
+  h3 {
+    @apply text-xl font-light leading-6 text-greenDark
+  }
+}

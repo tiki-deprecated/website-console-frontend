@@ -4,67 +4,78 @@
   -->
 
 <template>
-  <div
-    class="min-h-screen bg-contain bg-bottom bg-no-repeat sm:bg-[url('~/assets/images/png/palm_05x.png')] md:bg-[url('~/assets/images/png/palm_075x.png')] lg:bg-[url('~/assets/images/png/palm_1x.png')] xl:bg-[url('~/assets/images/png/palm_15x.png')] 2xl:bg-[url('~/assets/images/png/palm_2x.png')]"
-  >
-    <div
-      class="border-b border-green bg-white bg-opacity-20 px-12 py-10 backdrop-blur-lg md:flex md:items-center md:justify-between"
-    >
-      <div class="min-w-0 flex-1">
-        <h2
-          class="text-2xl font-bold leading-7 text-green sm:truncate sm:text-3xl sm:tracking-tight"
-        >
-          Welcome!
-        </h2>
-      </div>
-      <div class="mt-4 flex md:mt-0 md:ml-4">
-        <button
-          type="button"
-          class="ml-3 inline-flex items-center border border-green bg-white px-4 py-2 text-sm font-medium text-green shadow-sm focus:outline-none active:bg-greenLight"
-        >
-          <UtilsSvgCmp name="discord" class="mr-2 h-3 w-auto fill-green" />
-          Discord
-        </button>
-        <button
-          type="button"
-          class="ml-3 inline-flex items-center border border-green bg-white px-4 py-2 text-sm font-medium text-green shadow-sm focus:outline-none active:bg-greenLight"
-        >
-          <UtilsSvgCmp name="github" class="mr-2 h-3 w-auto fill-green" />
-          GitHub
-        </button>
-        <button
-          type="button"
-          class="border-transparent ml-3 inline-flex items-center border bg-green px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none active:bg-greenDark"
-        >
-          <UtilsSvgCmp name="readme" class="mr-2 h-3 w-auto fill-white" />
-          Docs
-        </button>
-      </div>
+  <div>
+    <Heading title="Projects">
+      <button
+        type="button"
+        class="ml-6 bg-green text-white hover:bg-white/70 hover:text-green"
+      >
+        <PlusIcon class="h-8" />
+      </button>
+    </Heading>
+    <div>
+      <ul
+        role="list"
+        class="mt-3 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6"
+      >
+        <li v-for="project in projects" :key="project.appId">
+          <Card>
+            <div class="flex items-center">
+              <div class="grid h-20 w-20 place-content-center">
+                <Identicon :value="project.appId" size-rem="4" />
+              </div>
+              <div class="flex-1 truncate py-2 pr-2 text-sm">
+                <h3 class="truncate">{{ project.name }}</h3>
+                <p
+                  class="mt-1 whitespace-normal break-normal text-xs text-greenDark/80"
+                >
+                  {{ project.appId }}
+                </p>
+              </div>
+            </div>
+          </Card>
+        </li>
+      </ul>
     </div>
-    <AlertWarnCmp
-      title="Our console is still in beta"
-      body="Please bear with us as we add features and docs, quickly. "
-    />
-    <AppInfoCmp class="mx-auto w-1/2" />
-    <UtilsDividerCmp class="my-5"
-      ><span class="text-sm text-greenDark">USER ACCOUNT</span></UtilsDividerCmp
-    >
-    <UserInfoCmp class="mx-auto w-1/2" />
   </div>
 </template>
 
 <script setup lang="ts">
+import { PlusIcon } from '@heroicons/vue/24/solid'
+
 definePageMeta({
   layout: 'home-layout',
 })
+
+let projects = ref<L0AuthRspApp[]>([])
+
+const { $getUser, $getApp } = useNuxtApp()
+const user = await $getUser()
+for (const appId of user!.apps) {
+  const app = await $getApp(appId)
+  if (app != null) projects.value.push(app)
+}
+
+// const projects = [
+//   {
+//     name: 'Graph API',
+//     href: '#',
+//     id: 'f30e452e-a442-11ed-a8fc-0242ac120002',
+//   },
+//   {
+//     name: 'Component Design',
+//     href: '#',
+//     id: 'f30e497a-a442-11ed-a8fc-0242ac120002',
+//   },
+//   {
+//     name: 'Templates',
+//     href: '#',
+//     id: 'f30e4b78-a442-11ed-a8fc-0242ac120002',
+//   },
+//   {
+//     name: 'React Components FUKAKFEF',
+//     href: '#',
+//     id: 'f30e4d58-a442-11ed-a8fc-0242ac120002',
+//   },
+// ]
 </script>
-
-<style lang="postcss">
-div#__nuxt {
-  @apply min-h-screen;
-}
-
-html {
-  @apply bg-white;
-}
-</style>

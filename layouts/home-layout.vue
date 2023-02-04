@@ -20,9 +20,7 @@
           leave-from="opacity-100"
           leave-to="opacity-0"
         >
-          <div
-            class="fixed inset-0 bg-greenLight bg-opacity-75 backdrop-blur-md"
-          />
+          <div class="fixed inset-0 backdrop-blur-md" />
         </TransitionChild>
 
         <div class="fixed inset-0 z-40 flex">
@@ -36,7 +34,7 @@
             leave-to="-translate-x-full"
           >
             <DialogPanel
-              class="relative flex w-full max-w-xs flex-1 flex-col bg-white"
+              class="relative flex w-full max-w-xs flex-1 flex-col bg-white/70"
             >
               <TransitionChild
                 as="template"
@@ -99,8 +97,10 @@
                     {{ item.name }}
                   </a>
                   <divider class="border-greenDark"
-                    ><LinkIcon class="my-4 h-4 bg-white fill-greenDark"
-                  /></divider>
+                    ><div class="rounded-full bg-greenDark p-1">
+                      <LinkIcon class="h-4 w-4 fill-white" />
+                    </div>
+                  </divider>
                   <a
                     v-for="item in links"
                     :key="item.name"
@@ -121,11 +121,11 @@
                   v-for="item in actions"
                   :key="item.name"
                   :href="item.href"
-                  class="group flex items-center rounded-md px-2 py-2 text-sm font-medium text-pinkDark hover:text-pink"
+                  class="group flex items-center rounded-md px-2 py-2 text-sm font-medium text-pinkDark/70 hover:text-pinkDark"
                 >
                   <component
                     :is="item.icon"
-                    class="mr-3 h-5 w-6 flex-shrink-0 fill-pinkDark group-hover:fill-pink"
+                    class="mr-3 h-5 w-6 flex-shrink-0 fill-pinkDark/70 group-hover:fill-pinkDark"
                     aria-hidden="true"
                   />
                   {{ item.name }}
@@ -138,7 +138,7 @@
       </Dialog>
     </TransitionRoot>
     <div class="hidden md:fixed md:inset-y-0 md:flex md:w-40 md:flex-col">
-      <div class="flex min-h-0 flex-1 flex-col bg-white">
+      <div class="flex min-h-0 flex-1 flex-col bg-transparent">
         <div class="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
           <div class="flex flex-shrink-0 items-center px-4">
             <img
@@ -152,13 +152,13 @@
               alt="TIKI"
             />
           </div>
-          <nav class="mt-5 flex-1 space-y-1 bg-white px-2">
+          <nav class="mt-5 flex-1 space-y-1 bg-transparent px-2">
             <a
               v-for="item in pages"
               :key="item.name"
               :href="item.href"
               :class="[
-                item.current ? 'text-green' : 'text-greenDark hover:text-green',
+                item.current ? 'text-white' : 'hover:white text-white/70',
                 'group flex items-center rounded-md px-2 py-2 text-sm font-medium',
               ]"
             >
@@ -166,26 +166,28 @@
                 :is="item.icon"
                 :class="[
                   item.current
-                    ? 'fill-green'
-                    : 'fill-greenDark group-hover:fill-green',
+                    ? 'fill-white'
+                    : 'fill-white/70 group-hover:fill-white',
                   'mr-3 h-6 w-6 flex-shrink-0',
                 ]"
                 aria-hidden="true"
               />
               {{ item.name }}
             </a>
-            <divider class="border-greenDark"
-              ><LinkIcon class="my-4 h-4 bg-white fill-greenDark"
-            /></divider>
+            <divider class="border-white/50"
+              ><div class="rounded-full bg-white/30 p-1 backdrop-blur-lg">
+                <LinkIcon class="h-4 w-4 fill-white" />
+              </div>
+            </divider>
             <a
               v-for="item in links"
               :key="item.name"
               :href="item.href"
-              class="group flex items-center rounded-md px-2 py-2 text-sm font-medium text-greenDark hover:text-green"
+              class="group flex items-center rounded-md px-2 py-2 text-sm font-medium text-white/70 hover:text-white"
             >
               <component
                 :is="item.icon"
-                class="mr-3 h-5 w-6 flex-shrink-0 fill-greenDark group-hover:fill-green"
+                class="mr-3 h-5 w-6 flex-shrink-0 fill-white/70 group-hover:fill-white"
                 aria-hidden="true"
               />
               {{ item.name }}
@@ -197,11 +199,11 @@
             v-for="item in actions"
             :key="item.name"
             :href="item.href"
-            class="group flex items-center rounded-md px-2 py-2 text-sm font-medium text-pinkDark hover:text-pink"
+            class="group flex items-center rounded-md px-2 py-2 text-sm font-medium text-pinkDark/50 hover:text-pinkDark"
           >
             <component
               :is="item.icon"
-              class="mr-3 h-5 w-6 flex-shrink-0 fill-pinkDark group-hover:fill-pink"
+              class="mr-3 h-5 w-6 flex-shrink-0 text-pinkDark/50 group-hover:fill-pinkDark"
               aria-hidden="true"
             />
             {{ item.name }}
@@ -211,31 +213,20 @@
     </div>
     <div class="flex flex-1 flex-col md:pl-40">
       <div
-        class="bg-gray-100 sticky top-0 z-10 pl-1 pt-1 sm:pl-3 sm:pt-3 md:hidden"
+        class="sticky top-0 z-10 bg-white/70 pl-1 pt-1 backdrop-blur-lg sm:pl-3 sm:pt-3 md:hidden"
       >
         <button
           type="button"
-          class="text-gray-500 hover:text-gray-900 focus:ring-indigo-500 -ml-0.5 -mt-0.5 inline-flex h-12 w-12 items-center justify-center rounded-md focus:outline-none focus:ring-2 focus:ring-inset"
+          class="-ml-0.5 -mt-0.5 inline-flex h-12 w-12 items-center justify-center rounded-md text-pink"
           @click="sidebarOpen = true"
         >
           <span class="sr-only">Open sidebar</span>
-          <Bars3Icon class="h-6 w-6" aria-hidden="true" />
+          <Bars3Icon class="h-10 w-10" aria-hidden="true" />
         </button>
       </div>
       <main class="flex-1">
-        <div class="py-6">
-          <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
-            <h1 class="text-gray-900 text-2xl font-semibold">Dashboard</h1>
-          </div>
-          <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
-            <!-- Replace with your content -->
-            <div class="py-4">
-              <div
-                class="border-gray-200 h-96 rounded-lg border-4 border-dashed"
-              />
-            </div>
-            <!-- /End replace -->
-          </div>
+        <div class="mx-8 lg:px-40">
+          <slot />
         </div>
       </main>
     </div>
@@ -269,22 +260,26 @@ import CatIcon from '~/assets/images/svg/cat.svg'
 import Divider from '~/components/divider.vue'
 
 const pages = [
-  { name: 'Projects', href: '#', icon: SquaresPlusIcon, current: true },
+  { name: 'Projects', href: '/', icon: SquaresPlusIcon, current: true },
   {
     name: 'Scan',
-    href: '#',
+    href: '/scan',
     icon: MagnifyingGlassCircleIcon,
     current: false,
   },
-  { name: 'Settings', href: '#', icon: Cog8ToothIcon, current: false },
+  { name: 'Settings', href: '/settings', icon: Cog8ToothIcon, current: false },
 ]
 
 const links = [
-  { name: 'Docs', href: '#', icon: ReadmeIcon },
-  { name: 'Changelog', href: '#', icon: MegaphoneIcon },
-  { name: 'Discord', href: '#', icon: DiscordIcon },
-  { name: 'GitHub', href: '#', icon: GitHubIcon },
-  { name: 'Status', href: '#', icon: CheckBadgeIcon },
+  { name: 'Docs', href: 'https://docs.mytiki.com', icon: ReadmeIcon },
+  {
+    name: 'Changelog',
+    href: 'https://docs.mytiki.com/changelog',
+    icon: MegaphoneIcon,
+  },
+  { name: 'Discord', href: 'https://discord.gg/tiki', icon: DiscordIcon },
+  { name: 'GitHub', href: 'https://github.com/tiki', icon: GitHubIcon },
+  { name: 'Status', href: 'https://status.mytiki.com', icon: CheckBadgeIcon },
 ]
 
 const actions = [
@@ -303,6 +298,6 @@ div#__nuxt {
 }
 
 html {
-  @apply bg-white;
+  @apply bg-gradient-to-br from-pink via-yellowLight to-greenLight;
 }
 </style>

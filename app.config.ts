@@ -9,6 +9,6 @@ export default defineAppConfig({
     worker: 'http://localhost:8787',
     cookie: 'refresh_token',
     secure: undefined,
-    bypass: true,
+    bypass: undefined,
   },
 })
