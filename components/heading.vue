@@ -4,7 +4,7 @@
   -->
 
 <template>
-  <div class="flex min-w-0 py-5 md:py-10 md:pt-24 lg:pt-32">
+  <div class="flex min-w-0 items-center py-5 md:py-10 md:pt-24 lg:pt-32">
     <h1>{{ title }}</h1>
     <slot />
   </div>

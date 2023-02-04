@@ -29,7 +29,6 @@ const input: HTMLInputElement = {
 
 const onSubmit = async (code: string) => {
   const success = await $grant(code)
-  if (success) navigateTo('/')
-  else navigateTo('/login')
+  navigateTo('/')
 }
 </script>

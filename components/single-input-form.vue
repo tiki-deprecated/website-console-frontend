@@ -9,7 +9,7 @@
   >
     <div class="mx-auto w-full max-w-sm lg:w-96">
       <div>
-        <UtilsSvgCmp name="logo" class="h-8 w-auto fill-blue" />
+        <Logo class="h-8 w-auto fill-blue" />
         <h2 class="mt-6 text-3xl font-bold tracking-tight text-greenDark">
           {{ title }}
         </h2>
@@ -61,6 +61,7 @@
 
 <script setup lang="ts">
 import { PropType } from '@vue/runtime-core'
+import Logo from '~/assets/images/svg/logo.svg'
 
 const props = defineProps({
   title: {

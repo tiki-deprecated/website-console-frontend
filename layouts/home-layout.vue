@@ -73,10 +73,10 @@
                   />
                 </div>
                 <nav class="mt-5 space-y-1 px-2">
-                  <a
+                  <nuxt-link
                     v-for="item in pages"
                     :key="item.name"
-                    :href="item.href"
+                    :to="item.href"
                     :class="[
                       item.current
                         ? 'text-green'
@@ -95,7 +95,7 @@
                       aria-hidden="true"
                     />
                     {{ item.name }}
-                  </a>
+                  </nuxt-link>
                   <divider class="border-greenDark"
                     ><div class="rounded-full bg-greenDark p-1">
                       <LinkIcon class="h-4 w-4 fill-white" />
@@ -153,10 +153,10 @@
             />
           </div>
           <nav class="mt-5 flex-1 space-y-1 bg-transparent px-2">
-            <a
+            <nuxt-link
               v-for="item in pages"
               :key="item.name"
-              :href="item.href"
+              :to="item.href"
               :class="[
                 item.current ? 'text-white' : 'hover:white text-white/70',
                 'group flex items-center rounded-md px-2 py-2 text-sm font-medium',
@@ -173,7 +173,7 @@
                 aria-hidden="true"
               />
               {{ item.name }}
-            </a>
+            </nuxt-link>
             <divider class="border-white/50"
               ><div class="rounded-full bg-white/30 p-1 backdrop-blur-lg">
                 <LinkIcon class="h-4 w-4 fill-white" />
@@ -298,6 +298,7 @@ div#__nuxt {
 }
 
 html {
+  @apply bg-greenLight;
   @apply bg-gradient-to-br from-pink via-yellowLight to-greenLight;
 }
 </style>
