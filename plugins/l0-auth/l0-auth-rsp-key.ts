@@ -6,4 +6,5 @@
 interface L0AuthRspKey {
   id: string
   created: Date
+  isPublic: boolean
 }

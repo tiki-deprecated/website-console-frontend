@@ -5,8 +5,12 @@
 
 <template>
   <div>
-    <AppInfoProfileCmp class="mt-8" />
-    <AppInfoPubCmp class="mt-8" />
-    <AppInfoKeysCmp class="mt-8" />
+    <h1 class="py-5 md:py-10">Settings</h1>
   </div>
 </template>
+
+<script setup lang="ts">
+definePageMeta({
+  layout: 'home-layout',
+})
+</script>

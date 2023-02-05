@@ -3,6 +3,8 @@
  * MIT license. See LICENSE file in root directory.
  */
 
+import svgLoader from 'vite-svg-loader'
+
 export default defineNuxtConfig({
   ssr: false,
   app: {
@@ -19,4 +21,8 @@ export default defineNuxtConfig({
     },
   },
   modules: ['@nuxtjs/plausible'],
+  vite: {
+    //@ts-ignore
+    plugins: [svgLoader()],
+  },
 })

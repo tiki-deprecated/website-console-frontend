@@ -7,7 +7,7 @@
   <div class="flex min-h-full">
     <slot />
     <div
-      class="relative hidden w-0 flex-1 bg-gradient-to-br from-greenDark via-green to-greenLight lg:block"
+      class="relative hidden w-0 flex-1 bg-gradient-to-br from-pink via-yellowLight to-greenLight lg:block"
     >
       <img
         class="absolute inset-1/2 h-1/4 w-auto -translate-x-1/2 -translate-y-1/2 object-contain object-center"
