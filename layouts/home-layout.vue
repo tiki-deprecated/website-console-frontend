@@ -63,10 +63,10 @@
                 <div class="flex flex-shrink-0 items-center px-4">
                   <img
                     class="h-12 w-auto"
-                    sizes="(max-width: 349px) 100vw, 576px"
+                    sizes="(max-width: 576px) 100vw, 576px"
                     srcset="
                       ~/assets/images/png/pineapple-jump-w-200.png 200w,
-                      ~/assets/images/png/pineapple-jump-w-576.png 349w
+                      ~/assets/images/png/pineapple-jump-w-576.png 576w
                     "
                     src="~/assets/images/png/pineapple-jump-w-576.png"
                     alt="TIKI"
@@ -143,10 +143,10 @@
           <div class="flex flex-shrink-0 items-center px-4">
             <img
               class="h-12 w-auto"
-              sizes="(max-width: 349px) 100vw, 576px"
+              sizes="(max-width: 576px) 100vw, 576px"
               srcset="
                 ~/assets/images/png/pineapple-jump-w-200.png 200w,
-                ~/assets/images/png/pineapple-jump-w-576.png 349w
+                ~/assets/images/png/pineapple-jump-w-576.png 576w
               "
               src="~/assets/images/png/pineapple-jump-w-576.png"
               alt="TIKI"

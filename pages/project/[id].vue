@@ -90,12 +90,38 @@
         </div>
       </dl>
     </div>
+    <modal v-if="showSecretModal" :onClose="onCloseSecretModal">
+      <div class="mt-6 grid place-content-center text-greenDark">
+        <img
+          class="mx-auto h-12 w-auto"
+          sizes="(max-width: 392px) 100vw, 392px"
+          srcset="
+            ~/assets/images/png/pineapple-caution-w-200.png 200w,
+            ~/assets/images/png/pineapple-caution-w-392.png 392w
+          "
+          src="~/assets/images/png/pineapple-jump-w-392.png"
+          alt="TIKI"
+        />
+        <h3 class="mx-auto mt-4">Private Key Created</h3>
+        <div class="mx-6 mx-auto mt-2 text-center text-xs">
+          You know the drill, save your secret! It's already hashed and only
+          available right now. <br />Protect with your life 😉.
+        </div>
+        <div class="my-6 text-sm">
+          <div class="font-medium">ID</div>
+          <div class="font-light">{{ newKey.id }}</div>
+          <div class="mt-4 font-medium">Secret</div>
+          <div class="font-light">{{ newKey.secret }}</div>
+        </div>
+      </div>
+    </modal>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ArrowPathIcon, PlusIcon, TrashIcon } from '@heroicons/vue/24/outline'
 import ActionEdit from '~/components/action-edit.vue'
+import Modal from '~/components/modal.vue'
 
 definePageMeta({
   layout: 'home-layout',
@@ -142,9 +168,17 @@ keys?.forEach((key) => {
   else fields.value[2].value = key.id
 })
 
+const showSecretModal = ref(false)
+const onCloseSecretModal = () => (showSecretModal.value = false)
+
+let newKey
 const addPrivateKey = async () => {
   const key = await $createKey(id, false)
-  if (key != null) privateKeys.value.push(key.id)
+  if (key != null) {
+    privateKeys.value.push(key.id)
+    newKey = key
+    showSecretModal.value = true
+  }
 }
 
 const deleteKey = async (id: string) => {
