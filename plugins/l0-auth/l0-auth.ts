@@ -175,6 +175,50 @@ export default class L0Auth {
     }
   }
 
+  async deleteApp(appId: string): Promise<any> {
+    const accessToken = this.getToken()
+    if (accessToken == null) return
+    const response = await fetch(
+      this.config.host + '/api/latest/app/' + appId,
+      {
+        method: 'delete',
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + accessToken.accessToken,
+        },
+      }
+    ).catch((error) => {
+      console.log(error)
+      return Promise.reject(error)
+    })
+  }
+
+  async updateApp(
+    appId: string,
+    req: L0AuthReqApp
+  ): Promise<L0AuthRspApp | undefined> {
+    const accessToken = this.getToken()
+    if (accessToken == null) return
+    const response = await fetch(
+      this.config.host + '/api/latest/app/' + appId,
+      {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + accessToken.accessToken,
+        },
+        body: JSON.stringify(req),
+      }
+    ).catch((error) => {
+      console.log(error)
+      return Promise.reject(error)
+    })
+    if (response.ok) {
+      return await response.json()
+    }
+  }
+
   async createKey(
     appId: string,
     isPublic: boolean

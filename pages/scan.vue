@@ -5,7 +5,7 @@
 
 <template>
   <div>
-    <Heading title="Scan" />
+    <h1 class="py-5 md:py-10">Scan</h1>
   </div>
 </template>
 

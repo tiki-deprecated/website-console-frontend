@@ -225,7 +225,7 @@
         </button>
       </div>
       <main class="flex-1">
-        <div class="mx-8 lg:px-40">
+        <div class="mx-8 py-8 md:pt-24 lg:px-40 lg:pt-32">
           <slot />
         </div>
       </main>
@@ -294,11 +294,11 @@ const sidebarOpen = ref(false)
 html,
 body,
 div#__nuxt {
-  @apply h-full;
+  @apply !h-fit min-h-full;
 }
 
 html {
-  @apply bg-greenLight;
-  @apply bg-gradient-to-br from-pink via-yellowLight to-greenLight;
+  @apply !bg-yellowLight;
+  @apply !bg-gradient-to-br from-pink via-yellowLight to-greenLight;
 }
 </style>

@@ -18,6 +18,9 @@ export default defineNuxtPlugin((nuxtApp) => {
         l0Auth.updateUser(userId, req),
       getApp: (appId: string) => l0Auth.getApp(appId),
       createApp: (req: L0AuthReqApp) => l0Auth.createApp(req),
+      deleteApp: (appId: string) => l0Auth.deleteApp(appId),
+      updateApp: (appId: string, req: L0AuthReqApp) =>
+        l0Auth.updateApp(appId, req),
       getKeys: (appId: string) => l0Auth.getKeys(appId),
       createKey: (appId: string, isPublic: boolean) =>
         l0Auth.createKey(appId, isPublic),

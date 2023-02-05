@@ -5,7 +5,7 @@
 
 <template>
   <div>
-    <Heading title="Settings" />
+    <h1 class="py-5 md:py-10">Settings</h1>
   </div>
 </template>
 

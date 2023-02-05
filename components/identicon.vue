@@ -14,7 +14,7 @@ const props = defineProps({
     required: true,
   },
   sizeRem: {
-    type: Number,
+    type: String,
     required: false,
     default: 24,
   },
@@ -28,7 +28,7 @@ const props = defineProps({
 const { $identicon } = useNuxtApp()
 
 const size =
-  props.sizeRem *
+  Number(props.sizeRem) *
   parseFloat(getComputedStyle(document.documentElement).fontSize)
 
 const svg = $identicon(props.value, size, {

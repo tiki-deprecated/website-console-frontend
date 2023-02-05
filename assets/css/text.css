@@ -5,9 +5,12 @@
 
 @layer base {
   h1 {
-    @apply text-5xl font-extralight text-greenDark
+    @apply text-5xl font-extralight text-greenDark min-w-0
   }
   h3 {
-    @apply text-xl font-light text-greenDark
+    @apply text-xl font-light text-greenDark min-w-0
+  }
+  h4 {
+    @apply text-lg font-light text-greenDark min-w-0
   }
 }
