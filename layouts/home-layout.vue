@@ -77,6 +77,7 @@
                     v-for="item in pages"
                     :key="item.name"
                     :to="item.href"
+                    @click="setActive(item.name)"
                     :class="[
                       item.current
                         ? 'text-green'
@@ -117,10 +118,10 @@
                 </nav>
               </div>
               <div class="flex flex-row-reverse justify-evenly px-2 py-4">
-                <a
+                <button
                   v-for="item in actions"
                   :key="item.name"
-                  :href="item.href"
+                  @click.stop.prevent="item.onClick"
                   class="group flex items-center rounded-md px-2 py-2 text-sm font-medium text-pinkDark/70 hover:text-pinkDark"
                 >
                   <component
@@ -129,7 +130,7 @@
                     aria-hidden="true"
                   />
                   {{ item.name }}
-                </a>
+                </button>
               </div>
             </DialogPanel>
           </TransitionChild>
@@ -155,6 +156,7 @@
           <nav class="mt-5 flex-1 space-y-1 bg-transparent px-2">
             <nuxt-link
               v-for="item in pages"
+              @click="setActive(item.name)"
               :key="item.name"
               :to="item.href"
               :class="[
@@ -195,10 +197,10 @@
           </nav>
         </div>
         <div class="px-2 py-4">
-          <a
+          <button
             v-for="item in actions"
             :key="item.name"
-            :href="item.href"
+            @click.stop.prevent="item.onClick"
             class="group flex items-center rounded-md px-2 py-2 text-sm font-medium text-pinkDark/50 hover:text-pinkDark"
           >
             <component
@@ -207,7 +209,7 @@
               aria-hidden="true"
             />
             {{ item.name }}
-          </a>
+          </button>
         </div>
       </div>
     </div>
@@ -230,10 +232,51 @@
         </div>
       </main>
     </div>
+    <modal v-if="showHelpModal" :onClose="onCloseHelpModal">
+      <div class="mt-6 grid place-content-center text-greenDark">
+        <img
+          class="mx-auto h-20 w-auto"
+          sizes="(max-width: 276px) 100vw, 276px"
+          srcset="
+            ~/assets/images/png/pineapple-hand-w-200.png 200w,
+            ~/assets/images/png/pineapple-hand-w-276.png 276w
+          "
+          src="~/assets/images/png/pineapple-hand-w-276.png"
+          alt=""
+        />
+        <h3 class="mx-auto mt-6 text-center">
+          No worries,<br />we're here to help.
+        </h3>
+        <ul class="mx-6 mx-auto mt-4 list-disc text-xs">
+          <li class="mt-2">
+            To get technical help or an answer to a question, pop in our discord
+            —the whole team's there.
+          </li>
+          <li class="mt-2">
+            To report a bug or request a feature, simply open an issue (or
+            better yet, a PR) on GitHub.
+          </li>
+        </ul>
+        <div class="mt-10 flex items-center justify-evenly">
+          <a
+            href="https://discord.gg/tiki"
+            class="flex items-center rounded-sm bg-[#7289DA] py-2 px-4 text-white hover:bg-[#7289DA]/75"
+          >
+            Discord <discord-icon class="ml-2 h-6" />
+          </a>
+          <a
+            href="https://github.com/tiki"
+            class="flex items-center rounded-sm bg-[#24292F] py-2 px-4 text-white hover:bg-[#24292F]/75"
+          >
+            GitHub <git-hub-icon class="ml-2 h-6" />
+          </a>
+        </div>
+      </div>
+    </modal>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import {
   Dialog,
@@ -246,8 +289,8 @@ import {
   Bars3Icon,
   CheckBadgeIcon,
   Cog8ToothIcon,
+  CurrencyDollarIcon,
   LinkIcon,
-  MagnifyingGlassCircleIcon,
   MegaphoneIcon,
   SquaresPlusIcon,
 } from '@heroicons/vue/24/solid'
@@ -259,16 +302,29 @@ import ReadmeIcon from '~/assets/images/svg/readme.svg'
 import CatIcon from '~/assets/images/svg/cat.svg'
 import Divider from '~/components/divider.vue'
 
-const pages = [
+const { $logout } = useNuxtApp()
+const showHelpModal = ref(false)
+const onLogout = async () => {
+  await $logout()
+  window.location.reload()
+}
+
+const pages = ref([
   { name: 'Projects', href: '/', icon: SquaresPlusIcon, current: true },
+  // {
+  //   name: 'Scan',
+  //   href: '/scan',
+  //   icon: MagnifyingGlassCircleIcon,
+  //   current: false,
+  // },
   {
-    name: 'Scan',
-    href: '/scan',
-    icon: MagnifyingGlassCircleIcon,
+    name: 'Billing',
+    href: '/billing',
+    icon: CurrencyDollarIcon,
     current: false,
   },
   { name: 'Settings', href: '/settings', icon: Cog8ToothIcon, current: false },
-]
+])
 
 const links = [
   { name: 'Docs', href: 'https://docs.mytiki.com', icon: ReadmeIcon },
@@ -283,11 +339,23 @@ const links = [
 ]
 
 const actions = [
-  { name: 'Halp !!!', href: '#', icon: CatIcon },
-  { name: 'Logout', href: '#', icon: ArrowLeftCircleIcon },
+  {
+    name: 'Halp !!!',
+    onClick: () => (showHelpModal.value = true),
+    icon: CatIcon,
+  },
+  { name: 'Logout', onClick: onLogout, icon: ArrowLeftCircleIcon },
 ]
 
 const sidebarOpen = ref(false)
+
+const setActive = (name: string) => {
+  pages.value.forEach((page) => {
+    page.current = page.name === name
+  })
+}
+
+const onCloseHelpModal = () => (showHelpModal.value = false)
 </script>
 
 <style lang="postcss">
@@ -295,10 +363,5 @@ html,
 body,
 div#__nuxt {
   @apply !h-fit min-h-full;
-}
-
-html {
-  @apply !bg-yellowLight;
-  @apply !bg-gradient-to-br from-pink via-yellowLight to-greenLight;
 }
 </style>

@@ -4,9 +4,7 @@
   -->
 
 <template>
-  <div
-    class="overflow-hidden rounded-xl border-4 border-greenDark bg-gray bg-opacity-70 backdrop-blur-md"
-  >
+  <card>
     <div class="flex items-center px-4 py-5 sm:px-6">
       <action-edit
         :onSave="updateName"
@@ -99,8 +97,8 @@
             ~/assets/images/png/pineapple-caution-w-200.png 200w,
             ~/assets/images/png/pineapple-caution-w-392.png 392w
           "
-          src="~/assets/images/png/pineapple-jump-w-392.png"
-          alt="TIKI"
+          src="~/assets/images/png/pineapple-caution-w-392.png"
+          alt=""
         />
         <h3 class="mx-auto mt-4">Private Key Created</h3>
         <div class="mx-6 mx-auto mt-2 text-center text-xs">
@@ -115,7 +113,7 @@
         </div>
       </div>
     </modal>
-  </div>
+  </card>
 </template>
 
 <script setup lang="ts">
