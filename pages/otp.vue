@@ -11,6 +11,7 @@
     label="Code"
     :input="input"
     :onSubmit="onSubmit"
+    :error="errorMessage"
   />
 </template>
 
@@ -27,8 +28,12 @@ const input: HTMLInputElement = {
   placeholder: 'ABC123',
 }
 
+const errorMessage = ref<string>('')
 const onSubmit = async (code: string) => {
   const success = await $grant(code)
-  navigateTo('/')
+  if (success) navigateTo('/')
+  else
+    errorMessage.value =
+      "That didn't work 🫠 —double check your email, or go back and request a new code."
 }
 </script>

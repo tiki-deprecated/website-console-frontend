@@ -39,6 +39,9 @@
                 class="block w-full appearance-none rounded-sm border border-2 border-greenDark bg-transparent px-3 py-2 text-greenDark placeholder-green shadow-sm focus:border-green focus:outline-none focus:ring-green"
               />
             </div>
+            <p v-if="error" class="mt-2 text-sm text-pinkDark">
+              {{ error }}
+            </p>
           </div>
 
           <div>
@@ -85,6 +88,10 @@ const props = defineProps({
   onSubmit: {
     type: Function,
     required: true,
+  },
+  error: {
+    required: false,
+    default: undefined,
   },
 })
 </script>
