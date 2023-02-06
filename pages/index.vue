@@ -12,6 +12,7 @@
     label="Email address"
     :input="input"
     :onSubmit="onSubmit"
+    :error="errorMessage"
   />
 </template>
 
@@ -29,8 +30,13 @@ const input: HTMLInputElement = {
   placeholder: 'hello@mytiki.com',
 }
 
+const errorMessage = ref<string>('')
+
 const onSubmit = async (email: string) => {
   const success: boolean = await $otp(email)
   if (success) navigateTo('/otp')
+  else
+    errorMessage.value =
+      'Something went wrong —please check your spelling 🫣 and try again.'
 }
 </script>

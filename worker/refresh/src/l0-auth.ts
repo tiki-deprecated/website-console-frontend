@@ -17,8 +17,6 @@ async function refresh(
   url: string,
   refreshToken: string
 ): Promise<L0AuthRspToken> {
-  console.log(url)
-  console.log(refreshToken)
   const response: Response = await fetch(url, {
     method: 'post',
     headers: {

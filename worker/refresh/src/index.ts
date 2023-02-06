@@ -31,7 +31,6 @@ export default {
           accessToken.refresh_token +
           '; HttpOnly' +
           (env.SECURE === 'true' ? '; SECURE' : '')
-        console.log(headers)
         return Response.json(accessToken, {
           status: 200,
           headers: headers,
