@@ -22,3 +22,10 @@ useServerSeoMeta({
   // twitterCard: 'summary_large_image',
 })
 </script>
+
+<style lang="postcss">
+html {
+  @apply bg-yellowLight;
+  @apply bg-gradient-to-br from-pink via-yellowLight to-greenLight;
+}
+</style>

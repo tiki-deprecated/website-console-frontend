@@ -7,7 +7,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
   const isAuthorized: boolean = await useNuxtApp().$isAuthorized()
 
   if (
-    to.name !== 'login' &&
+    to.name !== 'index' &&
     to.name !== 'otp' &&
     to.name !== undefined &&
     !isAuthorized
