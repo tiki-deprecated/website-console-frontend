@@ -316,9 +316,4 @@ body,
 div#__nuxt {
   @apply !h-fit min-h-full;
 }
-
-html {
-  @apply !bg-yellowLight;
-  @apply !bg-gradient-to-br from-pink via-yellowLight to-greenLight;
-}
 </style>

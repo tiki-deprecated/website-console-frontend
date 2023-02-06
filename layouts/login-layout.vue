@@ -5,7 +5,11 @@
 
 <template>
   <div class="flex min-h-full">
-    <slot />
+    <div
+      class="flex flex-1 flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:bg-white lg:px-20 xl:px-24"
+    >
+      <slot />
+    </div>
     <div
       class="relative hidden w-0 flex-1 bg-gradient-to-br from-pink via-yellowLight to-greenLight lg:block"
     >
@@ -28,9 +32,5 @@ html,
 body,
 div#__nuxt {
   @apply h-full;
-}
-
-html {
-  @apply bg-white;
 }
 </style>
