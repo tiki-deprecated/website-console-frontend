@@ -13,7 +13,7 @@
       >
         <li v-for="project in projects" :key="project.appId">
           <nuxt-link :to="'project/' + project.appId">
-            <Card>
+            <card class="hover:border-green">
               <div class="flex items-center">
                 <div class="grid h-20 w-20 place-content-center">
                   <Identicon :value="project.appId" size-rem="4" />
@@ -27,15 +27,18 @@
                   </p>
                 </div>
               </div>
-            </Card>
+            </card>
           </nuxt-link>
         </li>
         <li class="grid place-content-center">
-          <button-std
-            text="New Project"
-            :icon="PlusIcon"
-            :onClick="newProject"
-          />
+          <button
+            type="button"
+            class="ml-6 flex items-center rounded-sm bg-white/40 py-4 px-8 text-greenDark hover:text-green"
+            @click.prevent.stop="newProject"
+          >
+            New Project
+            <plus-icon class="ml-4 h-6" />
+          </button>
         </li>
       </ul>
     </div>
@@ -53,7 +56,6 @@
 
 <script setup lang="ts">
 import { PlusIcon, SquaresPlusIcon } from '@heroicons/vue/24/solid'
-import ButtonStd from '~/components/button-std.vue'
 
 definePageMeta({
   layout: 'home-layout',
