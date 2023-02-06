@@ -97,8 +97,8 @@
             ~/assets/images/png/pineapple-caution-w-200.png 200w,
             ~/assets/images/png/pineapple-caution-w-392.png 392w
           "
-          src="~/assets/images/png/pineapple-jump-w-392.png"
-          alt="TIKI"
+          src="~/assets/images/png/pineapple-caution-w-392.png"
+          alt=""
         />
         <h3 class="mx-auto mt-4">Private Key Created</h3>
         <div class="mx-6 mx-auto mt-2 text-center text-xs">

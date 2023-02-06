@@ -232,6 +232,47 @@
         </div>
       </main>
     </div>
+    <modal v-if="showHelpModal" :onClose="onCloseHelpModal">
+      <div class="mt-6 grid place-content-center text-greenDark">
+        <img
+          class="mx-auto h-20 w-auto"
+          sizes="(max-width: 276px) 100vw, 276px"
+          srcset="
+            ~/assets/images/png/pineapple-hand-w-200.png 200w,
+            ~/assets/images/png/pineapple-hand-w-276.png 276w
+          "
+          src="~/assets/images/png/pineapple-hand-w-276.png"
+          alt=""
+        />
+        <h3 class="mx-auto mt-6 text-center">
+          No worries,<br />we're here to help.
+        </h3>
+        <ul class="mx-6 mx-auto mt-4 list-disc text-xs">
+          <li class="mt-2">
+            To get technical help or an answer to a question, pop in our discord
+            —the whole team's there.
+          </li>
+          <li class="mt-2">
+            To report a bug or request a feature, simply open an issue (or
+            better yet, a PR) on GitHub.
+          </li>
+        </ul>
+        <div class="mt-10 flex items-center justify-evenly">
+          <a
+            href="https://discord.gg/tiki"
+            class="flex items-center rounded-sm bg-[#7289DA] py-2 px-4 text-white hover:bg-[#7289DA]/75"
+          >
+            Discord <discord-icon class="ml-2 h-6" />
+          </a>
+          <a
+            href="https://github.com/tiki"
+            class="flex items-center rounded-sm bg-[#24292F] py-2 px-4 text-white hover:bg-[#24292F]/75"
+          >
+            GitHub <git-hub-icon class="ml-2 h-6" />
+          </a>
+        </div>
+      </div>
+    </modal>
   </div>
 </template>
 
@@ -262,6 +303,7 @@ import CatIcon from '~/assets/images/svg/cat.svg'
 import Divider from '~/components/divider.vue'
 
 const { $logout } = useNuxtApp()
+const showHelpModal = ref(false)
 const onLogout = async () => {
   await $logout()
   window.location.reload()
@@ -297,7 +339,11 @@ const links = [
 ]
 
 const actions = [
-  { name: 'Halp !!!', onClick: () => {}, icon: CatIcon },
+  {
+    name: 'Halp !!!',
+    onClick: () => (showHelpModal.value = true),
+    icon: CatIcon,
+  },
   { name: 'Logout', onClick: onLogout, icon: ArrowLeftCircleIcon },
 ]
 
@@ -308,6 +354,8 @@ const setActive = (name: string) => {
     page.current = page.name === name
   })
 }
+
+const onCloseHelpModal = () => (showHelpModal.value = false)
 </script>
 
 <style lang="postcss">
