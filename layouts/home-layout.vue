@@ -77,6 +77,7 @@
                     v-for="item in pages"
                     :key="item.name"
                     :to="item.href"
+                    @click="setActive(item.name)"
                     :class="[
                       item.current
                         ? 'text-green'
@@ -117,10 +118,10 @@
                 </nav>
               </div>
               <div class="flex flex-row-reverse justify-evenly px-2 py-4">
-                <a
+                <button
                   v-for="item in actions"
                   :key="item.name"
-                  :href="item.href"
+                  @click.stop.prevent="item.onClick"
                   class="group flex items-center rounded-md px-2 py-2 text-sm font-medium text-pinkDark/70 hover:text-pinkDark"
                 >
                   <component
@@ -129,7 +130,7 @@
                     aria-hidden="true"
                   />
                   {{ item.name }}
-                </a>
+                </button>
               </div>
             </DialogPanel>
           </TransitionChild>
@@ -155,6 +156,7 @@
           <nav class="mt-5 flex-1 space-y-1 bg-transparent px-2">
             <nuxt-link
               v-for="item in pages"
+              @click="setActive(item.name)"
               :key="item.name"
               :to="item.href"
               :class="[
@@ -195,10 +197,10 @@
           </nav>
         </div>
         <div class="px-2 py-4">
-          <a
+          <button
             v-for="item in actions"
             :key="item.name"
-            :href="item.href"
+            @click.stop.prevent="item.onClick"
             class="group flex items-center rounded-md px-2 py-2 text-sm font-medium text-pinkDark/50 hover:text-pinkDark"
           >
             <component
@@ -207,7 +209,7 @@
               aria-hidden="true"
             />
             {{ item.name }}
-          </a>
+          </button>
         </div>
       </div>
     </div>
@@ -233,7 +235,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import {
   Dialog,
@@ -246,8 +248,8 @@ import {
   Bars3Icon,
   CheckBadgeIcon,
   Cog8ToothIcon,
+  CurrencyDollarIcon,
   LinkIcon,
-  MagnifyingGlassCircleIcon,
   MegaphoneIcon,
   SquaresPlusIcon,
 } from '@heroicons/vue/24/solid'
@@ -259,16 +261,28 @@ import ReadmeIcon from '~/assets/images/svg/readme.svg'
 import CatIcon from '~/assets/images/svg/cat.svg'
 import Divider from '~/components/divider.vue'
 
-const pages = [
+const { $logout } = useNuxtApp()
+const onLogout = async () => {
+  await $logout()
+  window.location.reload()
+}
+
+const pages = ref([
   { name: 'Projects', href: '/', icon: SquaresPlusIcon, current: true },
+  // {
+  //   name: 'Scan',
+  //   href: '/scan',
+  //   icon: MagnifyingGlassCircleIcon,
+  //   current: false,
+  // },
   {
-    name: 'Scan',
-    href: '/scan',
-    icon: MagnifyingGlassCircleIcon,
+    name: 'Billing',
+    href: '/billing',
+    icon: CurrencyDollarIcon,
     current: false,
   },
   { name: 'Settings', href: '/settings', icon: Cog8ToothIcon, current: false },
-]
+])
 
 const links = [
   { name: 'Docs', href: 'https://docs.mytiki.com', icon: ReadmeIcon },
@@ -283,11 +297,17 @@ const links = [
 ]
 
 const actions = [
-  { name: 'Halp !!!', href: '#', icon: CatIcon },
-  { name: 'Logout', href: '#', icon: ArrowLeftCircleIcon },
+  { name: 'Halp !!!', onClick: () => {}, icon: CatIcon },
+  { name: 'Logout', onClick: onLogout, icon: ArrowLeftCircleIcon },
 ]
 
 const sidebarOpen = ref(false)
+
+const setActive = (name: string) => {
+  pages.value.forEach((page) => {
+    page.current = page.name === name
+  })
+}
 </script>
 
 <style lang="postcss">

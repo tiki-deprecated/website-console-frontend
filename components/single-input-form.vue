@@ -20,7 +20,10 @@
 
       <div class="mt-8">
         <div class="mt-6">
-          <form class="space-y-6">
+          <form
+            class="space-y-6"
+            @submit.stop.prevent="onSubmit($refs.input1.value)"
+          >
             <div>
               <label
                 v-if="label"
@@ -46,7 +49,6 @@
             <div>
               <button
                 type="submit"
-                @click.stop.prevent="onSubmit($refs.input1.value)"
                 class="flex w-full justify-center rounded-sm border border-none bg-yellow/70 py-4 px-4 font-medium text-greenDark shadow-sm hover:bg-yellow"
               >
                 {{ cta }}

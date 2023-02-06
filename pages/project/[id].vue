@@ -4,9 +4,7 @@
   -->
 
 <template>
-  <div
-    class="overflow-hidden rounded-xl border-4 border-greenDark bg-gray bg-opacity-70 backdrop-blur-md"
-  >
+  <card>
     <div class="flex items-center px-4 py-5 sm:px-6">
       <action-edit
         :onSave="updateName"
@@ -115,7 +113,7 @@
         </div>
       </div>
     </modal>
-  </div>
+  </card>
 </template>
 
 <script setup lang="ts">
