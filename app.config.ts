@@ -11,4 +11,7 @@ export default defineAppConfig({
     secure: true,
     bypass: undefined,
   },
+  l0index: {
+    host: 'http://localhost:10504',
+  },
 })

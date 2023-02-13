@@ -4,15 +4,15 @@
  */
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
-  const isAuthorized: boolean = await useNuxtApp().$isAuthorized()
+  const token: L0AuthToken | undefined = await useNuxtApp().$getToken()
 
   if (
     to.name !== 'index' &&
     to.name !== 'otp' &&
     to.name !== undefined &&
-    !isAuthorized
+    token === undefined
   )
     return navigateTo('/')
 
-  if (to.name === 'index' && isAuthorized) return navigateTo('/project')
+  if (to.name === 'index' && token !== undefined) return navigateTo('/project')
 })
