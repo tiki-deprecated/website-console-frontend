@@ -5,7 +5,6 @@
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
   const token: L0AuthToken | undefined = await useNuxtApp().$getToken()
-
   if (
     to.name !== 'index' &&
     to.name !== 'otp' &&

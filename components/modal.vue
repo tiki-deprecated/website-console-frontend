@@ -54,18 +54,11 @@ import {
   TransitionRoot,
 } from '@headlessui/vue'
 
-const props = defineProps({
-  onClose: {
-    type: Function,
-    required: false,
-    default: undefined,
-  },
-})
-
+const emit = defineEmits(['close'])
 const open = ref(true)
 
 const close = () => {
   open.value = false
-  if (props.onClose != null) props.onClose()
+  emit('close')
 }
 </script>

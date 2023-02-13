@@ -11,7 +11,7 @@
     cta="Continue"
     label="Email address"
     :input="input"
-    :onSubmit="onSubmit"
+    @submit="onSubmit"
     :error="errorMessage"
   />
 </template>

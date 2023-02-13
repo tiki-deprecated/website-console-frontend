@@ -34,15 +34,11 @@
 <script setup lang="ts">
 import { PencilIcon } from '@heroicons/vue/24/solid'
 
+const emit = defineEmits(['save'])
 const props = defineProps({
   text: {
     type: String,
     required: true,
-  },
-  onSave: {
-    type: Function,
-    required: false,
-    default: undefined,
   },
 })
 
@@ -56,6 +52,6 @@ const edit = () => {
 const save = (newVal: string) => {
   editing.value = false
   val.value = newVal
-  if (props.onSave != null) props.onSave(newVal)
+  emit('save', newVal)
 }
 </script>

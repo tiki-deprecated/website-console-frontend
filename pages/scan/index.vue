@@ -5,7 +5,7 @@
 
 <template>
   <div>
-    <h1 class="py-5 md:py-10">Scan</h1>
+    <h1 class="py-5 md:py-10">searchy searchy</h1>
   </div>
 </template>
 

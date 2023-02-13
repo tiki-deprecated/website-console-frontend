@@ -11,8 +11,7 @@ interface L0AuthConfig {
   host: string
   worker: string
   cookie: string
-  secure: boolean | undefined
-  bypass: boolean | undefined
+  secure?: boolean | undefined
 }
 
 export default class L0Auth {
@@ -36,7 +35,6 @@ export default class L0Auth {
       },
       body: JSON.stringify(req),
     }).catch((error) => {
-      console.log(error)
       return Promise.reject(error)
     })
 
@@ -64,7 +62,6 @@ export default class L0Auth {
         password: code,
       }),
     }).catch((error) => {
-      console.log(error)
       return Promise.reject(error)
     })
 
@@ -84,7 +81,6 @@ export default class L0Auth {
         Authorization: 'Bearer ' + accessToken.accessToken,
       },
     }).catch((error) => {
-      console.log(error)
       return Promise.reject(error)
     })
     if (response.ok) {
@@ -110,7 +106,6 @@ export default class L0Auth {
         body: JSON.stringify(req),
       }
     ).catch((error) => {
-      console.log(error)
       return Promise.reject(error)
     })
     if (response.ok) {
@@ -130,7 +125,6 @@ export default class L0Auth {
       },
       body: JSON.stringify(req),
     }).catch((error) => {
-      console.log(error)
       return Promise.reject(error)
     })
     if (response.ok) {
@@ -151,7 +145,6 @@ export default class L0Auth {
         },
       }
     ).catch((error) => {
-      console.log(error)
       return Promise.reject(error)
     })
     if (response.ok) {
@@ -172,7 +165,6 @@ export default class L0Auth {
         },
       }
     ).catch((error) => {
-      console.log(error)
       return Promise.reject(error)
     })
   }
@@ -195,7 +187,6 @@ export default class L0Auth {
         body: JSON.stringify(req),
       }
     ).catch((error) => {
-      console.log(error)
       return Promise.reject(error)
     })
     if (response.ok) {
@@ -223,7 +214,6 @@ export default class L0Auth {
         }),
       }
     ).catch((error) => {
-      console.log(error)
       return Promise.reject(error)
     })
     if (response.ok) {
@@ -244,7 +234,6 @@ export default class L0Auth {
         },
       }
     ).catch((error) => {
-      console.log(error)
       return Promise.reject(error)
     })
     if (response.ok) {
@@ -266,7 +255,6 @@ export default class L0Auth {
         },
       }
     ).catch((error) => {
-      console.log(error)
       return Promise.reject(error)
     })
   }
@@ -321,7 +309,6 @@ export default class L0Auth {
         }),
       }
     ).catch((error) => {
-      console.log(error)
       return Promise.reject(error)
     })
   }

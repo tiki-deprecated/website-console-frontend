@@ -10,7 +10,7 @@
     cta="Continue"
     label="Code"
     :input="input"
-    :onSubmit="onSubmit"
+    @submit="onSubmit"
     :error="errorMessage"
   />
 </template>

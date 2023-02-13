@@ -6,10 +6,9 @@
 export default defineAppConfig({
   l0auth: {
     host: 'https://auth.l0.mytiki.com',
-    worker: 'https://console.mytiki.com',
+    worker: 'http://localhost:3000',
     cookie: 'refresh_token',
     secure: true,
-    bypass: undefined,
   },
   l0index: {
     host: 'http://localhost:10504',

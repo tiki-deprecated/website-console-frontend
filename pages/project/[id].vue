@@ -5,90 +5,62 @@
 
 <template>
   <card>
-    <div class="flex items-center px-4 py-5 sm:px-6">
-      <action-edit
-        :onSave="updateName"
-        :text="app.name"
-        class="text-xl font-light text-greenDark"
-      />
-    </div>
-    <div class="border-t border-greenDark/20 px-4 py-5 sm:p-0">
-      <dl class="sm:divide-y sm:divide-greenDark/20">
-        <div
-          v-for="field in fields"
-          class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6"
-        >
-          <dt class="flex items-center text-sm font-medium text-greenDark">
-            {{ field.name }}
-            <button
-              class="ml-4"
-              v-if="field.action"
-              @click.prevent.stop="
-                field.action.onClick(field.name, field.value)
-              "
-            >
-              <component
-                :is="field.action.icon"
-                class="h-5 stroke-2 text-green hover:text-greenDark"
-              />
-            </button>
-          </dt>
-          <dd class="mt-1 text-sm text-greenDark sm:col-span-2 sm:mt-0">
-            {{ field.value }}
-          </dd>
-        </div>
-        <div
-          class="items-start py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6"
-        >
-          <dt class="flex items-center text-sm font-medium text-greenDark">
-            Private Keys
-            <button class="ml-4">
-              <plus-icon
-                class="h-5 stroke-2 text-green hover:text-greenDark"
-                @click.stop.prevent="addPrivateKey"
-              />
-            </button>
-          </dt>
-          <dd class="mt-1 text-sm text-greenDark sm:col-span-2 sm:mt-0">
-            <ul
-              role="list"
-              v-if="privateKeys.length > 0"
-              class="divide-y divide-greenDark/20 rounded-md border border-greenDark/20"
-            >
-              <li
-                v-for="id in privateKeys"
-                :key="id"
-                class="flex items-center justify-between py-3 pl-3 pr-4 text-sm"
-              >
-                <div class="flex w-0 flex-1 items-center">
-                  <span class="ml-2 w-0 flex-1 truncate">{{ id }}</span>
-                </div>
-                <div class="ml-4 flex-shrink-0">
-                  <button
-                    class="font-medium text-green hover:text-greenDark"
-                    @click.stop.prevent="deleteKey(id)"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </li>
-            </ul>
-          </dd>
-        </div>
-        <div class="py-4 sm:py-5 sm:px-6">
-          <dt>
-            <button
-              class="ml-auto flex items-center text-sm font-medium text-pinkDark hover:text-purple"
-              @click.prevent.stop="deleteApp"
-            >
-              Delete App
-              <trash-icon class="ml-2 h-5 stroke-2" />
-            </button>
-          </dt>
-        </div>
-      </dl>
-    </div>
-    <modal v-if="showSecretModal" :onClose="onCloseSecretModal">
+    <card-table-heading>
+      <action-edit @save="updateName" :text="app.name" />
+    </card-table-heading>
+    <card-table-body>
+      <div
+        v-for="field in fields"
+        class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6"
+      >
+        <card-table-body-field-name>
+          {{ field.name }}
+          <button
+            class="ml-4"
+            v-if="field.button"
+            @click.prevent.stop="field.onClick(field.name, field.value)"
+          >
+            <component
+              :is="field.button"
+              class="h-5 stroke-2 text-green hover:text-greenDark"
+            />
+          </button>
+        </card-table-body-field-name>
+        <card-table-body-field-value>
+          {{ field.value }}
+        </card-table-body-field-value>
+      </div>
+      <div
+        class="items-start py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6"
+      >
+        <card-table-body-field-name>
+          Private Keys
+          <button class="ml-4">
+            <plus-icon
+              class="h-5 stroke-2 text-green hover:text-greenDark"
+              @click.stop.prevent="addPrivateKey"
+            />
+          </button>
+        </card-table-body-field-name>
+        <card-table-body-field-list
+          :items="privateKeys"
+          button="Delete"
+          @click="deleteKey"
+        />
+      </div>
+      <div class="py-4 sm:py-5 sm:px-6">
+        <dt>
+          <button
+            class="ml-auto flex items-center text-sm font-medium text-pinkDark hover:text-purple"
+            @click.prevent.stop="deleteApp"
+          >
+            Delete App
+            <trash-icon class="ml-2 h-5 stroke-2" />
+          </button>
+        </dt>
+      </div>
+    </card-table-body>
+    <modal v-if="showSecretModal" @close="onCloseSecretModal">
       <div class="mt-6 grid place-content-center text-greenDark">
         <img
           class="mx-auto h-12 w-auto"
@@ -150,11 +122,9 @@ const fields = ref([
   {
     name: 'Publishing ID',
     value: undefined,
-    action: {
-      icon: ArrowPathIcon,
-      onClick: async () => {
-        fields.value[2].value = await cyclePublicKey(fields.value[2].value)
-      },
+    button: ArrowPathIcon,
+    onClick: async () => {
+      fields.value[2].value = await cyclePublicKey(fields.value[2].value)
     },
   },
 ])
@@ -180,6 +150,7 @@ const addPrivateKey = async () => {
 }
 
 const deleteKey = async (id: string) => {
+  console.log(id)
   await $deleteKey(id)
   privateKeys.value = privateKeys.value.filter((key) => key !== id)
 }
