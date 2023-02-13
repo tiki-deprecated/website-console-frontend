@@ -11,7 +11,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     provide: {
       otp: (email: string) => l0Auth.otp(email),
       grant: (code: string) => l0Auth.grant(code),
-      isAuthorized: () => l0Auth.isAuthorized(),
+      getToken: () => l0Auth.getToken(),
       logout: () => l0Auth.logout(),
       getUser: () => l0Auth.getUser(),
       updateUser: (userId: string, req: L0AuthReqUser) =>

@@ -49,7 +49,7 @@ export default class L0Auth {
     }
   }
 
-  async grant(code: string): Promise<boolean> {
+  async grant(code: string): Promise<L0AuthToken | undefined> {
     const otpRsp = useState<L0AuthRspOtp>('otp').value
     const response = await fetch(this.config.host + '/api/latest/oauth/token', {
       method: 'post',
@@ -59,7 +59,7 @@ export default class L0Auth {
       },
       body: new URLSearchParams({
         grant_type: 'password',
-        scope: 'auth',
+        scope: 'auth index',
         username: otpRsp.deviceId,
         password: code,
       }),
@@ -70,28 +70,12 @@ export default class L0Auth {
 
     if (response.ok) {
       const tokenRsp: L0AuthRspToken = await response.json()
-      this.saveToken(tokenRsp)
-      return true
-    } else {
-      return false
-    }
-  }
-
-  async isAuthorized(): Promise<boolean> {
-    if (this.config.bypass) return true
-    const accessToken = useState<L0AuthToken>(tokenState).value
-    if (accessToken != null && accessToken.expires > new Date()) return true
-    else {
-      try {
-        return await this.refresh()
-      } catch (error: any) {
-        return false
-      }
+      return this.saveToken(tokenRsp)
     }
   }
 
   async getUser(): Promise<L0AuthRspUser | undefined> {
-    const accessToken = this.getToken()
+    const accessToken = await this.getToken()
     if (accessToken == null) return
     const response = await fetch(this.config.host + '/api/latest/user', {
       method: 'get',
@@ -112,7 +96,7 @@ export default class L0Auth {
     userId: string,
     req: L0AuthReqUser
   ): Promise<L0AuthRspUser | undefined> {
-    const accessToken = this.getToken()
+    const accessToken = await this.getToken()
     if (accessToken == null) return
     const response = await fetch(
       this.config.host + '/api/latest/user/' + userId,
@@ -135,7 +119,7 @@ export default class L0Auth {
   }
 
   async createApp(req: L0AuthReqApp): Promise<L0AuthRspApp | undefined> {
-    const accessToken = this.getToken()
+    const accessToken = await this.getToken()
     if (accessToken == null) return
     const response = await fetch(this.config.host + '/api/latest/app', {
       method: 'post',
@@ -155,7 +139,7 @@ export default class L0Auth {
   }
 
   async getApp(appId: string): Promise<L0AuthRspApp | undefined> {
-    const accessToken = this.getToken()
+    const accessToken = await this.getToken()
     if (accessToken == null) return
     const response = await fetch(
       this.config.host + '/api/latest/app/' + appId,
@@ -176,7 +160,7 @@ export default class L0Auth {
   }
 
   async deleteApp(appId: string): Promise<any> {
-    const accessToken = this.getToken()
+    const accessToken = await this.getToken()
     if (accessToken == null) return
     const response = await fetch(
       this.config.host + '/api/latest/app/' + appId,
@@ -197,7 +181,7 @@ export default class L0Auth {
     appId: string,
     req: L0AuthReqApp
   ): Promise<L0AuthRspApp | undefined> {
-    const accessToken = this.getToken()
+    const accessToken = await this.getToken()
     if (accessToken == null) return
     const response = await fetch(
       this.config.host + '/api/latest/app/' + appId,
@@ -223,7 +207,7 @@ export default class L0Auth {
     appId: string,
     isPublic: boolean
   ): Promise<L0AuthRspKey | L0AuthRspSecret | undefined> {
-    const accessToken = this.getToken()
+    const accessToken = await this.getToken()
     if (accessToken == null) return
     const response = await fetch(
       this.config.host + '/api/latest/app/' + appId + '/key',
@@ -248,7 +232,7 @@ export default class L0Auth {
   }
 
   async getKeys(appId: string): Promise<L0AuthRspKey[] | undefined> {
-    const accessToken = this.getToken()
+    const accessToken = await this.getToken()
     if (accessToken == null) return
     const response = await fetch(
       this.config.host + '/api/latest/app/' + appId + '/key',
@@ -269,7 +253,7 @@ export default class L0Auth {
   }
 
   async deleteKey(keyId: string): Promise<any> {
-    const accessToken = this.getToken()
+    const accessToken = await this.getToken()
     if (accessToken == null) return
     const response = await fetch(
       this.config.host + '/api/latest/key/' + keyId,
@@ -288,29 +272,34 @@ export default class L0Auth {
   }
 
   async logout(): Promise<any> {
-    const accessToken = this.getToken()
     useState(tokenState, () => null)
     useCookie(this.config.cookie).value = null
-    if (accessToken != null)
-      await this.revoke(accessToken.accessToken, accessToken.refreshToken)
   }
 
-  private async refresh(): Promise<boolean> {
+  async getToken(): Promise<L0AuthToken | undefined> {
+    const accessToken = useState<L0AuthToken>(tokenState)
+    if (accessToken.value != null && accessToken.value.expires > new Date())
+      return accessToken.value
+    else {
+      try {
+        return await this.refresh()
+      } catch (error: any) {
+        return undefined
+      }
+    }
+  }
+
+  private async refresh(): Promise<L0AuthToken | undefined> {
     const response = await fetch(this.config.worker + '/api/latest/refresh', {
       method: 'post',
       credentials: 'include',
       headers: { Accept: 'application/json' },
     }).catch((error) => {
-      console.log(error)
       return Promise.reject(error)
     })
-
     if (response.ok) {
       const rsp: L0AuthRspToken = await response.json()
-      this.saveToken(rsp)
-      return true
-    } else {
-      return false
+      return this.saveToken(rsp)
     }
   }
 
@@ -337,23 +326,18 @@ export default class L0Auth {
     })
   }
 
-  private saveToken(tokenRsp: L0AuthRspToken) {
+  private saveToken(tokenRsp: L0AuthRspToken): L0AuthToken {
     const token: L0AuthToken = {
       accessToken: tokenRsp.access_token,
-      refreshToken: tokenRsp.refresh_token,
       scope: tokenRsp.scope,
       expires: new Date(new Date().getTime() + tokenRsp.expires_in * 1000),
     }
     useState(tokenState, () => token)
-    useCookie(this.config.cookie).value = token.refreshToken
+    useCookie(this.config.cookie).value = tokenRsp.refresh_token
     useCookie(this.config.cookie, {
       httpOnly: true,
       secure: this.config.secure ? true : undefined,
     })
-  }
-
-  private getToken(): L0AuthToken | undefined {
-    const state = useState<L0AuthToken>(tokenState)
-    if (state != null) return state.value
+    return token
   }
 }

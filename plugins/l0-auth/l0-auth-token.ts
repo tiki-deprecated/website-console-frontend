@@ -5,7 +5,6 @@
 
 interface L0AuthToken {
   accessToken: string
-  refreshToken: string
   scope: string
   expires: Date
 }
