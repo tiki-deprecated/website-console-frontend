@@ -11,6 +11,6 @@ export default defineAppConfig({
     secure: true,
   },
   l0index: {
-    host: 'http://localhost:10504',
+    host: 'https://index.l0.mytiki.com',
   },
 })

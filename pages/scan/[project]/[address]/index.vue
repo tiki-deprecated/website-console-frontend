@@ -66,7 +66,7 @@ const { $l0Index, $getToken } = useNuxtApp()
 const project = useRoute().params.project as string
 const address = useRoute().params.address as string
 const open = (block: string) =>
-  navigateTo(`/scan/${project}/${address}/${block}'`)
+  navigateTo(`/scan/${project}/${address}/${block}`)
 
 const fields = ref<Object[]>([])
 const hashes = ref<string[]>([])
