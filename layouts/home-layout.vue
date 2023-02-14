@@ -314,7 +314,7 @@ const pages = ref([
   { name: 'Projects', href: '/', icon: SquaresPlusIcon, current: true },
   {
     name: 'Scan',
-    href: '/scan/1650e7aa-d853-4c9c-87c6-def48144c742',
+    href: '/scan/b10a731a-b4f1-4a50-a499-085736b4e918',
     icon: MagnifyingGlassCircleIcon,
     current: false,
   },

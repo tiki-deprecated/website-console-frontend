@@ -36,6 +36,7 @@
           <button
             class="mr-2 text-green hover:text-greenDark"
             v-if="page.page > 0"
+            @click.prevent.stop="update(page.page - 1)"
           >
             <ArrowLeftIcon class="h-5 stroke-2" />
           </button>
@@ -43,6 +44,7 @@
           <button
             v-if="page.page < page.totalPages - 1"
             class="ml-2 text-green hover:text-greenDark"
+            @click.prevent.stop="update(page.page + 1)"
           >
             <ArrowRightIcon class="h-5 stroke-2" />
           </button>
@@ -63,52 +65,54 @@ definePageMeta({
 const { $l0Index, $getToken } = useNuxtApp()
 const project = useRoute().params.project as string
 const address = useRoute().params.address as string
-const open = (address: string) =>
-  navigateTo(`/scan/${project}/address/${address}'`)
-
-const token = await $getToken()
+const open = (block: string) =>
+  navigateTo(`/scan/${project}/${address}/${block}'`)
 
 const fields = ref<Object[]>([])
 const hashes = ref<string[]>([])
 const page = ref({
   page: 0,
-  size: 100,
+  size: 25,
   totalPages: 0,
   items: 0,
   totalItems: 0,
 })
 
-if (token != null) {
-  const addr = await $l0Index.address(
-    token.accessToken,
-    {
-      appId: project,
-      address: address,
-    },
-    {
-      page: page.value.page,
+const update = async (pageNumber: number) => {
+  const token = await $getToken()
+  if (token != null) {
+    const addr = await $l0Index.address(
+      token.accessToken,
+      {
+        appId: project,
+        address: address,
+      },
+      {
+        page: pageNumber,
+        size: page.value.size,
+      }
+    )
+    fields.value.push({
+      name: 'Address',
+      value: addr.address,
+    })
+    fields.value.push({
+      name: 'Project',
+      value: addr.appId,
+    })
+    fields.value.push({
+      name: 'Total Blocks',
+      value: String(addr.blocks.totalHashes),
+    })
+    hashes.value = addr.blocks.hashes
+    page.value = {
+      page: addr.blocks.page,
       size: page.value.size,
+      totalPages: addr.blocks.totalPages,
+      items: addr.blocks.hashes.length,
+      totalItems: addr.blocks.totalHashes,
     }
-  )
-  fields.value.push({
-    name: 'Address',
-    value: addr.address,
-  })
-  fields.value.push({
-    name: 'Project',
-    value: addr.appId,
-  })
-  fields.value.push({
-    name: 'Total Blocks',
-    value: String(addr.blocks.totalHashes),
-  })
-  hashes.value = addr.blocks.hashes
-  page.value = {
-    page: addr.blocks.page,
-    size: page.value.size,
-    totalPages: addr.blocks.totalPages,
-    items: addr.blocks.hashes.length,
-    totalItems: addr.blocks.totalHashes,
   }
 }
+update(0)
 </script>

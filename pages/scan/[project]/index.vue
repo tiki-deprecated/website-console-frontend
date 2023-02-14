@@ -36,6 +36,7 @@
           <button
             class="mr-2 text-green hover:text-greenDark"
             v-if="page.page > 0"
+            @click.prevent.stop="update(page.page - 1)"
           >
             <ArrowLeftIcon class="h-5 stroke-2" />
           </button>
@@ -43,6 +44,7 @@
           <button
             v-if="page.page < page.totalPages - 1"
             class="ml-2 text-green hover:text-greenDark"
+            @click.prevent.stop="update(page.page + 1)"
           >
             <ArrowRightIcon class="h-5 stroke-2" />
           </button>
@@ -64,38 +66,40 @@ const { $l0Index, $getToken } = useNuxtApp()
 const project = useRoute().params.project as string
 const open = (address: string) => navigateTo(`/scan/${project}/${address}`)
 
-const token = await $getToken()
-
 const fields = ref<Object[]>([])
 const addresses = ref<string[]>([])
 const page = ref({
   page: 0,
-  size: 100,
+  size: 25,
   totalPages: 0,
   items: 0,
   totalItems: 0,
 })
 
-if (token != null) {
-  const app = await $l0Index.app(token.accessToken, project, {
-    page: page.value.page,
-    size: page.value.size,
-  })
-  fields.value.push({
-    name: 'ID',
-    value: app.appId,
-  })
-  fields.value.push({
-    name: 'Total Addresses',
-    value: String(app.addresses.totalAddresses),
-  })
-  addresses.value = app.addresses.addresses
-  page.value = {
-    page: app.addresses.page,
-    size: page.value.size,
-    totalPages: app.addresses.totalPages,
-    items: app.addresses.addresses.length,
-    totalItems: app.addresses.totalAddresses,
+const update = async (pageNumber: number) => {
+  const token = await $getToken()
+  if (token != null) {
+    const app = await $l0Index.app(token.accessToken, project, {
+      page: page.value.page,
+      size: page.value.size,
+    })
+    fields.value.push({
+      name: 'ID',
+      value: app.appId,
+    })
+    fields.value.push({
+      name: 'Total Addresses',
+      value: String(app.addresses.totalAddresses),
+    })
+    addresses.value = app.addresses.addresses
+    page.value = {
+      page: app.addresses.page,
+      size: page.value.size,
+      totalPages: app.addresses.totalPages,
+      items: app.addresses.addresses.length,
+      totalItems: app.addresses.totalAddresses,
+    }
   }
 }
+update(0)
 </script>
