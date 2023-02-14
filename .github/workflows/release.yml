@@ -60,7 +60,7 @@ jobs:
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
         with:
-          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+          token: ${{ secrets.DO_PAT }}
 
       - name: Create deployment
         run: doctl apps create-deployment 7a504892-fbac-4ee8-ba3b-6e300aec5c20
