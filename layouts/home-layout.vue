@@ -232,7 +232,7 @@
         </div>
       </main>
     </div>
-    <modal v-if="showHelpModal" :onClose="onCloseHelpModal">
+    <modal v-if="showHelpModal" @close="onCloseHelpModal">
       <div class="mt-6 grid place-content-center text-greenDark">
         <img
           class="mx-auto h-20 w-auto"
@@ -291,6 +291,7 @@ import {
   Cog8ToothIcon,
   CurrencyDollarIcon,
   LinkIcon,
+  MagnifyingGlassCircleIcon,
   MegaphoneIcon,
   SquaresPlusIcon,
 } from '@heroicons/vue/24/solid'
@@ -311,12 +312,12 @@ const onLogout = async () => {
 
 const pages = ref([
   { name: 'Projects', href: '/', icon: SquaresPlusIcon, current: true },
-  // {
-  //   name: 'Scan',
-  //   href: '/scan',
-  //   icon: MagnifyingGlassCircleIcon,
-  //   current: false,
-  // },
+  {
+    name: 'Scan',
+    href: '/scan/b10a731a-b4f1-4a50-a499-085736b4e918',
+    icon: MagnifyingGlassCircleIcon,
+    current: false,
+  },
   {
     name: 'Billing',
     href: '/billing',

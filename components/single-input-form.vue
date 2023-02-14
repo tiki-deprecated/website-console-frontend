@@ -17,7 +17,7 @@
       <div class="mt-6">
         <form
           class="space-y-6"
-          @submit.stop.prevent="onSubmit($refs.input1.value)"
+          @submit.stop.prevent="emit('submit', $refs.input1.value)"
         >
           <div>
             <label
@@ -62,6 +62,7 @@
 import { PropType } from '@vue/runtime-core'
 import Logo from '~/assets/images/svg/logo.svg'
 
+const emit = defineEmits(['submit'])
 const props = defineProps({
   title: {
     type: String,
@@ -83,10 +84,6 @@ const props = defineProps({
   },
   input: {
     type: Object as PropType<HTMLInputElement>,
-    required: true,
-  },
-  onSubmit: {
-    type: Function,
     required: true,
   },
   error: {
