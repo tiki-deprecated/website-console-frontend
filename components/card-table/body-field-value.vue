@@ -4,7 +4,7 @@
   -->
 
 <template>
-  <dd class="mt-1 text-sm text-greenDark sm:col-span-2 sm:mt-0">
+  <dd class="mt-1 break-words text-sm text-greenDark sm:col-span-2 sm:mt-0">
     <slot />
   </dd>
 </template>
