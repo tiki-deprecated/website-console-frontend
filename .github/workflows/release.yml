@@ -18,11 +18,11 @@ jobs:
     runs-on: ubuntu-latest
     environment: Production
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
         with:
           node-version: 18
 
@@ -43,22 +43,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
         with:
-          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
-      - name: Terraform Init
-        id: init
-        run: terraform init
-        working-directory: infra
-
-      - name: Terraform Format
-        id: fmt
-        run: terraform fmt
-        working-directory: infra
-
-      - name: Terraform Apply
-        id: apply
-        run: terraform apply -auto-approve
-        working-directory: infra
+      - name: Create deployment
+        run: doctl apps create-deployment 7a504892-fbac-4ee8-ba3b-6e300aec5c20

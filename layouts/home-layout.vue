@@ -291,7 +291,6 @@ import {
   Cog8ToothIcon,
   CurrencyDollarIcon,
   LinkIcon,
-  MagnifyingGlassCircleIcon,
   MegaphoneIcon,
   SquaresPlusIcon,
 } from '@heroicons/vue/24/solid'
@@ -312,12 +311,12 @@ const onLogout = async () => {
 
 const pages = ref([
   { name: 'Projects', href: '/', icon: SquaresPlusIcon, current: true },
-  {
-    name: 'Scan',
-    href: '/scan/2ab3efdb-8e91-4148-a43b-a7c198b4d3d7',
-    icon: MagnifyingGlassCircleIcon,
-    current: false,
-  },
+  // {
+  //   name: 'Scan',
+  //   href: '/scan',
+  //   icon: MagnifyingGlassCircleIcon,
+  //   current: false,
+  // },
   {
     name: 'Billing',
     href: '/billing',
