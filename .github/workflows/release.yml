@@ -28,11 +28,23 @@ jobs:
         with:
           node-version: 18
 
-      - name: Bump Version
-        id: bump-version
-        uses: phips28/gh-action-bump-version@v9.1.3
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Get Next Version
+        id: semver
+        uses: ietf-tools/semver-action@v1
+        with:
+          token: ${{ github.token }}
+          branch: main
+
+      - name: Set Version
+        id: package_version
+        uses: KageKirin/set-node-package-version@v1
+        with:
+          version: ${{ steps.semver.outputs.nextStrict }}
+
+      - name: Tag & Release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ steps.semver.outputs.nextStrict }}
 
     outputs:
       version: ${{ steps.bump-version.outputs.newTag }}
