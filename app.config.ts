@@ -6,7 +6,7 @@
 export default defineAppConfig({
   l0auth: {
     host: 'https://auth.l0.mytiki.com',
-    worker: 'https://console.mytiki.com',
+    worker: '/api/latest/refresh',
     cookie: 'refresh_token',
     secure: true,
   },
