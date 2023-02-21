@@ -23,7 +23,7 @@
           class="block w-full rounded-md border-2 border-greenDark bg-gray bg-opacity-70 pr-12 backdrop-blur-md focus:border-greenDark focus:ring-0 sm:text-sm"
         />
         <div class="absolute inset-y-0 right-0 flex py-2 pr-1.5">
-          <MagnifyingGlassIcon class="px-2 font-sans text-greenDark" />
+          <MagnifyingGlassIcon class="h-full px-2 font-sans text-greenDark" />
         </div>
       </form>
     </div>
