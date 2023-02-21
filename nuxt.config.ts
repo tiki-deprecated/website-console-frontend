@@ -25,13 +25,13 @@ export default defineNuxtConfig({
     //@ts-ignore
     plugins: [svgLoader()],
   },
-  nitro: {
-    devProxy: {
-      '/api/latest/refresh': {
-        target: 'https://console.mytiki.com/api/latest/refresh',
-        changeOrigin: true,
-        ignorePath: true,
-      },
-    },
-  },
+  // nitro: {
+  //   devProxy: {
+  //     '/api/latest/refresh': {
+  //       target: 'https://console.mytiki.com/api/latest/refresh',
+  //       changeOrigin: true,
+  //       ignorePath: true,
+  //     },
+  //   },
+  // },
 })
