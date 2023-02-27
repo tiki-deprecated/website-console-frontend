@@ -29,7 +29,7 @@
     "vite-svg-loader": "^4.0.0"
   },
   "dependencies": {
-    "@headlessui/vue": "^1.7.10",
+    "@headlessui/vue": "^1.7.11",
     "@heroicons/vue": "^2.0.16",
     "@mytiki/l0-index-plugin": "^0.2.1",
     "@nuxt/typescript-runtime": "^2.1.0",
