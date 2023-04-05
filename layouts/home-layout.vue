@@ -328,10 +328,10 @@ const pages = ref([
 ])
 
 const links = [
-  { name: 'Docs', href: 'https://docs.mytiki.com', icon: ReadmeIcon },
+  { name: 'Docs', href: 'https://mytiki.com/docs', icon: ReadmeIcon },
   {
     name: 'Changelog',
-    href: 'https://docs.mytiki.com/changelog',
+    href: 'https://mytiki.com/changelog',
     icon: MegaphoneIcon,
   },
   { name: 'Discord', href: 'https://discord.gg/tiki', icon: DiscordIcon },
