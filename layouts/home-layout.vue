@@ -183,6 +183,7 @@
             </divider>
             <a
               v-for="item in links"
+              target="_blank"
               :key="item.name"
               :href="item.href"
               class="group flex items-center rounded-md px-2 py-2 text-sm font-medium text-white/70 hover:text-white"
