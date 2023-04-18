@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.12",
-    "@heroicons/vue": "^2.0.16",
+    "@heroicons/vue": "^2.0.17",
     "@mytiki/l0-index-plugin": "^0.2.1",
     "@nuxt/typescript-runtime": "^3.0.1",
     "@tailwindcss/forms": "^0.5.3",
