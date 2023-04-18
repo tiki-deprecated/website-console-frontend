@@ -25,6 +25,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       createKey: (appId: string, isPublic: boolean) =>
         l0Auth.createKey(appId, isPublic),
       deleteKey: (keyId: string) => l0Auth.deleteKey(keyId),
+      getOrg: (orgId: string) => l0Auth.getOrg(orgId),
     },
   }
 })

@@ -152,6 +152,26 @@ export default class L0Auth {
     }
   }
 
+  async getOrg(orgId: string): Promise<L0AuthRspOrg | undefined> {
+    const accessToken = await this.getToken()
+    if (accessToken == null) return
+    const response = await fetch(
+      this.config.host + '/api/latest/org/' + orgId,
+      {
+        method: 'get',
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + accessToken.accessToken,
+        },
+      }
+    ).catch((error) => {
+      return Promise.reject(error)
+    })
+    if (response.ok) {
+      return await response.json()
+    }
+  }
+
   async deleteApp(appId: string): Promise<any> {
     const accessToken = await this.getToken()
     if (accessToken == null) return
