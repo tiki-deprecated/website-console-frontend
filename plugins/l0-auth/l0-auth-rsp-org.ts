@@ -3,10 +3,11 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-interface L0AuthRspUser {
+interface L0AuthRspOrg {
   userId: string
   email: string
   modified: Date
   created: Date
-  orgId: string
+  users: Array<string>
+  apps: Array<string>
 }
