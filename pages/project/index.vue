@@ -62,11 +62,12 @@ definePageMeta({
 })
 
 let projects = ref<L0AuthRspApp[]>([])
-const { $getUser, $getApp, $createApp, $createKey } = useNuxtApp()
+const { $getUser, $getApp, $createApp, $createKey, $getOrg } = useNuxtApp()
 const user = await $getUser()
+const org = await $getOrg(user!.orgId)
 
 let apps = ref<L0AuthRspApp[]>([])
-for (const appId of user!.apps) {
+for (const appId of org!.apps) {
   const app = await $getApp(appId)
   if (app != null) apps.value.push(app)
 }
