@@ -4,7 +4,7 @@
   -->
 
 <template>
-  <div class="mx-auto w-full max-w-sm lg:w-96">
+  <div class="mx-auto w-full max-w-sm md:w-96">
     <div>
       <Logo class="h-8 w-auto fill-blue" />
       <h2 class="mt-6 text-3xl font-bold tracking-tight text-blue">

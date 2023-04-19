@@ -47,6 +47,7 @@ module.exports = {
       },
     },
     boxShadow: {
+      xs: '1px 2px 0 1px rgba(255, 184, 34, 0.5)',
       sm: '2px 3px 0 1px rgba(255, 184, 34, 0.5)',
       md: '2px 3px 0 2px rgba(255, 184, 34, 0.5)',
       DEFAULT: '2px 3px 0 4px rgba(255, 184, 34, 0.5)',

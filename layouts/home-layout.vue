@@ -231,7 +231,7 @@
         </button>
       </div>
       <main class="flex-1">
-        <div class="mx-10 my-16 lg:my-20">
+        <div class="mx-10 my-16 md:my-20">
           <slot />
         </div>
       </main>
@@ -305,10 +305,10 @@ import GitHubIcon from '~/assets/images/svg/github.svg'
 import ReadmeIcon from '~/assets/images/svg/readme.svg'
 import CatIcon from '~/assets/images/svg/cat.svg'
 
-const { $logout } = useNuxtApp()
+const auth = useNuxtApp().$auth()
 const showHelpModal = ref(false)
 const onLogout = async () => {
-  await $logout()
+  await auth.logout()
   window.location.href = 'https://mytiki.com'
 }
 

@@ -5,31 +5,31 @@
 
 <template>
   <p
-    class="mt-4 mb-0 text-7xl leading-normal lg:mt-6 lg:text-4xl"
+    class="mt-4 mb-0 text-7xl leading-normal md:mt-6 md:text-4xl"
     :class="isSelected ? 'text-white' : 'text-blue'"
   >
     {{ price1 }}
   </p>
   <p
-    class="text-xl lg:mt-2 lg:text-xs"
+    class="text-xl md:mt-2 md:text-xs"
     :class="isSelected ? 'text-white' : 'text-black-xlight'"
   >
     {{ text1 }}
   </p>
   <p
-    class="mt-8 mb-0 text-3xl lg:mt-6 lg:text-xl"
+    class="mt-8 mb-0 text-3xl md:mt-6 md:text-xl"
     :class="isSelected ? 'text-white' : 'text-blue'"
   >
     {{ price2 }}
   </p>
   <p
-    class="text-xl lg:mt-2 lg:text-xs"
+    class="text-xl md:mt-2 md:text-xs"
     :class="isSelected ? 'text-white' : 'text-black-xlight'"
   >
     {{ text2 }}
   </p>
   <p
-    class="absolute right-3 bottom-3 text-right text-xl lg:text-xs"
+    class="absolute right-3 bottom-3 text-right text-xl md:text-xs"
     :class="isSelected ? 'text-orange' : 'text-black-xlight'"
     v-show="isSelectable && isSelected"
   >

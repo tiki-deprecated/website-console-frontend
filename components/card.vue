@@ -4,9 +4,7 @@
   -->
 
 <template>
-  <div
-    class="rounded-xl border-4 border-green-dark bg-gray bg-opacity-70 backdrop-blur-md"
-  >
+  <div class="rounded-xl border border-black bg-white">
     <slot />
   </div>
 </template>

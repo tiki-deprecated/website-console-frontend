@@ -9,9 +9,9 @@
     <p class="text-black-xlight">
       For meticulously crafted SDKs, APIs, and docs.
     </p>
-    <div class="mx-auto lg:mt-20">
+    <div class="mx-auto md:mt-20">
       <div
-        class="flex w-full flex-wrap items-center lg:mx-auto lg:w-3/4 lg:flex-nowrap lg:justify-center"
+        class="flex w-full flex-wrap items-center md:mx-auto md:w-3/4 md:flex-nowrap md:justify-center"
       >
         <subscription
           title="FREE"
