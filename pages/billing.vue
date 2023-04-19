@@ -9,11 +9,15 @@
     <p class="text-black-xlight">
       For meticulously crafted SDKs, APIs, and docs.
     </p>
-    <div class="mx-auto mt-28">
+    <div class="mx-auto lg:mt-20">
       <div
         class="flex w-full flex-wrap items-center lg:mx-auto lg:w-3/4 lg:flex-nowrap lg:justify-center"
       >
-        <subscription title="FREE" :is-selected="!state.hasSubscription">
+        <subscription
+          title="FREE"
+          :is-selected="!state.hasSubscription"
+          class="my-10"
+        >
           <single-price
             price="$0"
             text="Full access to play with and build against, up to 1k users."

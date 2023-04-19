@@ -5,7 +5,7 @@
 
 <template>
   <p
-    class="mt-8 mb-0 text-7xl leading-normal lg:mt-6 lg:text-4xl"
+    class="mt-4 mb-0 text-7xl leading-normal lg:mt-6 lg:text-4xl"
     :class="isSelected ? 'text-white' : 'text-blue'"
   >
     {{ price1 }}
@@ -17,7 +17,7 @@
     {{ text1 }}
   </p>
   <p
-    class="mt-16 mb-0 text-3xl lg:mt-6 lg:text-xl"
+    class="mt-8 mb-0 text-3xl lg:mt-6 lg:text-xl"
     :class="isSelected ? 'text-white' : 'text-blue'"
   >
     {{ price2 }}
