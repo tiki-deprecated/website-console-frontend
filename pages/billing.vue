@@ -5,10 +5,13 @@
 
 <template>
   <div>
-    <h1 class="py-5 md:py-10">Billing</h1>
-    <div class="mx-auto mt-10">
+    <h1>What's the cost, boss?</h1>
+    <p class="text-black-xlight">
+      For meticulously crafted SDKs, APIs, and docs.
+    </p>
+    <div class="mx-auto mt-28">
       <div
-        class="flex w-full flex-wrap items-center lg:mx-auto lg:w-3/4 lg:flex-nowrap lg:justify-evenly"
+        class="flex w-full flex-wrap items-center lg:mx-auto lg:w-3/4 lg:flex-nowrap lg:justify-center"
       >
         <subscription title="FREE" :is-selected="!state.hasSubscription">
           <single-price
@@ -40,6 +43,9 @@ import { BillingClient } from '~/plugins/billing/billing-client'
 import { Auth } from '~/plugins/account'
 import TwoItems from '~/components/subscription-details/two-items.vue'
 import SinglePrice from '~/components/subscription-details/single-price.vue'
+import { definePageMeta } from '#imports'
+import { useNuxtApp } from '#app'
+import { reactive } from '@vue/reactivity'
 
 definePageMeta({ layout: 'home-layout' })
 const auth: Auth = useNuxtApp().$auth()

@@ -3,7 +3,6 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
@@ -22,6 +21,8 @@ module.exports = {
       current: 'currentColor',
       inherit: 'inherit',
       yellow: '#FFD225',
+      'yellow-xxlight': '#FFF8DD',
+      'yellow-xlight': '#FFE68F99',
       'yellow-light': '#FFE68F',
       'yellow-dark': '#FFB822',
       orange: '#EE7F19',
@@ -46,12 +47,12 @@ module.exports = {
       },
     },
     boxShadow: {
-      sm: '2px 3px 0 1px rgba(255, 230, 143, 0.5)',
-      md: '2px 3px 0 2px rgba(255, 230, 143, 0.5)',
-      DEFAULT: '2px 3px 0 4px rgba(255, 230, 143, 0.5)',
-      lg: '2px 3px 0 6px rgba(255, 230, 143, 0.5)',
-      xl: '2px 4px 0 8px rgba(255, 230, 143, 0.5)',
-      '2xl': '2px 8px 0 10px rgba(255, 230, 143, 0.5)',
+      sm: '2px 3px 0 1px rgba(255, 184, 34, 0.5)',
+      md: '2px 3px 0 2px rgba(255, 184, 34, 0.5)',
+      DEFAULT: '2px 3px 0 4px rgba(255, 184, 34, 0.5)',
+      lg: '2px 3px 0 6px rgba(255, 184, 34, 0.5)',
+      xl: '2px 4px 0 8px rgba(255, 184, 34, 0.5)',
+      '2xl': '2px 8px 0 10px rgba(255, 184, 34, 0.5)',
     },
   },
   plugins: [require('@tailwindcss/forms')],

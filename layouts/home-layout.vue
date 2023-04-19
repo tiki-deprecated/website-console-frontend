@@ -138,20 +138,22 @@
         </div>
       </Dialog>
     </TransitionRoot>
-    <div class="hidden md:fixed md:inset-y-0 md:flex md:w-40 md:flex-col">
-      <div class="flex min-h-0 flex-1 flex-col bg-transparent">
+    <div class="hidden md:fixed md:inset-y-0 md:flex md:w-56 md:flex-col">
+      <div class="flex min-h-0 flex-1 flex-col bg-white">
         <div class="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
-          <div class="flex flex-shrink-0 items-center px-4">
-            <img
-              class="h-12 w-auto"
-              sizes="(max-width: 576px) 100vw, 576px"
-              srcset="
-                ~/assets/images/png/pineapple-jump-w-200.png 200w,
-                ~/assets/images/png/pineapple-jump-w-576.png 576w
-              "
-              src="~/assets/images/png/pineapple-jump-w-576.png"
-              alt="TIKI"
-            />
+          <div class="flex flex-shrink-0 items-center px-4 py-4">
+            <a href="https://mytiki.com"
+              ><img
+                class="h-12 w-auto"
+                sizes="(max-width: 576px) 100vw, 576px"
+                srcset="
+                  ~/assets/images/png/pineapple-jump-w-200.png 200w,
+                  ~/assets/images/png/pineapple-jump-w-576.png 576w
+                "
+                src="~/assets/images/png/pineapple-jump-w-576.png"
+                alt="TIKI"
+              />
+            </a>
           </div>
           <nav class="mt-5 flex-1 space-y-1 bg-transparent px-2">
             <nuxt-link
@@ -159,42 +161,43 @@
               @click="setActive(item.name)"
               :key="item.name"
               :to="item.href"
-              :class="[
-                item.current ? 'text-white' : 'hover:white text-white/70',
-                'group flex items-center rounded-md px-2 py-2 text-sm font-medium',
-              ]"
+              :class="{
+                'hover:text-black-light': !item.current,
+                'text-black-xlight': !item.current,
+                'text-black-light': item.current,
+                'font-bold': item.current,
+                'bg-yellow-xxlight': item.current,
+              }"
+              class="group flex items-center rounded-md px-2 py-2 text-sm"
             >
               <component
                 :is="item.icon"
-                :class="[
-                  item.current
-                    ? 'fill-white'
-                    : 'fill-white/70 group-hover:fill-white',
-                  'mr-3 h-6 w-6 flex-shrink-0',
-                ]"
+                :class="{
+                  'group-hover:fill-black-light': !item.current,
+                  'fill-black-light': item.current,
+                  'fill-black-xlight': !item.current,
+                }"
+                class="mr-3 h-6 w-6 flex-shrink-0"
                 aria-hidden="true"
               />
               {{ item.name }}
             </nuxt-link>
-            <divider class="border-white/50"
-              ><div class="rounded-full bg-white/30 p-1 backdrop-blur-lg">
-                <LinkIcon class="h-4 w-4 fill-white" />
-              </div>
-            </divider>
-            <a
-              v-for="item in links"
-              target="_blank"
-              :key="item.name"
-              :href="item.href"
-              class="group flex items-center rounded-md px-2 py-2 text-sm font-medium text-white/70 hover:text-white"
-            >
-              <component
-                :is="item.icon"
-                class="mr-3 h-5 w-6 flex-shrink-0 fill-white/70 group-hover:fill-white"
-                aria-hidden="true"
-              />
-              {{ item.name }}
-            </a>
+            <div class="pt-10">
+              <a
+                v-for="item in links"
+                target="_blank"
+                :key="item.name"
+                :href="item.href"
+                class="group flex items-center rounded-md px-2 py-2 text-sm text-black-xlight hover:text-black-light"
+              >
+                <component
+                  :is="item.icon"
+                  class="mr-3 h-5 w-6 flex-shrink-0 fill-black-xlight group-hover:fill-black-light"
+                  aria-hidden="true"
+                />
+                {{ item.name }}
+              </a>
+            </div>
           </nav>
         </div>
         <div class="px-2 py-4">
@@ -202,11 +205,11 @@
             v-for="item in actions"
             :key="item.name"
             @click.stop.prevent="item.onClick"
-            class="group flex items-center rounded-md px-2 py-2 text-sm font-medium text-pinkDark/50 hover:text-pinkDark"
+            class="group flex items-center rounded-md px-2 py-2 text-sm text-pinkDark hover:text-purple"
           >
             <component
               :is="item.icon"
-              class="mr-3 h-5 w-6 flex-shrink-0 text-pinkDark/50 group-hover:fill-pinkDark"
+              class="mr-3 h-5 w-6 flex-shrink-0 text-pinkDark group-hover:fill-purple"
               aria-hidden="true"
             />
             {{ item.name }}
@@ -214,7 +217,7 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-1 flex-col md:pl-40">
+    <div class="flex flex-1 flex-col md:pl-56">
       <div
         class="sticky top-0 z-10 bg-white/70 pl-1 pt-1 backdrop-blur-lg sm:pl-3 sm:pt-3 md:hidden"
       >
@@ -228,7 +231,7 @@
         </button>
       </div>
       <main class="flex-1">
-        <div class="mx-8 py-8 md:pt-24 lg:px-40 lg:pt-32">
+        <div class="mx-10 my-20">
           <slot />
         </div>
       </main>
@@ -290,6 +293,7 @@ import {
   Bars3Icon,
   CheckBadgeIcon,
   Cog8ToothIcon,
+  CommandLineIcon,
   CurrencyDollarIcon,
   LinkIcon,
   MegaphoneIcon,
@@ -307,22 +311,39 @@ const { $logout } = useNuxtApp()
 const showHelpModal = ref(false)
 const onLogout = async () => {
   await $logout()
-  window.location.reload()
+  window.location.href = 'https://mytiki.com'
 }
 
+const path = useRoute().path as string
+
 const pages = ref([
-  { name: 'Projects', href: '/', icon: SquaresPlusIcon, current: true },
+  {
+    name: 'Projects',
+    href: '/',
+    icon: SquaresPlusIcon,
+    current: path.startsWith('/project'),
+  },
   {
     name: 'Billing',
     href: '/billing',
     icon: CurrencyDollarIcon,
-    current: false,
+    current: path.startsWith('/billing'),
   },
-  { name: 'Settings', href: '/settings', icon: Cog8ToothIcon, current: false },
+  {
+    name: 'Settings',
+    href: '/settings',
+    icon: Cog8ToothIcon,
+    current: path.startsWith('/settings'),
+  },
 ])
 
 const links = [
   { name: 'Docs', href: 'https://mytiki.com/docs', icon: ReadmeIcon },
+  {
+    name: 'API',
+    href: 'https://mytiki.com/docs',
+    icon: CommandLineIcon,
+  },
   {
     name: 'Changelog',
     href: 'https://mytiki.com/changelog',

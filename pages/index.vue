@@ -18,11 +18,18 @@
 
 <script setup lang="ts">
 import { Auth } from '~/plugins/account/auth'
+import { navigateTo, useNuxtApp } from '#app'
+import { ref } from '@vue/reactivity'
+import SingleInputForm from '~/components/single-input-form.vue'
+import { definePageMeta } from '#imports'
 
-definePageMeta({ layout: 'login-layout' })
+definePageMeta({
+  layout: 'login-layout',
+})
+
 const auth: Auth = useNuxtApp().$auth()
 
-const input: HTMLInputElement = {
+const input: HTMLInputElement = <HTMLInputElement>{
   name: 'email',
   type: 'email',
   autocomplete: 'email',

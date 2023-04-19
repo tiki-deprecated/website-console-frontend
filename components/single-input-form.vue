@@ -7,10 +7,10 @@
   <div class="mx-auto w-full max-w-sm lg:w-96">
     <div>
       <Logo class="h-8 w-auto fill-blue" />
-      <h2 class="mt-6 text-3xl font-bold tracking-tight text-green-dark">
+      <h2 class="mt-6 text-3xl font-bold tracking-tight text-blue">
         {{ title }}
       </h2>
-      <p v-if="subtitle" class="mt-2 text-sm text-green-dark">
+      <p v-if="subtitle" class="mt-2 text-sm text-black-xlight">
         {{ subtitle }}.
       </p>
     </div>
@@ -25,7 +25,7 @@
             <label
               v-if="label"
               for="email"
-              class="block text-sm font-medium text-green-dark"
+              class="block text-sm font-bold text-black-xlight"
               >{{ label }}</label
             >
             <div class="mt-1">
@@ -38,7 +38,7 @@
                 required
                 :pattern="input.pattern"
                 :placeholder="input.placeholder"
-                class="block w-full appearance-none rounded-sm border border-2 border-green-dark bg-transparent px-3 py-2 text-green-dark placeholder-green shadow-sm focus:border-green focus:outline-none focus:ring-green"
+                class="block w-full appearance-none rounded-md border-2 border-green-dark bg-transparent px-3 py-2 text-black-light placeholder-black-xlight focus:border-green focus:outline-none focus:ring-green"
               />
             </div>
             <p v-if="error" class="mt-2 text-sm text-pinkDark">
@@ -49,7 +49,7 @@
           <div>
             <button
               type="submit"
-              class="flex w-full justify-center rounded-sm border border-none bg-yellow/70 py-4 px-4 font-medium text-green-dark shadow-sm hover:bg-yellow"
+              class="flex w-full justify-center rounded-md border border-none bg-black py-4 px-4 text-yellow-dark hover:shadow-md"
             >
               {{ cta }}
             </button>

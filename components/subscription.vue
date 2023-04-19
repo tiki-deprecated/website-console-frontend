@@ -5,11 +5,12 @@
 
 <template>
   <div
-    class="relative mx-auto block h-96 w-11/12 rounded-xl border border-black py-6 px-6 hover:shadow-md lg:mx-8 lg:h-64 lg:w-52 lg:rounded-lg lg:border lg:px-4 lg:py-6"
+    class="relative mx-auto block h-96 w-11/12 rounded-xl border border-black py-6 px-6 lg:mx-8 lg:h-64 lg:w-52 lg:rounded-lg lg:border lg:px-4 lg:py-6"
     :class="{
       'bg-black': isSelected,
       'bg-white': !isSelected,
       'cursor-pointer': isSelectable,
+      'hover:shadow-md': isSelectable,
     }"
     @click.prevent.stop="onClick"
   >

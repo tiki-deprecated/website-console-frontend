@@ -10,9 +10,7 @@
     >
       <slot />
     </div>
-    <div
-      class="relative hidden w-0 flex-1 bg-gradient-to-br from-pink via-yellow-light to-green-light lg:block"
-    >
+    <div class="relative hidden w-0 flex-1 bg-yellow-xxlight lg:block">
       <img
         class="absolute inset-1/2 h-1/4 w-auto -translate-x-1/2 -translate-y-1/2 object-contain object-center"
         sizes="(max-width: 448px) 100vw, 448px"
