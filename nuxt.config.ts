@@ -10,6 +10,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+      script: [{ src: 'https://js.stripe.com/v3' }],
     },
   },
   css: ['~/assets/css/main.css'],
@@ -25,13 +26,11 @@ export default defineNuxtConfig({
     //@ts-ignore
     plugins: [svgLoader()],
   },
-  // nitro: {
-  //   devProxy: {
-  //     '/api/latest/refresh': {
-  //       target: 'https://console.mytiki.com/api/latest/refresh',
-  //       changeOrigin: true,
-  //       ignorePath: true,
-  //     },
-  //   },
-  // },
+  plugins: ['~/plugins/identicon/index.ts', '~/plugins/account/index.ts'],
+  runtimeConfig: {
+    public: {
+      stripePk:
+        'pk_test_51MJlp2DveWor0wgFzMF8SfUwsr2zgm4PCb4CWzlp6mF77S10Yr21QTRqBTYcYM1IktSOao2wUBTZKlC7YVB2PUUZ00lDr8UqRk',
+    },
+  },
 })

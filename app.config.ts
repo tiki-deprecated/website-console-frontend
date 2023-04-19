@@ -4,13 +4,11 @@
  */
 
 export default defineAppConfig({
-  l0auth: {
+  account: {
     host: 'https://auth.l0.mytiki.com',
     worker: 'https://console.mytiki.com',
     cookie: 'refresh_token',
     secure: true,
-  },
-  l0index: {
-    host: 'https://index.l0.mytiki.com',
+    debug: true,
   },
 })

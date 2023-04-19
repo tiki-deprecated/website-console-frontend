@@ -17,11 +17,10 @@
 </template>
 
 <script setup lang="ts">
-const { $otp } = useNuxtApp()
+import { Auth } from '~/plugins/account/auth/auth'
 
-definePageMeta({
-  layout: 'login-layout',
-})
+definePageMeta({ layout: 'login-layout' })
+const auth: Auth = useNuxtApp().$auth()
 
 const input: HTMLInputElement = {
   name: 'email',
@@ -33,7 +32,7 @@ const input: HTMLInputElement = {
 const errorMessage = ref<string>('')
 
 const onSubmit = async (email: string) => {
-  const success: boolean = await $otp(email)
+  const success: boolean = await auth.requestOtp(email)
   if (success) navigateTo('/otp')
   else
     errorMessage.value =

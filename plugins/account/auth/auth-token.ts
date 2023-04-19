@@ -3,8 +3,8 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-interface L0AuthRspKey {
-  id: string
-  created: Date
-  isPublic: boolean
+export interface AuthToken {
+  accessToken: string
+  scope: string
+  expires: Date
 }
