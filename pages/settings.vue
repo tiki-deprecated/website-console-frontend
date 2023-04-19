@@ -5,7 +5,7 @@
 
 <template>
   <div>
-    <h1 class="py-5 md:py-10">Account Settings</h1>
+    <h1 class="py-5 md:py-10">Profile Settings</h1>
     <card>
       <div class="px-4 py-5 sm:p-6">
         <h3 class="text-lg font-medium leading-6 text-greenDark">
@@ -42,14 +42,14 @@
 </template>
 
 <script setup lang="ts">
-definePageMeta({
-  layout: 'home-layout',
-})
+import { Profile } from '~/plugins/account'
 
-const { $getUser, $updateUser } = useNuxtApp()
-const user = await $getUser()
+definePageMeta({ layout: 'home-layout' })
+const profile: Profile = useNuxtApp().$profile()
+
+const user = await profile.getUser()
 
 const updateEmail = async (newEmail: string) => {
-  if (user != null) await $updateUser(user.userId, { email: newEmail })
+  await profile.updateUser(user.userId, { email: newEmail })
 }
 </script>

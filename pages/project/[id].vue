@@ -93,20 +93,17 @@ import { ArrowPathIcon, PlusIcon, TrashIcon } from '@heroicons/vue/24/outline'
 import ActionEdit from '~/components/action-edit.vue'
 import Modal from '~/components/modal.vue'
 
-definePageMeta({
-  layout: 'home-layout',
-})
+definePageMeta({ layout: 'home-layout' })
 
-const { $getApp, $getKeys, $deleteApp, $createKey, $deleteKey, $updateApp } =
-  useNuxtApp()
+const profile = useNuxtApp().$profile()
 const id = useRoute().params.id as string
-const app = await $getApp(id)
+const app = await profile.getApp(id)
 
 const cyclePublicKey = async (
   current: string | undefined
 ): Promise<string | undefined> => {
-  if (current != null) await $deleteKey(current)
-  return (await $createKey(id, true))?.id
+  if (current != null) await profile.deleteKey(current)
+  return (await profile.createKey(id, true))?.id
 }
 
 const fields = ref([
@@ -130,7 +127,7 @@ const fields = ref([
 ])
 
 const privateKeys = ref<string[]>([])
-const keys = await $getKeys(id)
+const keys = await profile.getKeys(id)
 keys?.forEach((key) => {
   if (!key.isPublic) privateKeys.value.push(key.id)
   else fields.value[2].value = key.id
@@ -141,7 +138,7 @@ const onCloseSecretModal = () => (showSecretModal.value = false)
 
 let newKey
 const addPrivateKey = async () => {
-  const key = await $createKey(id, false)
+  const key = await profile.createKey(id, false)
   if (key != null) {
     privateKeys.value.push(key.id)
     newKey = key
@@ -151,17 +148,15 @@ const addPrivateKey = async () => {
 
 const deleteKey = async (id: string) => {
   console.log(id)
-  await $deleteKey(id)
+  await profile.deleteKey(id)
   privateKeys.value = privateKeys.value.filter((key) => key !== id)
 }
 
 const deleteApp = async () => {
-  await $deleteApp(id)
+  await profile.deleteApp(id)
   navigateTo('/project')
 }
 
 const updateName = async (name: string) =>
-  await $updateApp(id, {
-    name: name,
-  })
+  await profile.updateApp(id, { name: name })
 </script>

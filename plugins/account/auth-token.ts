@@ -3,7 +3,8 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-interface L0AuthReqOtp {
-  email: string
-  notAnonymous: boolean
+export interface AuthToken {
+  accessToken: string
+  scope: string
+  expires: Date
 }

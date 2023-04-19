@@ -16,7 +16,9 @@
 </template>
 
 <script setup lang="ts">
-const { $grant } = useNuxtApp()
+import { Auth } from '~/plugins/account/auth'
+
+const auth: Auth = useNuxtApp().$auth()
 
 definePageMeta({
   layout: 'login-layout',
@@ -30,7 +32,8 @@ const input: HTMLInputElement = {
 
 const errorMessage = ref<string>('')
 const onSubmit = async (code: string) => {
-  const success = await $grant(code)
+  const success = await auth.redeemOtp(code)
+  console.log(success)
   if (success) navigateTo('/')
   else
     errorMessage.value =

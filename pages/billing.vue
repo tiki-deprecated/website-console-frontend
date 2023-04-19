@@ -24,12 +24,24 @@
         That's right, TIKI is free for you as thanks for being one of the first
         building with us. Have fun!
       </div>
+      <button @click.prevent.stop="billingTest">billing test</button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-definePageMeta({
-  layout: 'home-layout',
-})
+import { BillingClient } from '~/plugins/billing/billing-client'
+import { Auth } from '~/plugins/account'
+
+definePageMeta({ layout: 'home-layout' })
+const auth: Auth = useNuxtApp().$auth()
+const billing: BillingClient = useNuxtApp().$billing()
+
+const billingTest = async () => {
+  window.location.href = await billing.portal(
+    (
+      await auth.getToken()
+    )?.accessToken
+  )
+}
 </script>

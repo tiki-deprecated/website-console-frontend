@@ -25,13 +25,9 @@ export default defineNuxtConfig({
     //@ts-ignore
     plugins: [svgLoader()],
   },
-  // nitro: {
-  //   devProxy: {
-  //     '/api/latest/refresh': {
-  //       target: 'https://console.mytiki.com/api/latest/refresh',
-  //       changeOrigin: true,
-  //       ignorePath: true,
-  //     },
-  //   },
-  // },
+  plugins: [
+    '~/plugins/identicon/index.ts',
+    '~/plugins/account/index.ts',
+    '~/plugins/billing/index.ts',
+  ],
 })
