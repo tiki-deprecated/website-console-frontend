@@ -21,7 +21,7 @@
                 <div class="flex-1 truncate py-2 pr-2 text-sm">
                   <h3 class="truncate">{{ project.name }}</h3>
                   <p
-                    class="mt-1 whitespace-normal break-normal text-xs text-greenDark/80"
+                    class="mt-1 whitespace-normal break-normal text-xs text-green-dark/80"
                   >
                     {{ project.appId }}
                   </p>
@@ -33,7 +33,7 @@
         <li class="grid place-content-center">
           <button
             type="button"
-            class="ml-6 flex items-center rounded-sm bg-white/40 py-4 px-8 text-greenDark hover:text-green"
+            class="ml-6 flex items-center rounded-sm bg-white/40 py-4 px-8 text-green-dark hover:text-green"
             @click.prevent.stop="newProject"
           >
             New Project
@@ -45,7 +45,7 @@
     <button
       v-if="apps.length === 0"
       type="button"
-      class="relative block grid w-full place-content-center rounded-lg border-2 border-dashed border-greenDark p-12 text-center text-greenDark hover:border-green hover:text-green"
+      class="relative block grid w-full place-content-center rounded-lg border-2 border-dashed border-green-dark p-12 text-center text-green-dark hover:border-green hover:text-green"
       @click.stop.prevent="newProject"
     >
       <squares-plus-icon class="mx-auto h-10" />

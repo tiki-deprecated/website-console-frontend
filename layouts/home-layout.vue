@@ -53,7 +53,7 @@
                   >
                     <span class="sr-only">Close sidebar</span>
                     <XCircleIcon
-                      class="h-8 w-8 text-greenDark"
+                      class="h-8 w-8 text-green-dark"
                       aria-hidden="true"
                     />
                   </button>
@@ -81,7 +81,7 @@
                     :class="[
                       item.current
                         ? 'text-green'
-                        : 'text-greenDark hover:text-green',
+                        : 'text-green-dark hover:text-green',
                       'group flex items-center rounded-md px-2 py-2 text-sm font-medium',
                     ]"
                   >
@@ -90,15 +90,15 @@
                       :class="[
                         item.current
                           ? 'fill-green'
-                          : 'fill-greenDark group-hover:fill-green',
+                          : 'fill-green-dark group-hover:fill-green',
                         'mr-3 h-6 w-6 flex-shrink-0',
                       ]"
                       aria-hidden="true"
                     />
                     {{ item.name }}
                   </nuxt-link>
-                  <divider class="border-greenDark"
-                    ><div class="rounded-full bg-greenDark p-1">
+                  <divider class="border-green-dark"
+                    ><div class="rounded-full bg-green-dark p-1">
                       <LinkIcon class="h-4 w-4 fill-white" />
                     </div>
                   </divider>
@@ -106,11 +106,11 @@
                     v-for="item in links"
                     :key="item.name"
                     :href="item.href"
-                    class="group flex items-center rounded-md px-2 py-2 text-sm font-medium text-greenDark hover:text-green"
+                    class="group flex items-center rounded-md px-2 py-2 text-sm font-medium text-green-dark hover:text-green"
                   >
                     <component
                       :is="item.icon"
-                      class="mr-3 h-5 w-6 flex-shrink-0 fill-greenDark group-hover:fill-green"
+                      class="mr-3 h-5 w-6 flex-shrink-0 fill-green-dark group-hover:fill-green"
                       aria-hidden="true"
                     />
                     {{ item.name }}
@@ -234,7 +234,7 @@
       </main>
     </div>
     <modal v-if="showHelpModal" @close="onCloseHelpModal">
-      <div class="mt-6 grid place-content-center text-greenDark">
+      <div class="mt-6 grid place-content-center text-green-dark">
         <img
           class="mx-auto h-20 w-auto"
           sizes="(max-width: 276px) 100vw, 276px"

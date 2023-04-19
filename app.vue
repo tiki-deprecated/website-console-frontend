@@ -25,7 +25,7 @@ useServerSeoMeta({
 
 <style lang="postcss">
 html {
-  @apply bg-yellowLight;
-  @apply bg-gradient-to-br from-pink via-yellowLight to-greenLight;
+  @apply bg-yellow-light;
+  @apply bg-gradient-to-br from-pink via-yellow-light to-green-light;
 }
 </style>

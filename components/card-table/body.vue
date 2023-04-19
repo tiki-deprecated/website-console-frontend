@@ -4,8 +4,8 @@
   -->
 
 <template>
-  <div class="border-t border-greenDark/20 px-4 py-5 sm:p-0">
-    <dl class="sm:divide-y sm:divide-greenDark/20">
+  <div class="border-t border-green-dark/20 px-4 py-5 sm:p-0">
+    <dl class="sm:divide-y sm:divide-green-dark/20">
       <slot />
     </dl>
   </div>

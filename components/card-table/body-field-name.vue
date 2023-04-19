@@ -4,7 +4,7 @@
   -->
 
 <template>
-  <dt class="flex items-center text-sm font-medium text-greenDark">
+  <dt class="flex items-center text-sm font-medium text-green-dark">
     <slot />
   </dt>
 </template>
