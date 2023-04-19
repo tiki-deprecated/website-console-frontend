@@ -34,7 +34,6 @@
     "@heroicons/vue": "^2.0.17",
     "@mytiki/l0-auth-plugin": "^0.1.3",
     "@nuxt/typescript-runtime": "^3.0.1",
-    "@stripe/stripe-js": "^1.52.1",
     "@tailwindcss/forms": "^0.5.3",
     "jdenticon": "^3.2.0",
     "nuxt": "^3.4.1"
