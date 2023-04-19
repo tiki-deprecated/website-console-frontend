@@ -22,7 +22,7 @@
           >
             <component
               :is="field.button"
-              class="h-5 stroke-2 text-green hover:text-greenDark"
+              class="h-5 stroke-2 text-green hover:text-green-dark"
             />
           </button>
         </card-table-body-field-name>
@@ -37,7 +37,7 @@
           Private Keys
           <button class="ml-4">
             <plus-icon
-              class="h-5 stroke-2 text-green hover:text-greenDark"
+              class="h-5 stroke-2 text-green hover:text-green-dark"
               @click.stop.prevent="addPrivateKey"
             />
           </button>
@@ -61,7 +61,7 @@
       </div>
     </card-table-body>
     <modal v-if="showSecretModal" @close="onCloseSecretModal">
-      <div class="mt-6 grid place-content-center text-greenDark">
+      <div class="mt-6 grid place-content-center text-green-dark">
         <img
           class="mx-auto h-12 w-auto"
           sizes="(max-width: 392px) 100vw, 392px"

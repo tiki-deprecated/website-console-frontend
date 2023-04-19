@@ -17,7 +17,7 @@
       >
         <component
           :is="field.button"
-          class="h-5 stroke-2 text-green hover:text-greenDark"
+          class="h-5 stroke-2 text-green hover:text-green-dark"
         />
       </button>
     </card-table-body-field-name>

@@ -4,11 +4,11 @@
   -->
 
 <template>
-  <dd class="mt-1 text-sm text-greenDark sm:col-span-2 sm:mt-0">
+  <dd class="mt-1 text-sm text-green-dark sm:col-span-2 sm:mt-0">
     <ul
       role="list"
       v-if="items.length > 0"
-      class="divide-y divide-greenDark/20 rounded-md border border-greenDark/20"
+      class="divide-y divide-green-dark/20 rounded-md border border-green-dark/20"
     >
       <li
         v-for="id in items"
@@ -20,7 +20,7 @@
         </div>
         <div v-if="button" class="ml-4 flex-shrink-0">
           <button
-            class="font-medium text-green hover:text-greenDark"
+            class="font-medium text-green hover:text-green-dark"
             @click.stop.prevent="emit('click', id)"
           >
             {{ button }}

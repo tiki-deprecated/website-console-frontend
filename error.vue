@@ -29,14 +29,14 @@
             {{ error.statusCode }}
           </p>
           <h1
-            class="mt-2 text-4xl font-bold tracking-tight text-greenDark sm:text-5xl"
+            class="mt-2 text-4xl font-bold tracking-tight text-green-dark sm:text-5xl"
           >
             {{ error.statusMessage }}
           </h1>
           <div class="mt-6">
             <nuxt-link
               to="/"
-              class="text-base font-medium text-green hover:text-yellowDark"
+              class="text-base font-medium text-green hover:text-yellow-dark"
             >
               Go back to Console
               <span aria-hidden="true"> &rarr;</span>
@@ -49,25 +49,25 @@
       <nav class="flex justify-center space-x-4">
         <a
           href="https://discord.gg/tiki"
-          class="text-sm font-normal text-greenDark hover:text-yellowDark"
+          class="text-sm font-normal text-green-dark hover:text-yellow-dark"
           >Discord</a
         >
         <span
-          class="inline-block border-l border-greenLight"
+          class="inline-block border-l border-green-light"
           aria-hidden="true"
         />
         <a
           href="https://twitter.com/my_tiki_"
-          class="text-sm font-normal text-greenDark hover:text-yellowDark"
+          class="text-sm font-normal text-green-dark hover:text-yellow-dark"
           >Twitter</a
         >
         <span
-          class="inline-block border-l border-greenLight"
+          class="inline-block border-l border-green-light"
           aria-hidden="true"
         />
         <a
           href="https://status.mytiki.com"
-          class="text-sm font-normal text-greenDark hover:text-yellowDark"
+          class="text-sm font-normal text-green-dark hover:text-yellow-dark"
           >Status</a
         >
       </nav>

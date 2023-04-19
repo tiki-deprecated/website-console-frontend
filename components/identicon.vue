@@ -4,7 +4,7 @@
   -->
 
 <template>
-  <div v-html="svg" class="fill-yellowDark" />
+  <div v-html="svg" class="fill-yellow-dark" />
 </template>
 
 <script setup lang="ts">
