@@ -11,4 +11,7 @@ export default defineAppConfig({
     secure: true,
     debug: true,
   },
+  billing: {
+    host: 'http://localhost:8787',
+  },
 })
