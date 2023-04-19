@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { Auth } from '~/plugins/account/auth/auth'
+import { Auth } from '~/plugins/account/auth'
 
 definePageMeta({ layout: 'login-layout' })
 const auth: Auth = useNuxtApp().$auth()

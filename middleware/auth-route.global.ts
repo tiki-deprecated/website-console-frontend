@@ -3,7 +3,7 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import { AuthToken } from '~/plugins/account/auth/auth-token'
+import { AuthToken } from '~/plugins/account/auth-token'
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
   const token: AuthToken | undefined = await useNuxtApp().$auth().getToken()

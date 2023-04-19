@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { Auth } from '~/plugins/account/auth/auth'
+import { Auth } from '~/plugins/account/auth'
 
 const auth: Auth = useNuxtApp().$auth()
 

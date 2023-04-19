@@ -56,32 +56,30 @@
 
 <script setup lang="ts">
 import { PlusIcon, SquaresPlusIcon } from '@heroicons/vue/24/solid'
+import { AppRsp } from '@mytiki/l0-auth-plugin'
+import { Profile } from '~/plugins/account'
 
-definePageMeta({
-  layout: 'home-layout',
-})
+definePageMeta({ layout: 'home-layout' })
 
-let projects = ref<L0AuthRspApp[]>([])
-const { $getUser, $getApp, $createApp, $createKey, $getOrg } = useNuxtApp()
-const user = await $getUser()
-const org = await $getOrg(user!.orgId)
+let projects = ref<AppRsp[]>([])
+const profile: Profile = useNuxtApp().$profile()
+const user = await profile.getUser()
+const org = await profile.getOrg(user!.orgId)
 
-let apps = ref<L0AuthRspApp[]>([])
+let apps = ref<AppRsp[]>([])
 for (const appId of org!.apps) {
-  const app = await $getApp(appId)
-  if (app != null) apps.value.push(app)
+  const app = await profile.getApp(appId)
+  apps.value.push(app)
 }
 projects.value = apps.value.sort(
   (a, b) => new Date(a.created).getTime() - new Date(b.created).getTime()
 )
 
 const newProject = async () => {
-  const app = await $createApp({
+  const app = await profile.createApp({
     name: 'New Project',
   })
-  if (app != null) {
-    await $createKey(app.appId, true)
-    apps.value.push(app)
-  }
+  await profile.createKey(app.appId, true)
+  apps.value.push(app)
 }
 </script>
