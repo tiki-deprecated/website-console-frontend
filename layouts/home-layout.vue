@@ -45,7 +45,7 @@
                 leave-from="opacity-100"
                 leave-to="opacity-0"
               >
-                <div class="absolute top-0 right-0 -mr-12 pt-2">
+                <div class="absolute right-0 top-0 -mr-12 pt-2">
                   <button
                     type="button"
                     class="ml-1 flex h-10 w-10 items-center justify-center"
@@ -59,7 +59,7 @@
                   </button>
                 </div>
               </TransitionChild>
-              <div class="h-0 flex-1 overflow-y-auto pt-5 pb-4">
+              <div class="h-0 flex-1 overflow-y-auto pb-4 pt-5">
                 <div class="flex flex-shrink-0 items-center px-4 py-2">
                   <a href="https://mytiki.com"
                     ><img
@@ -140,7 +140,7 @@
     </TransitionRoot>
     <div class="hidden md:fixed md:inset-y-0 md:flex md:w-56 md:flex-col">
       <div class="flex min-h-0 flex-1 flex-col bg-white">
-        <div class="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
+        <div class="flex flex-1 flex-col overflow-y-auto pb-4 pt-5">
           <div class="flex flex-shrink-0 items-center px-4 py-4">
             <a href="https://mytiki.com"
               ><img
@@ -264,13 +264,13 @@
         <div class="my-10 flex items-center justify-evenly">
           <a
             href="https://discord.gg/tiki"
-            class="flex items-center rounded-md bg-[#7289DA] py-2 px-4 text-white hover:shadow-xs"
+            class="flex items-center rounded-md bg-[#7289DA] px-4 py-2 text-white hover:shadow-xs"
           >
             Discord <discord-icon class="ml-2 h-6" />
           </a>
           <a
             href="https://github.com/tiki"
-            class="flex items-center rounded-md bg-[#24292F] py-2 px-4 text-white hover:shadow-xs"
+            class="flex items-center rounded-md bg-[#24292F] px-4 py-2 text-white hover:shadow-xs"
           >
             GitHub <git-hub-icon class="ml-2 h-6" />
           </a>
@@ -339,7 +339,7 @@ const links = [
   { name: 'Docs', href: 'https://mytiki.com/docs', icon: ReadmeIcon },
   {
     name: 'API',
-    href: 'https://mytiki.com/docs',
+    href: 'https://mytiki.com/reference',
     icon: CommandLineIcon,
   },
   {
