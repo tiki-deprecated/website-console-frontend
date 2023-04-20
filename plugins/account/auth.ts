@@ -92,7 +92,7 @@ export class Auth {
       useCookie(this.config.cookie).value = tokenRsp.refresh_token
     } else {
       useCookie(this.config.cookie, {
-        httpOnly: true,
+        //httpOnly: true,
         secure: true,
       }).value = tokenRsp.refresh_token
     }
