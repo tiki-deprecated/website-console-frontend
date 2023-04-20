@@ -9,9 +9,9 @@ export default defineAppConfig({
     worker: 'https://console.mytiki.com',
     cookie: 'refresh_token',
     secure: true,
-    debug: true,
+    debug: false,
   },
   billing: {
-    host: 'http://localhost:8787',
+    host: 'https://console.mytiki.com',
   },
 })
