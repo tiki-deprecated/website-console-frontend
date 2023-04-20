@@ -35,12 +35,6 @@ jobs:
           token: ${{ github.token }}
           branch: main
 
-      - name: Set Version
-        id: package_version
-        uses: KageKirin/set-node-package-version@v1
-        with:
-          version: ${{ steps.semver.outputs.nextStrict }}
-
       - name: Tag & Release
         uses: ncipollo/release-action@v1
         with:
