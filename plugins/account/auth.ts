@@ -91,11 +91,11 @@ export class Auth {
     if (this.config.debug === true) {
       useCookie(this.config.cookie).value = tokenRsp.refresh_token
     } else {
+      useCookie(this.config.cookie).value = tokenRsp.refresh_token
       useCookie(this.config.cookie, {
         httpOnly: true,
         secure: this.config.secure ? true : undefined,
       })
-      useCookie(this.config.cookie).value = tokenRsp.refresh_token
     }
     return token
   }
