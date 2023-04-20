@@ -34,7 +34,7 @@
             leave-to="-translate-x-full"
           >
             <DialogPanel
-              class="relative flex w-full max-w-xs flex-1 flex-col bg-white/70"
+              class="relative flex w-full max-w-xs flex-1 flex-col bg-white"
             >
               <TransitionChild
                 as="template"
@@ -53,24 +53,25 @@
                   >
                     <span class="sr-only">Close sidebar</span>
                     <XCircleIcon
-                      class="h-8 w-8 text-green-dark"
+                      class="h-8 w-8 text-black"
                       aria-hidden="true"
                     />
                   </button>
                 </div>
               </TransitionChild>
               <div class="h-0 flex-1 overflow-y-auto pt-5 pb-4">
-                <div class="flex flex-shrink-0 items-center px-4">
-                  <img
-                    class="h-12 w-auto"
-                    sizes="(max-width: 576px) 100vw, 576px"
-                    srcset="
-                      ~/assets/images/png/pineapple-jump-w-200.png 200w,
-                      ~/assets/images/png/pineapple-jump-w-576.png 576w
-                    "
-                    src="~/assets/images/png/pineapple-jump-w-576.png"
-                    alt="TIKI"
-                  />
+                <div class="flex flex-shrink-0 items-center px-4 py-2">
+                  <a href="https://mytiki.com"
+                    ><img
+                      class="h-12 w-auto"
+                      sizes="(max-width: 576px) 100vw, 576px"
+                      srcset="
+                        ~/assets/images/png/pineapple-jump-w-200.png 200w,
+                        ~/assets/images/png/pineapple-jump-w-576.png 576w
+                      "
+                      src="~/assets/images/png/pineapple-jump-w-576.png"
+                      alt="TIKI"
+                  /></a>
                 </div>
                 <nav class="mt-5 space-y-1 px-2">
                   <nuxt-link
@@ -78,43 +79,42 @@
                     :key="item.name"
                     :to="item.href"
                     @click="setActive(item.name)"
-                    :class="[
-                      item.current
-                        ? 'text-green'
-                        : 'text-green-dark hover:text-green',
-                      'group flex items-center rounded-md px-2 py-2 text-sm font-medium',
-                    ]"
+                    :class="{
+                      'text-black-light': item.current,
+                      'font-bold': item.current,
+                      'text-black-xlight': !item.current,
+                      'hover:text-black-light': !item.current,
+                      'bg-yellow-xxlight': item.current,
+                    }"
+                    class="group flex items-center rounded-md px-2 py-2 text-sm"
                   >
                     <component
                       :is="item.icon"
-                      :class="[
-                        item.current
-                          ? 'fill-green'
-                          : 'fill-green-dark group-hover:fill-green',
-                        'mr-3 h-6 w-6 flex-shrink-0',
-                      ]"
+                      :class="{
+                        'fill-black-light': item.current,
+                        'fill-black-xlight': !item.current,
+                        'hover:fill-black-light': !item.current,
+                      }"
+                      class="mr-3 h-6 w-6 flex-shrink-0"
                       aria-hidden="true"
                     />
                     {{ item.name }}
                   </nuxt-link>
-                  <divider class="border-green-dark"
-                    ><div class="rounded-full bg-green-dark p-1">
-                      <LinkIcon class="h-4 w-4 fill-white" />
-                    </div>
-                  </divider>
-                  <a
-                    v-for="item in links"
-                    :key="item.name"
-                    :href="item.href"
-                    class="group flex items-center rounded-md px-2 py-2 text-sm font-medium text-green-dark hover:text-green"
-                  >
-                    <component
-                      :is="item.icon"
-                      class="mr-3 h-5 w-6 flex-shrink-0 fill-green-dark group-hover:fill-green"
-                      aria-hidden="true"
-                    />
-                    {{ item.name }}
-                  </a>
+                  <div class="pt-4">
+                    <a
+                      v-for="item in links"
+                      :key="item.name"
+                      :href="item.href"
+                      class="group flex items-center rounded-md px-2 py-2 text-sm text-black-xlight hover:text-black-light"
+                    >
+                      <component
+                        :is="item.icon"
+                        class="mr-3 h-5 w-6 flex-shrink-0 fill-black-xlight group-hover:text-black-light"
+                        aria-hidden="true"
+                      />
+                      {{ item.name }}
+                    </a>
+                  </div>
                 </nav>
               </div>
               <div class="flex flex-row-reverse justify-evenly px-2 py-4">
@@ -122,11 +122,11 @@
                   v-for="item in actions"
                   :key="item.name"
                   @click.stop.prevent="item.onClick"
-                  class="group flex items-center rounded-md px-2 py-2 text-sm font-medium text-pinkDark/70 hover:text-pinkDark"
+                  class="group flex items-center rounded-md px-2 py-2 text-sm text-pinkDark hover:text-purple"
                 >
                   <component
                     :is="item.icon"
-                    class="mr-3 h-5 w-6 flex-shrink-0 fill-pinkDark/70 group-hover:fill-pinkDark"
+                    class="mr-3 h-5 w-6 flex-shrink-0 fill-pinkDark group-hover:fill-purple"
                     aria-hidden="true"
                   />
                   {{ item.name }}
@@ -138,20 +138,22 @@
         </div>
       </Dialog>
     </TransitionRoot>
-    <div class="hidden md:fixed md:inset-y-0 md:flex md:w-40 md:flex-col">
-      <div class="flex min-h-0 flex-1 flex-col bg-transparent">
+    <div class="hidden md:fixed md:inset-y-0 md:flex md:w-56 md:flex-col">
+      <div class="flex min-h-0 flex-1 flex-col bg-white">
         <div class="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
-          <div class="flex flex-shrink-0 items-center px-4">
-            <img
-              class="h-12 w-auto"
-              sizes="(max-width: 576px) 100vw, 576px"
-              srcset="
-                ~/assets/images/png/pineapple-jump-w-200.png 200w,
-                ~/assets/images/png/pineapple-jump-w-576.png 576w
-              "
-              src="~/assets/images/png/pineapple-jump-w-576.png"
-              alt="TIKI"
-            />
+          <div class="flex flex-shrink-0 items-center px-4 py-4">
+            <a href="https://mytiki.com"
+              ><img
+                class="h-12 w-auto"
+                sizes="(max-width: 576px) 100vw, 576px"
+                srcset="
+                  ~/assets/images/png/pineapple-jump-w-200.png 200w,
+                  ~/assets/images/png/pineapple-jump-w-576.png 576w
+                "
+                src="~/assets/images/png/pineapple-jump-w-576.png"
+                alt="TIKI"
+              />
+            </a>
           </div>
           <nav class="mt-5 flex-1 space-y-1 bg-transparent px-2">
             <nuxt-link
@@ -159,42 +161,43 @@
               @click="setActive(item.name)"
               :key="item.name"
               :to="item.href"
-              :class="[
-                item.current ? 'text-white' : 'hover:white text-white/70',
-                'group flex items-center rounded-md px-2 py-2 text-sm font-medium',
-              ]"
+              :class="{
+                'hover:text-black-light': !item.current,
+                'text-black-xlight': !item.current,
+                'text-black-light': item.current,
+                'font-bold': item.current,
+                'bg-yellow-xxlight': item.current,
+              }"
+              class="group flex items-center rounded-md px-2 py-2 text-sm"
             >
               <component
                 :is="item.icon"
-                :class="[
-                  item.current
-                    ? 'fill-white'
-                    : 'fill-white/70 group-hover:fill-white',
-                  'mr-3 h-6 w-6 flex-shrink-0',
-                ]"
+                :class="{
+                  'group-hover:fill-black-light': !item.current,
+                  'fill-black-light': item.current,
+                  'fill-black-xlight': !item.current,
+                }"
+                class="mr-3 h-6 w-6 flex-shrink-0"
                 aria-hidden="true"
               />
               {{ item.name }}
             </nuxt-link>
-            <divider class="border-white/50"
-              ><div class="rounded-full bg-white/30 p-1 backdrop-blur-lg">
-                <LinkIcon class="h-4 w-4 fill-white" />
-              </div>
-            </divider>
-            <a
-              v-for="item in links"
-              target="_blank"
-              :key="item.name"
-              :href="item.href"
-              class="group flex items-center rounded-md px-2 py-2 text-sm font-medium text-white/70 hover:text-white"
-            >
-              <component
-                :is="item.icon"
-                class="mr-3 h-5 w-6 flex-shrink-0 fill-white/70 group-hover:fill-white"
-                aria-hidden="true"
-              />
-              {{ item.name }}
-            </a>
+            <div class="pt-10">
+              <a
+                v-for="item in links"
+                target="_blank"
+                :key="item.name"
+                :href="item.href"
+                class="group flex items-center rounded-md px-2 py-2 text-sm text-black-xlight hover:text-black-light"
+              >
+                <component
+                  :is="item.icon"
+                  class="mr-3 h-5 w-6 flex-shrink-0 fill-black-xlight group-hover:fill-black-light"
+                  aria-hidden="true"
+                />
+                {{ item.name }}
+              </a>
+            </div>
           </nav>
         </div>
         <div class="px-2 py-4">
@@ -202,11 +205,11 @@
             v-for="item in actions"
             :key="item.name"
             @click.stop.prevent="item.onClick"
-            class="group flex items-center rounded-md px-2 py-2 text-sm font-medium text-pinkDark/50 hover:text-pinkDark"
+            class="group flex items-center rounded-md px-2 py-2 text-sm text-pinkDark hover:text-purple"
           >
             <component
               :is="item.icon"
-              class="mr-3 h-5 w-6 flex-shrink-0 text-pinkDark/50 group-hover:fill-pinkDark"
+              class="mr-3 h-5 w-6 flex-shrink-0 text-pinkDark group-hover:fill-purple"
               aria-hidden="true"
             />
             {{ item.name }}
@@ -214,13 +217,13 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-1 flex-col md:pl-40">
+    <div class="flex flex-1 flex-col md:pl-56">
       <div
-        class="sticky top-0 z-10 bg-white/70 pl-1 pt-1 backdrop-blur-lg sm:pl-3 sm:pt-3 md:hidden"
+        class="sticky top-0 z-10 bg-white pl-1 pt-1 sm:pl-3 sm:pt-3 md:hidden"
       >
         <button
           type="button"
-          class="-ml-0.5 -mt-0.5 inline-flex h-12 w-12 items-center justify-center rounded-md text-pink"
+          class="-ml-0.5 -mt-0.5 inline-flex h-12 w-12 items-center justify-center rounded-md text-black"
           @click="sidebarOpen = true"
         >
           <span class="sr-only">Open sidebar</span>
@@ -228,13 +231,13 @@
         </button>
       </div>
       <main class="flex-1">
-        <div class="mx-8 py-8 md:pt-24 lg:px-40 lg:pt-32">
+        <div class="mx-10 my-16 md:my-20">
           <slot />
         </div>
       </main>
     </div>
     <modal v-if="showHelpModal" @close="onCloseHelpModal">
-      <div class="mt-6 grid place-content-center text-green-dark">
+      <div class="mt-6 grid place-content-center text-black-xlight">
         <img
           class="mx-auto h-20 w-auto"
           sizes="(max-width: 276px) 100vw, 276px"
@@ -245,29 +248,29 @@
           src="~/assets/images/png/pineapple-hand-w-276.png"
           alt=""
         />
-        <h3 class="mx-auto mt-6 text-center">
-          No worries,<br />we're here to help.
-        </h3>
-        <ul class="mx-6 mx-auto mt-4 list-disc text-xs">
-          <li class="mt-2">
+        <p class="mx-auto mt-6 text-center text-blue">
+          <b>No worries</b>,<br />we're here to help.
+        </p>
+        <ul class="mx-auto list-inside list-disc text-sm lg:w-10/12">
+          <li class="mt-6">
             To get technical help or an answer to a question, pop in our discord
             —the whole team's there.
           </li>
-          <li class="mt-2">
+          <li class="mt-6">
             To report a bug or request a feature, simply open an issue (or
             better yet, a PR) on GitHub.
           </li>
         </ul>
-        <div class="mt-10 flex items-center justify-evenly">
+        <div class="my-10 flex items-center justify-evenly">
           <a
             href="https://discord.gg/tiki"
-            class="flex items-center rounded-sm bg-[#7289DA] py-2 px-4 text-white hover:bg-[#7289DA]/75"
+            class="flex items-center rounded-md bg-[#7289DA] py-2 px-4 text-white hover:shadow-xs"
           >
             Discord <discord-icon class="ml-2 h-6" />
           </a>
           <a
             href="https://github.com/tiki"
-            class="flex items-center rounded-sm bg-[#24292F] py-2 px-4 text-white hover:bg-[#24292F]/75"
+            class="flex items-center rounded-md bg-[#24292F] py-2 px-4 text-white hover:shadow-xs"
           >
             GitHub <git-hub-icon class="ml-2 h-6" />
           </a>
@@ -290,8 +293,8 @@ import {
   Bars3Icon,
   CheckBadgeIcon,
   Cog8ToothIcon,
+  CommandLineIcon,
   CurrencyDollarIcon,
-  LinkIcon,
   MegaphoneIcon,
   SquaresPlusIcon,
 } from '@heroicons/vue/24/solid'
@@ -301,28 +304,44 @@ import DiscordIcon from '~/assets/images/svg/discord.svg'
 import GitHubIcon from '~/assets/images/svg/github.svg'
 import ReadmeIcon from '~/assets/images/svg/readme.svg'
 import CatIcon from '~/assets/images/svg/cat.svg'
-import Divider from '~/components/divider.vue'
 
-const { $logout } = useNuxtApp()
+const auth = useNuxtApp().$auth()
 const showHelpModal = ref(false)
 const onLogout = async () => {
-  await $logout()
-  window.location.reload()
+  await auth.logout()
+  window.location.href = 'https://mytiki.com'
 }
 
+const path = useRoute().path as string
+
 const pages = ref([
-  { name: 'Projects', href: '/', icon: SquaresPlusIcon, current: true },
+  {
+    name: 'Projects',
+    href: '/',
+    icon: SquaresPlusIcon,
+    current: path.startsWith('/project'),
+  },
   {
     name: 'Billing',
     href: '/billing',
     icon: CurrencyDollarIcon,
-    current: false,
+    current: path.startsWith('/billing'),
   },
-  { name: 'Settings', href: '/settings', icon: Cog8ToothIcon, current: false },
+  {
+    name: 'Settings',
+    href: '/settings',
+    icon: Cog8ToothIcon,
+    current: path.startsWith('/settings'),
+  },
 ])
 
 const links = [
   { name: 'Docs', href: 'https://mytiki.com/docs', icon: ReadmeIcon },
+  {
+    name: 'API',
+    href: 'https://mytiki.com/docs',
+    icon: CommandLineIcon,
+  },
   {
     name: 'Changelog',
     href: 'https://mytiki.com/changelog',

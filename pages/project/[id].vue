@@ -11,7 +11,7 @@
     <card-table-body>
       <div
         v-for="field in fields"
-        class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6"
+        class="py-4 md:grid md:grid-cols-3 md:gap-4 md:py-5 md:px-6"
       >
         <card-table-body-field-name>
           {{ field.name }}
@@ -31,7 +31,7 @@
         </card-table-body-field-value>
       </div>
       <div
-        class="items-start py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6"
+        class="items-start py-4 md:grid md:grid-cols-3 md:gap-4 md:py-5 md:px-6"
       >
         <card-table-body-field-name>
           Private Keys
@@ -48,7 +48,7 @@
           @click="deleteKey"
         />
       </div>
-      <div class="py-4 sm:py-5 sm:px-6">
+      <div class="py-4 md:py-5 md:px-6">
         <dt>
           <button
             class="ml-auto flex items-center text-sm font-medium text-pinkDark hover:text-purple"
@@ -61,7 +61,7 @@
       </div>
     </card-table-body>
     <modal v-if="showSecretModal" @close="onCloseSecretModal">
-      <div class="mt-6 grid place-content-center text-green-dark">
+      <div class="mt-6 grid place-content-center text-black-xlight">
         <img
           class="mx-auto h-12 w-auto"
           sizes="(max-width: 392px) 100vw, 392px"
@@ -72,16 +72,14 @@
           src="~/assets/images/png/pineapple-caution-w-392.png"
           alt=""
         />
-        <h3 class="mx-auto mt-4">Private Key Created</h3>
-        <div class="mx-6 mx-auto mt-2 text-center text-xs">
+        <p class="mx-auto mt-4 font-bold text-blue">Private Key Created</p>
+        <div class="mx-auto mt-2 text-center text-sm">
           You know the drill, save your secret! It's already hashed and only
-          available right now. <br />Protect with your life 😉.
+          available right now. Protect with your life 😉.
         </div>
-        <div class="my-6 text-sm">
-          <div class="font-medium">ID</div>
-          <div class="font-light">{{ newKey.id }}</div>
-          <div class="mt-4 font-medium">Secret</div>
-          <div class="font-light">{{ newKey.secret }}</div>
+        <div class="my-6 text-center text-sm">
+          <div class="break-all"><b>ID: </b>{{ newKey.id }}</div>
+          <div class="mt-4 break-all"><b>Secret: </b>{{ newKey.secret }}</div>
         </div>
       </div>
     </modal>

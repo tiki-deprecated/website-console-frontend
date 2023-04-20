@@ -6,13 +6,11 @@
 <template>
   <div class="flex min-h-full">
     <div
-      class="flex flex-1 flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:bg-white lg:px-20 xl:px-24"
+      class="flex flex-1 flex-col justify-center py-12 px-4 sm:px-6 md:flex-none md:bg-white md:px-20 xl:px-24"
     >
       <slot />
     </div>
-    <div
-      class="relative hidden w-0 flex-1 bg-gradient-to-br from-pink via-yellow-light to-green-light lg:block"
-    >
+    <div class="relative hidden w-0 flex-1 bg-yellow-xxlight md:block">
       <img
         class="absolute inset-1/2 h-1/4 w-auto -translate-x-1/2 -translate-y-1/2 object-contain object-center"
         sizes="(max-width: 448px) 100vw, 448px"

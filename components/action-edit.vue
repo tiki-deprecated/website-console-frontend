@@ -19,7 +19,7 @@
         ref="input"
         type="text"
         :value="val"
-        class="min-w-0 border-0 border-b-2 border-b-green bg-transparent p-0 text-xl font-light text-green-dark focus:border-b-green focus:ring-0 md:max-w-md"
+        class="min-w-0 border-0 border-b-2 border-b-green bg-transparent p-0 text-3xl font-bold text-blue focus:border-b-green focus:ring-0 md:max-w-md"
       />
       <button
         class="ml-2 text-sm font-medium text-green hover:text-green-dark"
