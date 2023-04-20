@@ -5,40 +5,31 @@
 
 <template>
   <div>
-    <h1 class="py-5 md:py-10">Projects</h1>
-    <div v-if="apps.length > 0">
-      <ul
-        role="list"
-        class="mt-3 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6"
+    <div class="mb-10 flex flex-wrap items-center justify-between">
+      <h1>Projects</h1>
+      <button
+        type="button"
+        class="mt-8 flex items-center rounded-md border border-black bg-transparent py-3 px-5 text-sm text-black hover:shadow-sm lg:mt-0"
+        @click.prevent.stop="newProject"
       >
+        <plus-icon class="mr-3 h-5" />
+        Add Project
+      </button>
+    </div>
+    <div v-if="apps.length > 0">
+      <ul role="list" class="mt-3 flex flex-wrap gap-5 md:gap-6">
         <li v-for="project in projects" :key="project.appId">
           <nuxt-link :to="'project/' + project.appId">
-            <card class="hover:border-green">
-              <div class="flex items-center">
-                <div class="grid h-20 w-20 place-content-center">
-                  <Identicon :value="project.appId" size-rem="4" />
-                </div>
-                <div class="flex-1 truncate py-2 pr-2 text-sm">
-                  <h3 class="truncate">{{ project.name }}</h3>
-                  <p
-                    class="mt-1 whitespace-normal break-normal text-xs text-green-dark/80"
-                  >
-                    {{ project.appId }}
-                  </p>
-                </div>
+            <card class="w-full p-4 hover:shadow-md lg:w-64">
+              <div class="mb-4 grid h-[4rem] w-[4rem] place-content-center">
+                <Identicon :value="project.appId" size-rem="4" />
               </div>
+              <p class="font-bold text-blue">{{ project.name }}</p>
+              <p class="mt-1 whitespace-normal break-normal text-black-xlight">
+                {{ project.appId }}
+              </p>
             </card>
           </nuxt-link>
-        </li>
-        <li class="grid place-content-center">
-          <button
-            type="button"
-            class="ml-6 flex items-center rounded-sm bg-white/40 py-4 px-8 text-green-dark hover:text-green"
-            @click.prevent.stop="newProject"
-          >
-            New Project
-            <plus-icon class="ml-4 h-6" />
-          </button>
         </li>
       </ul>
     </div>

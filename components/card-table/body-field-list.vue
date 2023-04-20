@@ -4,11 +4,11 @@
   -->
 
 <template>
-  <dd class="mt-1 text-sm text-green-dark sm:col-span-2 sm:mt-0">
+  <dd class="mt-1 text-sm text-black-xlight sm:col-span-2 sm:mt-0">
     <ul
       role="list"
       v-if="items.length > 0"
-      class="divide-y divide-green-dark/20 rounded-md border border-green-dark/20"
+      class="divide-y divide-black-xlight/30 rounded-md border border-black-xlight/30"
     >
       <li
         v-for="id in items"
