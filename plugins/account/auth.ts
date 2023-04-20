@@ -88,8 +88,9 @@ export class Auth {
       expires: new Date(new Date().getTime() + tokenRsp.expires_in * 1000),
     }
     useState(tokenState, () => token)
-    useCookie(this.config.cookie).value = tokenRsp.refresh_token
-    if (this.config.debug !== true) {
+    if (this.config.debug === true) {
+      useCookie(this.config.cookie).value = tokenRsp.refresh_token
+    } else {
       useCookie(this.config.cookie, {
         httpOnly: true,
         secure: this.config.secure ? true : undefined,
