@@ -25,7 +25,6 @@ export class BillingClient {
     ).catch((error) => {
       return Promise.reject(error)
     })
-    console.log(response)
     if (response.ok) {
       const json = await response.json()
       return json.url

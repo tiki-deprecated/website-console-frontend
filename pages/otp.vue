@@ -33,7 +33,6 @@ const input: HTMLInputElement = {
 const errorMessage = ref<string>('')
 const onSubmit = async (code: string) => {
   const success = await auth.redeemOtp(code)
-  console.log(success)
   if (success) navigateTo('/')
   else
     errorMessage.value =

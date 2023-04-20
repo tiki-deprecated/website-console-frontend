@@ -11,7 +11,7 @@
     <card-table-body>
       <div
         v-for="field in fields"
-        class="py-4 md:grid md:grid-cols-3 md:gap-4 md:py-5 md:px-6"
+        class="py-4 md:grid md:grid-cols-3 md:gap-4 md:px-6 md:py-5"
       >
         <card-table-body-field-name>
           {{ field.name }}
@@ -31,7 +31,7 @@
         </card-table-body-field-value>
       </div>
       <div
-        class="items-start py-4 md:grid md:grid-cols-3 md:gap-4 md:py-5 md:px-6"
+        class="items-start py-4 md:grid md:grid-cols-3 md:gap-4 md:px-6 md:py-5"
       >
         <card-table-body-field-name>
           Private Keys
@@ -48,7 +48,7 @@
           @click="deleteKey"
         />
       </div>
-      <div class="py-4 md:py-5 md:px-6">
+      <div class="py-4 md:px-6 md:py-5">
         <dt>
           <button
             class="ml-auto flex items-center text-sm font-medium text-pinkDark hover:text-purple"
@@ -145,7 +145,6 @@ const addPrivateKey = async () => {
 }
 
 const deleteKey = async (id: string) => {
-  console.log(id)
   await profile.deleteKey(id)
   privateKeys.value = privateKeys.value.filter((key) => key !== id)
 }
