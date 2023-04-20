@@ -95,6 +95,7 @@ export class Auth {
         httpOnly: true,
         secure: this.config.secure ? true : undefined,
       })
+      useCookie(this.config.cookie).value = tokenRsp.refresh_token
     }
     return token
   }
