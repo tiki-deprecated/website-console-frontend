@@ -237,7 +237,7 @@
       </main>
     </div>
     <modal v-if="showHelpModal" @close="onCloseHelpModal">
-      <div class="mt-6 grid place-content-center text-green-dark">
+      <div class="mt-6 grid place-content-center text-black-xlight">
         <img
           class="mx-auto h-20 w-auto"
           sizes="(max-width: 276px) 100vw, 276px"
@@ -248,29 +248,29 @@
           src="~/assets/images/png/pineapple-hand-w-276.png"
           alt=""
         />
-        <h3 class="mx-auto mt-6 text-center">
-          No worries,<br />we're here to help.
-        </h3>
-        <ul class="mx-6 mx-auto mt-4 list-disc text-xs">
-          <li class="mt-2">
+        <p class="mx-auto mt-6 text-center text-blue">
+          <b>No worries</b>,<br />we're here to help.
+        </p>
+        <ul class="mx-auto list-inside list-disc text-sm lg:w-10/12">
+          <li class="mt-6">
             To get technical help or an answer to a question, pop in our discord
             —the whole team's there.
           </li>
-          <li class="mt-2">
+          <li class="mt-6">
             To report a bug or request a feature, simply open an issue (or
             better yet, a PR) on GitHub.
           </li>
         </ul>
-        <div class="mt-10 flex items-center justify-evenly">
+        <div class="my-10 flex items-center justify-evenly">
           <a
             href="https://discord.gg/tiki"
-            class="flex items-center rounded-sm bg-[#7289DA] py-2 px-4 text-white hover:bg-[#7289DA]/75"
+            class="flex items-center rounded-md bg-[#7289DA] py-2 px-4 text-white hover:shadow-xs"
           >
             Discord <discord-icon class="ml-2 h-6" />
           </a>
           <a
             href="https://github.com/tiki"
-            class="flex items-center rounded-sm bg-[#24292F] py-2 px-4 text-white hover:bg-[#24292F]/75"
+            class="flex items-center rounded-md bg-[#24292F] py-2 px-4 text-white hover:shadow-xs"
           >
             GitHub <git-hub-icon class="ml-2 h-6" />
           </a>
