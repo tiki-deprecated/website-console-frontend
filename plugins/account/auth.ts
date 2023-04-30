@@ -54,8 +54,12 @@ export class Auth {
   }
 
   async logout(): Promise<any> {
+    const refreshToken = useCookie(this.config.cookie).value
+    const accessToken = await this.getToken()
+    if (refreshToken != null && accessToken != null) {
+      await this.l0Auth.revokeToken(refreshToken, accessToken.accessToken)
+    }
     useState(tokenState, () => null)
-    useCookie(this.config.cookie).value = null
   }
 
   private async refresh(): Promise<AuthToken> {
