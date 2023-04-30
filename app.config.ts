@@ -13,4 +13,7 @@ export default defineAppConfig({
   billing: {
     host: 'https://console.mytiki.com',
   },
+  registry: {
+    host: 'https://registry.l0.mytiki.com',
+  },
 })

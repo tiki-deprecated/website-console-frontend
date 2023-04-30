@@ -25,9 +25,4 @@ export default defineNuxtConfig({
     //@ts-ignore
     plugins: [svgLoader()],
   },
-  plugins: [
-    '~/plugins/identicon/index.ts',
-    '~/plugins/account/index.ts',
-    '~/plugins/billing/index.ts',
-  ],
 })
