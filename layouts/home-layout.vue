@@ -297,6 +297,7 @@ import {
   CurrencyDollarIcon,
   MegaphoneIcon,
   SquaresPlusIcon,
+  UserGroupIcon,
 } from '@heroicons/vue/24/solid'
 import { XCircleIcon } from '@heroicons/vue/24/outline'
 
@@ -320,6 +321,12 @@ const pages = ref([
     href: '/',
     icon: SquaresPlusIcon,
     current: path.startsWith('/project'),
+  },
+  {
+    name: 'Users',
+    href: '/users',
+    icon: UserGroupIcon,
+    current: path.startsWith('/users'),
   },
   {
     name: 'Billing',

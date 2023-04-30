@@ -31,7 +31,7 @@ export class Auth {
     try {
       const rsp: L0AuthPlugin.TokenRsp = await this.l0Auth.redeemOtp(
         code,
-        'auth'
+        'auth registry:admin'
       )
       this.saveToken(rsp)
       return true
