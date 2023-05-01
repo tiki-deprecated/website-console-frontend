@@ -14,13 +14,11 @@ export class Registry {
     this.auth = auth
   }
 
-  async getUsage(month?: number, year?: number) {
-    const now = new Date()
-    if (month == null) month = now.getMonth() + 1
-    if (year == null) year = now.getFullYear()
+  async getUsage(day?: Date) {
+    if (day == null) day = new Date()
     const accessToken = (await this.auth.getToken())?.accessToken
     const response = await fetch(
-      this.config.host + `/api/latest/usage?month=${month}&year=${year}`,
+      this.config.host + `/api/latest/usage?day=${day.toUTCString()}`,
       {
         method: 'get',
         headers: {
