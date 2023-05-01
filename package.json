@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "0.4.1",
+  "version": "0.4.2",
   "scripts": {
     "build": "nuxi build",
     "dev": "nuxi dev",
@@ -23,8 +23,8 @@
     "postcss": "^8.4.23",
     "postcss-import": "^15.1.0",
     "prettier": "^2.8.8",
-    "prettier-plugin-tailwindcss": "^0.2.7",
-    "tailwindcss": "^3.3.1",
+    "prettier-plugin-tailwindcss": "^0.2.8",
+    "tailwindcss": "^3.3.2",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^5.0.4",
     "vite-svg-loader": "^4.0.0"
