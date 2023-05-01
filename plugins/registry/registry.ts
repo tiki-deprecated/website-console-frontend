@@ -18,7 +18,7 @@ export class Registry {
     if (day == null) day = new Date()
     const accessToken = (await this.auth.getToken())?.accessToken
     const response = await fetch(
-      this.config.host + `/api/latest/usage?day=${day.toUTCString()}`,
+      this.config.host + `/api/latest/usage?day=${day.toISOString()}`,
       {
         method: 'get',
         headers: {
