@@ -45,8 +45,8 @@
 <script setup lang="ts">
 import { BillingClient } from '~/plugins/billing/billing-client'
 import { Auth } from '~/plugins/account'
-import TwoItems from '~/components/subscription-details/two-items.vue'
-import SinglePrice from '~/components/subscription-details/single-price.vue'
+import TwoItems from '~/components/subscription/details/two-items.vue'
+import SinglePrice from '~/components/subscription/details/single-price.vue'
 import { definePageMeta } from '#imports'
 import { useNuxtApp } from '#app'
 import { reactive } from '@vue/reactivity'

@@ -8,7 +8,7 @@ export default defineAppConfig({
     host: 'https://auth.l0.mytiki.com',
     worker: 'https://console.mytiki.com',
     cookie: 'refresh_token',
-    debug: false,
+    debug: true,
   },
   billing: {
     host: 'https://console.mytiki.com',

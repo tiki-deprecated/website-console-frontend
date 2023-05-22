@@ -49,7 +49,7 @@
           <div>
             <button
               type="submit"
-              class="flex w-full justify-center rounded-md border border-none bg-black py-4 px-4 text-yellow-dark hover:shadow-md"
+              class="flex w-full justify-center rounded-md border border-none bg-black px-4 py-4 text-yellow-dark hover:shadow-md"
             >
               {{ cta }}
             </button>
@@ -62,7 +62,7 @@
 
 <script setup lang="ts">
 import { PropType } from '@vue/runtime-core'
-import Logo from '~/assets/images/svg/logo.svg'
+import Logo from 'assets/images/svg/logo.svg'
 
 const emit = defineEmits(['submit'])
 const props = defineProps({

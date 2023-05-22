@@ -88,8 +88,7 @@
 
 <script setup lang="ts">
 import { ArrowPathIcon, PlusIcon, TrashIcon } from '@heroicons/vue/24/outline'
-import ActionEdit from '~/components/action-edit.vue'
-import Modal from '~/components/modal.vue'
+import Modal from '~/components/modal/modal.vue'
 
 definePageMeta({ layout: 'home-layout' })
 
