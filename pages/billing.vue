@@ -13,72 +13,106 @@
       class="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3"
     >
       <card-buy
-        :is-active="false"
-        name="Freelancer"
-        description="The essentials
-      to provide your best work for clients."
-        :price="0"
-        :items="[
+        :class="`${hasLmsm || hasIgt ? 'bg-transparent' : 'bg-white'}`"
+        :action="{
+          text: 'no cc required',
+          bgColor: 'bg-transparent',
+          textColor: 'text-black-xlight',
+        }"
+        :description="{
+          name: 'FREE',
+          text: 'All of the features under the &ldquo;I Got This&rdquo; plan are free up to 1,000 users.',
+          price: '0',
+        }"
+        :features="[
           {
-            text: '5 products',
-          },
-          {
-            text: 'Up to 1,000 subscribers',
-          },
-          {
-            text: 'Basic analytics',
-          },
-          {
-            text: '48-hour support response time',
+            text: 'Includes 1,000 users',
           },
         ]"
       />
       <card-buy
-        :is-active="true"
-        name="Startup"
-        description="A plan that scales with your rapidly growing business."
-        :price="30"
-        :items="[
+        :class="`${hasIgt ? 'bg-white' : 'bg-transparent'}`"
+        :action="{
+          text: hasIgt ? 'manage plan' : 'buy plan',
+          bgColor: hasIgt ? 'bg-transparent' : 'bg-black',
+          textColor: hasIgt ? 'bg-black' : 'text-yellow-dark',
+          href: hasIgt ? portal : igtCheckout,
+        }"
+        :description="{
+          name: '&ldquo;I Got This&rdquo;',
+          text: 'For those who know how to use ZPD to improve ops like ROAS & eCPM.',
+          price: '10+',
+        }"
+        :features="[
           {
-            text: '25 products',
+            text: 'Includes 10,000 users',
           },
           {
-            text: 'Up to 10,000 subscribers',
+            text: 'Immutable license storage',
           },
           {
-            text: 'Advanced analytics',
+            text: 'Mobile & web SDKs',
           },
           {
-            text: '24-hour support response time',
+            text: 'API access',
           },
           {
-            text: 'Marketing automations',
+            text: 'Integrations',
+          },
+          {
+            text: 'Email & chat support',
+          },
+          {
+            icon: PlusCircleIcon,
+            text: '$10/mo per additional 10,000 users',
+            color: 'text-black-xlight',
           },
         ]"
       />
       <card-buy
-        :is-active="false"
-        name="Enterprise"
-        description="Dedicated support and infrastructure for your company."
-        :price="833"
-        :items="[
+        :class="`${hasLmsm ? 'bg-white' : 'bg-transparent'}`"
+        :action="{
+          text: hasLmsm ? 'manage plan' : 'buy plan',
+          bgColor: hasLmsm ? 'bg-transparent' : 'bg-black',
+          textColor: hasLmsm ? 'bg-black' : 'text-yellow-dark',
+          href: hasLmsm ? portal : lmsmCheckout,
+        }"
+        :description="{
+          name: '&ldquo;Let&rsquo;s Make Some Money&rdquo;',
+          text: 'Designed for businesses looking to add revenue with ZPD. Includes &ldquo;I Got This&rdquo;.',
+          price: '833+',
+        }"
+        :features="[
           {
-            text: 'Unlimited products',
+            text: 'Includes 100,000 users',
           },
           {
-            text: 'Unlimited subscribers',
+            text: 'Our data buyer network',
           },
           {
-            text: 'Advanced analytics',
+            text: 'ZPD capture tools',
           },
           {
-            text: '1-hour, dedicated support response time',
+            text: 'Data enrichment and pooling',
           },
           {
-            text: 'Marketing automations',
+            text: 'Custom integrations',
           },
           {
-            text: 'Custom reporting tools',
+            text: 'User identity validation',
+          },
+          {
+            text: 'Live onboarding and support',
+          },
+          {
+            icon: PlusCircleIcon,
+            text: '$10/mo per additional 25,000 users',
+            color: 'text-black-xlight',
+          },
+          {
+            icon: PlusCircleIcon,
+            text: '15% commission on our data buyers',
+            color: 'text-black-xlight',
           },
         ]"
       />
@@ -91,25 +125,37 @@ import { BillingClient } from '~/plugins/billing/billing-client'
 import { Auth } from '~/plugins/account'
 import { definePageMeta } from '#imports'
 import { useNuxtApp } from '#app'
-import { reactive } from '@vue/reactivity'
+import { PlusCircleIcon } from '@heroicons/vue/24/outline'
 
 definePageMeta({ layout: 'home-layout' })
 const auth: Auth = useNuxtApp().$auth()
 const billing: BillingClient = useNuxtApp().$billing()
+const subscriptions = await billing.subscription(
+  (
+    await auth.getToken()
+  )?.accessToken
+)
 
-const state = reactive({
-  hasSubscription: false,
-})
+const hasIgt = billing.hasIgtSubscription(subscriptions)
+const hasLmsm = billing.hasLmsmSubscription(subscriptions)
+const hasLmsmao = billing.hasLmsmaoSubscription(subscriptions)
 
-billing.hasSubscription((await auth.getToken())?.accessToken).then((status) => {
-  state.hasSubscription = status
-})
+let portal = undefined
+if (hasIgt || hasLmsm)
+  portal = await billing.portal((await auth.getToken())?.accessToken)
 
-const onSelect = async () => {
-  let url
-  if (state.hasSubscription)
-    url = await billing.portal((await auth.getToken())?.accessToken)
-  else url = await billing.checkout((await auth.getToken())?.accessToken)
-  window.location.href = url
-}
+if (hasLmsm && !hasLmsmao)
+  await billing.checkoutlmsmao((await auth.getToken())?.accessToken)
+
+let igtCheckout = undefined
+if (!hasIgt)
+  igtCheckout = await billing.checkoutIgt((await auth.getToken())?.accessToken)
+
+let lmsmCheckout = undefined
+if (!hasLmsm)
+  lmsmCheckout = await billing.checkoutlmsm(
+    (
+      await auth.getToken()
+    )?.accessToken
+  )
 </script>

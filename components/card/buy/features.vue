@@ -12,7 +12,7 @@
       <component
         :is="item.icon != null ? item.icon : CheckIcon"
         class="h-6 w-5 flex-none"
-        :class="item.color != null ? item.color : 'text-green'"
+        :class="item.color || 'text-green'"
       />
       {{ item.text }}
     </li>

@@ -4,51 +4,55 @@
   -->
 
 <template>
-  <div
-    class="rounded-2xl p-8 ring-1 ring-black xl:p-10"
-    :class="isActive ? 'bg-white' : 'bg-transparent'"
-  >
-    <card-buy-details :name="name" :description="description" :price="price" />
+  <div class="rounded-2xl p-8 ring-1 ring-black xl:p-10">
+    <card-buy-details
+      :name="description.name"
+      :description="description.text"
+      :price="description.price"
+    />
     <a
-      href="#"
-      v-if="!isActive"
+      :href="action?.href"
       aria-describedby="tier-freelancer"
-      class="mt-6 block rounded-md border border-black bg-black px-3 py-2 text-center text-sm font-semibold leading-6 text-yellow-dark hover:shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+      class="mt-6 block rounded-md border border-black bg-black px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+      :class="`
+      ${action?.bgColor || 'bg-black'}
+      ${action?.textColor || 'text-yellow-dark'}
+      ${action?.href != null ? 'hover:shadow-sm' : ''}
+      `"
     >
-      Buy plan
+      {{ action?.text || 'buy plan' }}
     </a>
-    <div
-      v-if="isActive"
-      aria-describedby="tier-freelancer"
-      class="mt-6 block rounded-md border border-black bg-transparent px-3 py-2 text-center text-sm font-semibold leading-6 text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
-    >
-      Current plan
-    </div>
-    <card-buy-features :items="items" />
+    <card-buy-features :items="features" />
   </div>
 </template>
 
 <script setup lang="ts">
+import { PropType } from '@vue/runtime-core'
+
+interface Description {
+  name: string
+  text: string
+  price: string
+}
+
+interface Action {
+  text: string
+  bgColor?: string
+  textColor?: string
+  href?: Function
+}
+
 const props = defineProps({
-  isActive: {
-    type: Boolean,
-    required: false,
-    default: false,
-  },
-  name: {
-    type: String,
-    required: true,
-  },
   description: {
-    type: String,
+    type: Object as PropType<Description>,
     required: true,
   },
-  price: {
-    type: Number,
-    required: true,
-  },
-  items: {
+  features: {
     type: Array,
+    required: true,
+  },
+  action: {
+    type: Object as PropType<Action>,
     required: true,
   },
 })
