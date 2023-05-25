@@ -13,9 +13,9 @@ export default defineAppConfig({
   billing: {
     host: 'http://localhost:8787',
     stripe: {
-      igtProductId: 'prod_NwvomO97ioWrGZ',
-      lmsmProductId: 'prod_NwuEkwp85fb7va',
-      lmsmaoProductId: 'prod_NwuFrRFvb5ctW7',
+      igtProductId: 'prod_NxPayH6ltybQVV',
+      lmsmProductId: 'prod_NxPvzVRz2wXzPx',
+      lmsmaoProductId: 'prod_NxPxbsvCIhGm0I',
     },
   },
   registry: {
