@@ -4,7 +4,7 @@
   -->
 
 <template>
-  <single-input-form
+  <form-single-input
     title="Sign in to your account"
     subtitle="Or sign up; it's
   free."
@@ -20,7 +20,6 @@
 import { Auth } from '~/plugins/account/auth'
 import { navigateTo, useNuxtApp } from '#app'
 import { ref } from '@vue/reactivity'
-import SingleInputForm from '~/components/single-input-form.vue'
 import { definePageMeta } from '#imports'
 
 definePageMeta({

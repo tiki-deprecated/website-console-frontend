@@ -9,35 +9,113 @@
     <p class="text-black-xlight">
       For meticulously crafted SDKs, APIs, and docs.
     </p>
-    <div class="mx-auto md:mt-20">
-      <div
-        class="flex w-full flex-wrap items-center md:mx-auto md:w-3/4 md:flex-nowrap md:justify-center"
-      >
-        <subscription
-          title="FREE"
-          :is-selected="!state.hasSubscription"
-          class="my-10"
-        >
-          <single-price
-            price="$0"
-            text="Full access to play with and build against, up to 1k users."
-            :is-selected="!state.hasSubscription"
-          />
-        </subscription>
-        <subscription
-          title="PRO"
-          :is-selectable="true"
-          :is-selected="state.hasSubscription"
-          @select="onSelect"
-          ><two-items
-            price1="$0.001"
-            text1="per user, per month."
-            price2="$0.01"
-            text2="one time, per new user."
-            :is-selected="state.hasSubscription"
-            :is-selectable="true"
-        /></subscription>
-      </div>
+    <div
+      class="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3"
+    >
+      <card-buy
+        :class="`${hasLmsm || hasIgt ? 'bg-transparent' : 'bg-white'}`"
+        :action="{
+          text: 'no cc required',
+          bgColor: 'bg-transparent',
+          textColor: 'text-black-xlight',
+        }"
+        :description="{
+          name: 'FREE',
+          text: 'All of the features under the &ldquo;I Got This&rdquo; plan are free up to 1,000 users.',
+          price: '0',
+        }"
+        :features="[
+          {
+            text: 'Includes 1,000 users',
+          },
+        ]"
+      />
+      <card-buy
+        :class="`${hasIgt ? 'bg-white' : 'bg-transparent'}`"
+        :action="{
+          text: hasIgt ? 'manage plan' : 'buy plan',
+          bgColor: hasIgt ? 'bg-transparent' : 'bg-black',
+          textColor: hasIgt ? 'bg-black' : 'text-yellow-dark',
+          href: hasIgt ? portal : igtCheckout,
+        }"
+        :description="{
+          name: '&ldquo;I Got This&rdquo;',
+          text: 'For those who know how to use ZPD to improve ops like ROAS & eCPM.',
+          price: '10+',
+        }"
+        :features="[
+          {
+            text: 'Includes 10,000 users',
+          },
+          {
+            text: 'Immutable license storage',
+          },
+          {
+            text: 'Mobile & web SDKs',
+          },
+          {
+            text: 'API access',
+          },
+          {
+            text: 'Integrations',
+          },
+          {
+            text: 'Email & chat support',
+          },
+          {
+            icon: PlusCircleIcon,
+            text: '$10/mo per additional 10,000 users',
+            color: 'text-black-xlight',
+          },
+        ]"
+      />
+      <card-buy
+        :class="`${hasLmsm ? 'bg-white' : 'bg-transparent'}`"
+        :action="{
+          text: hasLmsm ? 'manage plan' : 'buy plan',
+          bgColor: hasLmsm ? 'bg-transparent' : 'bg-black',
+          textColor: hasLmsm ? 'bg-black' : 'text-yellow-dark',
+          href: hasLmsm ? portal : lmsmCheckout,
+        }"
+        :description="{
+          name: '&ldquo;Let&rsquo;s Make Some Money&rdquo;',
+          text: 'Designed for businesses looking to add revenue with ZPD. Includes &ldquo;I Got This&rdquo;.',
+          price: '833+',
+        }"
+        :features="[
+          {
+            text: 'Includes 100,000 users',
+          },
+          {
+            text: 'Our data buyer network',
+          },
+          {
+            text: 'ZPD capture tools',
+          },
+          {
+            text: 'Data enrichment and pooling',
+          },
+          {
+            text: 'Custom integrations',
+          },
+          {
+            text: 'User identity validation',
+          },
+          {
+            text: 'Live onboarding and support',
+          },
+          {
+            icon: PlusCircleIcon,
+            text: '$10/mo per additional 25,000 users',
+            color: 'text-black-xlight',
+          },
+          {
+            icon: PlusCircleIcon,
+            text: '15% commission on our data buyers',
+            color: 'text-black-xlight',
+          },
+        ]"
+      />
     </div>
   </div>
 </template>
@@ -45,29 +123,39 @@
 <script setup lang="ts">
 import { BillingClient } from '~/plugins/billing/billing-client'
 import { Auth } from '~/plugins/account'
-import TwoItems from '~/components/subscription-details/two-items.vue'
-import SinglePrice from '~/components/subscription-details/single-price.vue'
 import { definePageMeta } from '#imports'
 import { useNuxtApp } from '#app'
-import { reactive } from '@vue/reactivity'
+import { PlusCircleIcon } from '@heroicons/vue/24/outline'
 
 definePageMeta({ layout: 'home-layout' })
 const auth: Auth = useNuxtApp().$auth()
 const billing: BillingClient = useNuxtApp().$billing()
+const subscriptions = await billing.subscription(
+  (
+    await auth.getToken()
+  )?.accessToken
+)
 
-const state = reactive({
-  hasSubscription: false,
-})
+const hasIgt = billing.hasIgtSubscription(subscriptions)
+const hasLmsm = billing.hasLmsmSubscription(subscriptions)
+const hasLmsmao = billing.hasLmsmaoSubscription(subscriptions)
 
-billing.hasSubscription((await auth.getToken())?.accessToken).then((status) => {
-  state.hasSubscription = status
-})
+let portal = undefined
+if (hasIgt || hasLmsm)
+  portal = await billing.portal((await auth.getToken())?.accessToken)
 
-const onSelect = async () => {
-  let url
-  if (state.hasSubscription)
-    url = await billing.portal((await auth.getToken())?.accessToken)
-  else url = await billing.checkout((await auth.getToken())?.accessToken)
-  window.location.href = url
-}
+if (hasLmsm && !hasLmsmao)
+  await billing.checkoutlmsmao((await auth.getToken())?.accessToken)
+
+let igtCheckout = undefined
+if (!hasIgt)
+  igtCheckout = await billing.checkoutIgt((await auth.getToken())?.accessToken)
+
+let lmsmCheckout = undefined
+if (!hasLmsm)
+  lmsmCheckout = await billing.checkoutlmsm(
+    (
+      await auth.getToken()
+    )?.accessToken
+  )
 </script>

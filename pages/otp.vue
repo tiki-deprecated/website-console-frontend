@@ -4,7 +4,7 @@
   -->
 
 <template>
-  <single-input-form
+  <form-single-input
     title="Enter Code"
     subtitle="Passwords suck. We’ve emailed you a one-time use code. Enter it below."
     cta="Continue"
