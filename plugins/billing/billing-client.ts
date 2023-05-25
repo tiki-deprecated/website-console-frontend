@@ -39,16 +39,22 @@ export class BillingClient {
     }
   }
 
-  hasIgtSubscription = (subscriptions: Array<Object>): boolean =>
-    this.hasSubscription(subscriptions, this.config.stripe.igtProductId)
+  hasIgtSubscription = (subscriptions: Array<Object> | undefined): boolean =>
+    subscriptions === undefined
+      ? false
+      : this.hasSubscription(subscriptions, this.config.stripe.igtProductId)
 
-  hasLmsmSubscription = (subscriptions: Array<Object>): boolean =>
-    this.hasSubscription(subscriptions, this.config.stripe.lmsmProductId)
+  hasLmsmSubscription = (subscriptions: Array<Object> | undefined): boolean =>
+    subscriptions === undefined
+      ? false
+      : this.hasSubscription(subscriptions, this.config.stripe.lmsmProductId)
 
-  hasLmsmaoSubscription = (subscriptions: Array<Object>): boolean =>
-    this.hasSubscription(subscriptions, this.config.stripe.lmsmaoProductId)
+  hasLmsmaoSubscription = (subscriptions: Array<Object> | undefined): boolean =>
+    subscriptions === undefined
+      ? false
+      : this.hasSubscription(subscriptions, this.config.stripe.lmsmaoProductId)
 
-  async subscription(accessToken?: string): Promise<Array<Object>> {
+  async subscription(accessToken?: string): Promise<Array<Object> | undefined> {
     const response = await fetch(
       this.config.host + '/api/latest/billing/subscriptions',
       {
@@ -65,6 +71,7 @@ export class BillingClient {
     if (response.ok) {
       return await response.json()
     } else {
+      if (response.status === 404) return undefined
       return Promise.reject(response)
     }
   }
