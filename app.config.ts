@@ -11,7 +11,7 @@ export default defineAppConfig({
     debug: false,
   },
   billing: {
-    host: 'http://localhost:8787',
+    host: 'https://console.mytiki.com',
     stripe: {
       igtProductId: 'prod_NxPayH6ltybQVV',
       lmsmProductId: 'prod_NxPvzVRz2wXzPx',
