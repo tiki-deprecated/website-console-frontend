@@ -13,8 +13,11 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     to.name !== 'checkout' &&
     to.name !== undefined &&
     token === undefined
-  )
+  ) {
+    sessionStorage.setItem('attempt-route', to.name ? to.name.toString() : '')
+
     return navigateTo('/')
+  }
 
   if (to.name === 'index' && token !== undefined) return navigateTo('/project')
 })

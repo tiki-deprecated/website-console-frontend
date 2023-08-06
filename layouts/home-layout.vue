@@ -361,7 +361,7 @@ const links = [
 
 const actions = [
   {
-    name: 'Halp !!!',
+    name: 'Help !!!',
     onClick: () => (showHelpModal.value = true),
     icon: CatIcon,
   },
