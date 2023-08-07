@@ -33,7 +33,8 @@ const input: HTMLInputElement = {
 const errorMessage = ref<string>('')
 const onSubmit = async (code: string) => {
   const success = await auth.redeemOtp(code)
-  if (success) navigateTo('/')
+  const attemptRoute = sessionStorage.getItem('attempt-route')
+  if (success) navigateTo('/' + attemptRoute)
   else
     errorMessage.value =
       "That didn't work 🫠 —double check your email, or go back and request a new code."
